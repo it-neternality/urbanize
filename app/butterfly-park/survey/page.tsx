@@ -487,14 +487,14 @@ export default function ButterflyParkSurvey() {
                             {currentStep < surveySteps.length - 1 ? (
                                 <button
                                     onClick={handleNextStep}
-                                    disabled={currentStep === 0 ? false : error !== ""}
-                                    className={`px-6 py-2 rounded-md transition-colors relative group ${error
+                                    disabled={currentStep === 0 ? false : !success}
+                                    className={`px-6 py-2 rounded-md transition-colors relative group ${!success
                                         ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                         : 'bg-blue-600 hover:bg-blue-700 text-white'
                                         }`}
                                 >
                                     הבא
-                                    {error && (
+                                    {!success && (
                                         <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                             עדיין נותרו נקודות לחלוקה
                                         </span>
