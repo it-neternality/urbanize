@@ -17,7 +17,7 @@ import { ThankYou } from "./components/ThankYou";
 
 // Import survey configuration and types
 import { firebaseConfig, surveySteps } from "./surveyConfig";
-import { FormData, SurveyStep, ProfileStep, RatingStep, CommentStep } from "./types";
+import { FormData, RatingStep } from "./types";
 
 export default function ButterflyParkSurvey() {
     // State for multi-step form
@@ -326,7 +326,7 @@ export default function ButterflyParkSurvey() {
             const newPostRef = ref(db);
 
             // Prepare data for submission
-            const submissionData: Record<string, any> = {};
+            const submissionData: Record<string, Record<string, number | string>> = {};
 
             // Process profile data
             submissionData.profile = { ...formData.profile };

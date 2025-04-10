@@ -1,22 +1,15 @@
-import { useState } from "react";
-import { RatingItem, RatingStep } from "../types";
+import { RatingStep } from "../types";
 
 interface RatingFormProps {
     step: RatingStep;
     formData: Record<string, number>;
     onRatingChange: (category: string, itemKey: string, rating: number) => void;
-    error: string;
-    warning: string;
-    success: boolean;
 }
 
 export const RatingForm = ({
     step,
     formData,
-    onRatingChange,
-    error,
-    warning,
-    success
+    onRatingChange
 }: RatingFormProps) => {
     // Calculate current sum of ratings
     const ratingSum = step.items.reduce((sum, item) => sum + (formData[item.key] || 0), 0);
@@ -35,15 +28,6 @@ export const RatingForm = ({
                             </span>
                             <span className="text-right flex-1 pl-4">נקודות</span>
                         </div>
-                        {ratingSum > step.maxPoints && (
-                            <p className="mt-2 text-sm text-red-200">חרגת בנקודות! הפחת את הדירוגים.</p>
-                        )}
-                        {ratingSum < step.maxPoints && (
-                            <p className="mt-2 text-sm text-yellow-200">נותרו {step.maxPoints - ratingSum} נקודות לחלוקה.</p>
-                        )}
-                        {ratingSum === step.maxPoints && (
-                            <p className="mt-2 text-sm text-green-200">מצוין! כל הנקודות חולקו.</p>
-                        )}
                     </div>
                 </div>
             </div>
@@ -65,11 +49,11 @@ export const RatingForm = ({
                                 value={formData[item.key] || 0}
                                 onChange={(e) => onRatingChange(step.category, item.key, parseInt(e.target.value, 10))}
                                 className={`w-full h-2 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 transition-colors duration-300 ${formData[item.key] === 0 ? 'bg-green-50' : // Light green for 0
-                                    formData[item.key] === 1 ? 'bg-green-100' : // Slightly darker green for 1
-                                        formData[item.key] === 2 ? 'bg-green-200' : // Medium green for 2
-                                            formData[item.key] === 3 ? 'bg-green-300' : // Darker green for 3
-                                                formData[item.key] === 4 ? 'bg-green-400' : // Even darker green for 4
-                                                    'bg-green-500' // Dark green for 5
+                                        formData[item.key] === 1 ? 'bg-green-100' : // Slightly darker green for 1
+                                            formData[item.key] === 2 ? 'bg-green-200' : // Medium green for 2
+                                                formData[item.key] === 3 ? 'bg-green-300' : // Darker green for 3
+                                                    formData[item.key] === 4 ? 'bg-green-400' : // Even darker green for 4
+                                                        'bg-green-500' // Dark green for 5
                                     }`}
                             />
                         </div>
