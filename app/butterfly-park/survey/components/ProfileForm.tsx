@@ -81,8 +81,10 @@ const renderInput = (
                     type="text"
                     value={profileData[input.key as keyof ProfileData] || ''}
                     onChange={(e) => onInputChange(field.title, input.key, e.target.value)}
-                    className={`w-full px-4 py-3 bg-white border-2 ${fieldErrors[input.key] ? 'border-red-500' : 'border-indigo-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors shadow-sm text-lg font-medium text-indigo-900`}
+                    className={`w-full px-4 py-3 bg-white border-2 ${fieldErrors[input.key] ? 'border-red-500' : 'border-indigo-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors shadow-sm text-lg font-medium text-indigo-900 text-right`}
                     required={input.required}
+                    dir="rtl"
+                    placeholder={input.label}
                 />
                 {fieldErrors[input.key] && (
                     <p className="mt-1 text-sm text-red-600 flex items-center">
@@ -107,8 +109,10 @@ const renderInput = (
                     type="number"
                     value={profileData[input.key as keyof ProfileData] || ''}
                     onChange={(e) => onInputChange(field.title, input.key, e.target.value)}
-                    className={`w-full px-4 py-3 bg-white border-2 ${fieldErrors[input.key] ? 'border-red-500' : 'border-indigo-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors shadow-sm text-lg font-medium text-indigo-900`}
+                    className={`w-full px-4 py-3 bg-white border-2 ${fieldErrors[input.key] ? 'border-red-500' : 'border-indigo-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors shadow-sm text-lg font-medium text-indigo-900 text-right`}
                     required={input.required}
+                    dir="rtl"
+                    placeholder={input.label}
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -281,13 +285,14 @@ const renderPhoneInput = (
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: 'left 0.1rem center',
                                 backgroundSize: '0.8em 0.8em',
-                                paddingRight: '1rem'
+                                paddingRight: '1rem',
+                                color: 'white'
                             }}
                             required={input.required}
                         >
-                            <option value="" disabled>קוד</option>
+                            <option value="" disabled style={{ color: 'black', fontWeight: 'bold' }}>קוד</option>
                             {['050', '051', '052', '053', '054', '055', '058'].map((prefix) => (
-                                <option key={prefix} value={prefix}>{prefix}</option>
+                                <option key={prefix} value={prefix} style={{ color: 'black', fontWeight: 'bold' }}>{prefix}</option>
                             ))}
                         </select>
                         <span className="mx-1 text-white font-bold">-</span>
@@ -299,9 +304,10 @@ const renderPhoneInput = (
                         maxLength={7}
                         value={profileData.phone || ''}
                         onChange={(e) => onInputChange(input.label, 'phone', e.target.value)}
-                        className="flex-1 py-3 px-4 text-lg font-medium text-indigo-900 bg-white border-none outline-none"
+                        className="flex-1 py-3 px-4 text-lg font-medium text-indigo-900 bg-white border-none outline-none text-right"
                         placeholder="מספר טלפון"
                         required={input.required}
+                        dir="rtl"
                     />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -67,14 +67,7 @@ export const surveySteps: SurveyStep[] = [
             ]
           },
           { key: "address_number", type: "number", label: "מספר בית", required: true },
-          { key: "phone", type: "number", label: "טלפון", required: true },
-          {
-            key: "phone_prefix",
-            type: "select",
-            label: "קידומת",
-            required: true,
-            options: ['050', '051', '052', '053', '054', '055', '058']
-          }
+          { key: "phone", type: "number", label: "טלפון", required: true }
         ]
       },
       {

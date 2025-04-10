@@ -66,14 +66,14 @@ export const RatingForm = ({
                                     <span className="text-lg font-medium text-gray-800">{item.label}</span>
                                 </div>
                                 <div className="w-full md:w-2/3">
-                                    <div className="flex flex-wrap gap-2">
+                                    <div className="flex flex-nowrap overflow-x-auto pb-2 hide-scrollbar">
                                         {ratingOptions.map((option) => (
                                             <button
                                                 key={option.value}
                                                 onClick={() => onRatingChange(step.category, item.key, option.value)}
-                                                className={`relative px-4 py-2 rounded-lg transition-all duration-200 ${(formData[item.key] || 0) === option.value
-                                                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md transform scale-105'
-                                                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700 hover:shadow-sm'
+                                                className={`relative whitespace-nowrap flex-shrink-0 px-3 py-2 mx-1 text-sm rounded-lg transition-all duration-200 ${(formData[item.key] || 0) === option.value
+                                                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md transform scale-105'
+                                                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700 hover:shadow-sm'
                                                     }`}
                                             >
                                                 <span className="relative z-10 font-medium">
