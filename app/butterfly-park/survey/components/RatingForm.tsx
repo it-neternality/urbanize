@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { RatingStep } from '../types';
 
 export interface RatingFormProps {
@@ -22,6 +22,69 @@ export const RatingForm: React.FC<RatingFormProps> = ({
     const ratingSum = step.items.reduce((sum, item) => sum + (formData[item.key] || 0), 0);
     const pointsLeft = step.maxPoints - ratingSum;
 
+    // Refs for all sliders to manage touch events
+    const sliderRefs = useRef<Record<string, HTMLInputElement | null>>({});
+
+    // Touch handling state
+    const [touchActive, setTouchActive] = useState(false);
+    const [scrolling, setScrolling] = useState(false);
+    const touchStartY = useRef(0);
+
+    // Effect to set up touch event listeners for the page
+    useEffect(() => {
+        let scrollTimeout: NodeJS.Timeout;
+
+        const handleTouchStart = (e: TouchEvent) => {
+            touchStartY.current = e.touches[0].clientY;
+            setScrolling(false);
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            const touchY = e.touches[0].clientY;
+            const deltaY = Math.abs(touchY - touchStartY.current);
+
+            // If vertical movement is detected, assume scrolling
+            if (deltaY > 10) {
+                setScrolling(true);
+
+                // Disable all sliders temporarily
+                Object.values(sliderRefs.current).forEach(slider => {
+                    if (slider) slider.disabled = true;
+                });
+
+                // Clear previous timeout
+                if (scrollTimeout) clearTimeout(scrollTimeout);
+
+                // Re-enable sliders after scrolling stops
+                scrollTimeout = setTimeout(() => {
+                    Object.values(sliderRefs.current).forEach(slider => {
+                        if (slider) slider.disabled = false;
+                    });
+                    setScrolling(false);
+                }, 500);
+            }
+        };
+
+        document.addEventListener('touchstart', handleTouchStart);
+        document.addEventListener('touchmove', handleTouchMove);
+
+        return () => {
+            document.removeEventListener('touchstart', handleTouchStart);
+            document.removeEventListener('touchmove', handleTouchMove);
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+        };
+    }, []);
+
+    // RTL slider value transformation
+    const transformToRtl = (value: number, max: number = 5) => max - value;
+    const transformFromRtl = (value: number, max: number = 5) => max - value;
+
+    const handleSliderChange = (category: string, itemKey: string, displayValue: number) => {
+        // Transform the displayed RTL value back to the actual value
+        const actualValue = transformFromRtl(displayValue);
+        onRatingChange(category, itemKey, actualValue);
+    };
+
     return (
         <div className="has-fixed-footer">
             <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -30,7 +93,6 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                     <div className="bg-white rounded-lg md:rounded-xl shadow-lg p-3 md:p-6 border-r-4 border-indigo-500">
                         <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-4 text-indigo-900">{step.title}</h2>
                         <p className="text-sm md:text-base text-gray-700 mb-3 md:mb-6">{step.description}</p>
-
                         <div className="py-2 md:py-3 pr-4 pl-4 md:pr-6 md:pl-6 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg md:rounded-xl shadow-lg text-white w-full">
                             <div className="font-bold flex items-center justify-between">
                                 <span className="text-xl md:text-2xl font-extrabold text-indigo-100 text-left flex-1 ml-4 md:ml-8">
@@ -40,7 +102,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                             </div>
                         </div>
 
-                        {/* Display validation messages - only visible on desktop */}
+                        {/* Display validation messages */}
                         <div className="hidden md:block">
                             {error && (
                                 <div className="mt-4 p-3 bg-red-100 border border-red-300 rounded-lg text-red-700 text-sm">
@@ -69,37 +131,50 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                 {/* Left column with ratings items */}
                 <div className="md:col-span-2">
                     <div className="bg-white rounded-lg md:rounded-xl shadow-lg p-3 md:p-6 border-t-4 border-indigo-500">
-                        {step.items.map((item, itemIndex) => (
-                            <div key={itemIndex} className="mb-4 md:mb-6">
-                                <div className="flex items-center justify-between mb-1 md:mb-2">
-                                    <span className="text-base md:text-lg font-medium text-gray-800">{item.label}</span>
-                                    <span className="text-indigo-600 font-bold">{formData[item.key] || 0}</span>
+                        {step.items.map((item, itemIndex) => {
+                            // Transform the actual value to RTL display value
+                            const displayValue = transformToRtl(formData[item.key] || 0);
+
+                            return (
+                                <div key={itemIndex} className="mb-4 md:mb-6">
+                                    <div className="flex items-center justify-between mb-1 md:mb-2">
+                                        <span className="text-base md:text-lg font-medium text-gray-800">{item.label}</span>
+                                        <span className="text-indigo-600 font-bold">{formData[item.key] || 0}</span>
+                                    </div>
+                                    <div
+                                        className="relative slider-container"
+                                        onTouchStart={() => setTouchActive(true)}
+                                        onTouchEnd={() => setTouchActive(false)}
+                                    >
+                                        <input
+                                            ref={el => sliderRefs.current[item.key] = el}
+                                            type="range"
+                                            min="0"
+                                            max="5"
+                                            step="1"
+                                            value={displayValue}
+                                            onChange={(e) => handleSliderChange(step.category, item.key, parseInt(e.target.value, 10))}
+                                            className={`w-full h-2 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 transition-colors duration-300 rtl-slider ${formData[item.key] === 0 ? 'bg-green-50' :
+                                                    formData[item.key] === 1 ? 'bg-green-100' :
+                                                        formData[item.key] === 2 ? 'bg-green-200' :
+                                                            formData[item.key] === 3 ? 'bg-green-300' :
+                                                                formData[item.key] === 4 ? 'bg-green-400' :
+                                                                    'bg-green-500'
+                                                }`}
+                                            style={{ direction: 'rtl' }}
+                                        />
+                                        <div className="slider-labels">
+                                            <span className="slider-number">5</span>
+                                            <span className="slider-number">4</span>
+                                            <span className="slider-number">3</span>
+                                            <span className="slider-number">2</span>
+                                            <span className="slider-number">1</span>
+                                            <span className="slider-number">0</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="5"
-                                    step="1"
-                                    value={formData[item.key] || 0}
-                                    onChange={(e) => onRatingChange(step.category, item.key, parseInt(e.target.value, 10))}
-                                    className={`w-full h-2 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 transition-colors duration-300 ${formData[item.key] === 0 ? 'bg-green-50' :
-                                            formData[item.key] === 1 ? 'bg-green-100' :
-                                                formData[item.key] === 2 ? 'bg-green-200' :
-                                                    formData[item.key] === 3 ? 'bg-green-300' :
-                                                        formData[item.key] === 4 ? 'bg-green-400' :
-                                                            'bg-green-500'
-                                        }`}
-                                />
-                                <div className="flex justify-between text-xs text-gray-500 mt-1" style={{ paddingLeft: '0.25rem', paddingRight: '0.25rem' }}>
-                                    <span>0</span>
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>5</span>
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>

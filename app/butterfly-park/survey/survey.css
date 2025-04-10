@@ -458,139 +458,94 @@
 
 .nav-button-prev {
     padding: 0.75rem 1.5rem;
-    border: 1px solid #d1d5db;
+    border: 2px solid #6366f1;
     border-radius: 0.375rem;
-    transition-property: background-color;
+    color: #4338ca;
+    background-color: #f5f3ff;
+    transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
-    font-weight: 500;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button-prev:hover {
-    background-color: #f3f4f6;
+    background-color: #ede9fe;
+    border-color: #4f46e5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.submit-button {
-    padding: 1rem 2rem;
-    background-image: linear-gradient(to right, #6366f1, #3b82f6);
-    color: white;
-    border-radius: 9999px;
-    font-weight: 500;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transition-property: all;
-    transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateY(0);
-}
-
-.submit-button:hover {
-    background-image: linear-gradient(to right, #4f46e5, #2563eb);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    transform: translateY(-0.25rem);
-}
-
-/* Mobile optimizations */
 @media (max-width: 768px) {
-
-    .survey-input,
-    .survey-select,
-    .survey-textarea {
+    .nav-button-prev {
+        background-color: #e0e7ff;
+        border-color: #4f46e5;
         font-size: 1rem;
-    }
-
-    .phone-prefix,
-    .phone-number {
-        font-size: 1rem;
-        padding: 0.5rem 0.75rem;
-    }
-
-    .custom-alert-container {
-        max-width: 90%;
-        margin-left: 1rem;
-        margin-right: 1rem;
+        font-weight: 700;
+        color: #3730a3;
+        padding: 0.625rem 1.25rem;
     }
 }
 
-/* Full screen mobile survey */
-.mobile-full-screen {
-    min-height: 100vh;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+/* Add these styles for larger, more visible slider numbers */
+
+.slider-number {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4B5563;
 }
 
-.mobile-full-width {
-    width: 100%;
-    margin: 0;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
+@media (max-width: 768px) {
+    .slider-number {
+        font-size: 18px;
+        font-weight: 700;
+        color: #374151;
+    }
 
-.mobile-compact-header {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
-
-.mobile-compact-padding {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
-
-.mobile-no-padding {
-    padding: 0;
-}
-
-/* Fixed score footer for rating steps */
-.fixed-score-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-image: linear-gradient(to right, #6366f1, #9333ea);
-    color: white;
-    padding: 0.75rem 1rem;
-    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
-    z-index: 40;
-}
-
-.fixed-score-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 56rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.fixed-score-number {
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-.fixed-score-message {
-    font-size: 0.875rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 9999px;
-    padding: 0.25rem 0.75rem;
-}
-
-@media (min-width: 769px) {
-    .fixed-score-footer {
-        display: none;
+    /* Improve spacing between numbers for better touch targets */
+    .slider-labels {
+        padding: 0 2px;
     }
 }
 
-/* Add bottom padding for pages with fixed footer */
-.has-fixed-footer {
-    padding-bottom: 4rem;
+/* RTL Slider Styles */
+.rtl-slider {
+    direction: rtl;
 }
 
-@media (min-width: 769px) {
-    .has-fixed-footer {
-        padding-bottom: 0;
+/* Improve touch target size for mobile */
+@media (max-width: 768px) {
+    input[type="range"] {
+        height: 20px;
+        /* Increase touch target height */
+        margin: 10px 0;
+        /* Add some margin for better touch targeting */
+    }
+
+    /* Add a "deadzone" time during scrolling */
+    .slider-container.scrolling input[type="range"] {
+        pointer-events: none;
+    }
+
+    /* Custom thumb appearance for better touch targeting */
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #6366f1;
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #6366f1;
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 }

@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Touch handling improvements */
+.slider-container {
+    touch-action: pan-x;
+    /* Allow horizontal touch actions but prevent vertical */
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Prevent accidental slider interaction during scrolling */
+.scrolling-active input[type="range"] {
+    pointer-events: none;
+}
+
 /* Mobile utility classes */
 .mobile-full-screen {
     min-height: 100vh;

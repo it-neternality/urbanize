@@ -33,6 +33,26 @@ export default function SurveyLayout({
                         max-width: 100vw;
                         overflow-x: hidden;
                     }
+                    
+                    /* Larger number labels for sliders */
+                    .slider-labels {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-top: 8px;
+                        font-weight: 500;
+                    }
+                    
+                    .slider-labels span {
+                        font-size: 16px;
+                        color: #4B5563;
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .slider-labels span {
+                            font-size: 18px;
+                            font-weight: 600;
+                        }
+                    }
                 `}</style>
             </head>
             <body>
