@@ -40,22 +40,34 @@ export default function ButterflyParkSurvey() {
             kupat_cholim: "",
             other_address: ""
         },
-        food: surveySteps.find(step => step.category === 'food' && hasItems(step))?.items.reduce((acc, item) => {
-            acc[item.key] = 0;
-            return acc;
-        }, {} as Record<string, number>) || {},
-        shops: surveySteps.find(step => step.category === 'shops' && hasItems(step))?.items.reduce((acc, item) => {
-            acc[item.key] = 0;
-            return acc;
-        }, {} as Record<string, number>) || {},
-        services: surveySteps.find(step => step.category === 'services' && hasItems(step))?.items.reduce((acc, item) => {
-            acc[item.key] = 0;
-            return acc;
-        }, {} as Record<string, number>) || {},
-        pleasure: surveySteps.find(step => step.category === 'pleasure' && hasItems(step))?.items.reduce((acc, item) => {
-            acc[item.key] = 0;
-            return acc;
-        }, {} as Record<string, number>) || {},
+        food: (() => {
+            const foodStep = surveySteps.find(step => step.category === 'food');
+            return foodStep && hasItems(foodStep) ? foodStep.items.reduce((acc, item) => {
+                acc[item.key] = 0;
+                return acc;
+            }, {} as Record<string, number>) : {};
+        })(),
+        shops: (() => {
+            const shopsStep = surveySteps.find(step => step.category === 'shops');
+            return shopsStep && hasItems(shopsStep) ? shopsStep.items.reduce((acc, item) => {
+                acc[item.key] = 0;
+                return acc;
+            }, {} as Record<string, number>) : {};
+        })(),
+        services: (() => {
+            const servicesStep = surveySteps.find(step => step.category === 'services');
+            return servicesStep && hasItems(servicesStep) ? servicesStep.items.reduce((acc, item) => {
+                acc[item.key] = 0;
+                return acc;
+            }, {} as Record<string, number>) : {};
+        })(),
+        pleasure: (() => {
+            const pleasureStep = surveySteps.find(step => step.category === 'pleasure');
+            return pleasureStep && hasItems(pleasureStep) ? pleasureStep.items.reduce((acc, item) => {
+                acc[item.key] = 0;
+                return acc;
+            }, {} as Record<string, number>) : {};
+        })(),
         other: {
             comments: ""
         }

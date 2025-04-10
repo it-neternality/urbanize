@@ -1,16 +1,23 @@
-import { RatingStep } from "../types";
+import React from 'react';
+import { RatingStep } from '../types';
 
-interface RatingFormProps {
+export interface RatingFormProps {
     step: RatingStep;
     formData: Record<string, number>;
     onRatingChange: (category: string, itemKey: string, rating: number) => void;
+    error: string;
+    warning: string;
+    success: boolean;
 }
 
-export const RatingForm = ({
+export const RatingForm: React.FC<RatingFormProps> = ({
     step,
     formData,
-    onRatingChange
-}: RatingFormProps) => {
+    onRatingChange,
+    error,
+    warning,
+    success
+}) => {
     // Calculate current sum of ratings
     const ratingSum = step.items.reduce((sum, item) => sum + (formData[item.key] || 0), 0);
 
@@ -29,6 +36,28 @@ export const RatingForm = ({
                             <span className="text-right flex-1 pl-4">נקודות</span>
                         </div>
                     </div>
+
+                    {/* Display validation messages */}
+                    {error && (
+                        <div className="mt-4 p-3 bg-red-100 border border-red-300 rounded-lg text-red-700">
+                            {error}
+                        </div>
+                    )}
+
+                    {warning && (
+                        <div className="mt-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-yellow-700">
+                            {warning}
+                        </div>
+                    )}
+
+                    {success && (
+                        <div className="mt-4 p-3 bg-green-100 border border-green-300 rounded-lg text-green-700 flex items-center">
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            חלוקת הנקודות הושלמה בהצלחה!
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -49,11 +78,11 @@ export const RatingForm = ({
                                 value={formData[item.key] || 0}
                                 onChange={(e) => onRatingChange(step.category, item.key, parseInt(e.target.value, 10))}
                                 className={`w-full h-2 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 transition-colors duration-300 ${formData[item.key] === 0 ? 'bg-green-50' : // Light green for 0
-                                        formData[item.key] === 1 ? 'bg-green-100' : // Slightly darker green for 1
-                                            formData[item.key] === 2 ? 'bg-green-200' : // Medium green for 2
-                                                formData[item.key] === 3 ? 'bg-green-300' : // Darker green for 3
-                                                    formData[item.key] === 4 ? 'bg-green-400' : // Even darker green for 4
-                                                        'bg-green-500' // Dark green for 5
+                                    formData[item.key] === 1 ? 'bg-green-100' : // Slightly darker green for 1
+                                        formData[item.key] === 2 ? 'bg-green-200' : // Medium green for 2
+                                            formData[item.key] === 3 ? 'bg-green-300' : // Darker green for 3
+                                                formData[item.key] === 4 ? 'bg-green-400' : // Even darker green for 4
+                                                    'bg-green-500' // Dark green for 5
                                     }`}
                             />
                         </div>
