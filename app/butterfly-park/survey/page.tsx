@@ -35,19 +35,19 @@ export default function ButterflyParkSurvey() {
             kupat_cholim: "",
             other_address: ""
         },
-        food: surveySteps.find(step => step.category === 'food')?.items.reduce((acc, item) => {
+        food: surveySteps.find(step => step.category === 'food' && 'items' in step)?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
-        shops: surveySteps.find(step => step.category === 'shops')?.items.reduce((acc, item) => {
+        shops: surveySteps.find(step => step.category === 'shops' && 'items' in step)?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
-        services: surveySteps.find(step => step.category === 'services')?.items.reduce((acc, item) => {
+        services: surveySteps.find(step => step.category === 'services' && 'items' in step)?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
-        pleasure: surveySteps.find(step => step.category === 'pleasure')?.items.reduce((acc, item) => {
+        pleasure: surveySteps.find(step => step.category === 'pleasure' && 'items' in step)?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
@@ -509,14 +509,21 @@ export default function ButterflyParkSurvey() {
                             {currentStep < surveySteps.length - 1 ? (
                                 <button
                                     onClick={handleNextStep}
-                                    disabled={currentStep === 0 ? false : !success}
-                                    className={`px-6 py-2 rounded-md transition-colors relative group ${!success
+                                    disabled={currentStep === 0 ? Object.values(fieldErrors).length > 0 : !success}
+                                    className={`px-6 py-2 rounded-md transition-colors relative group ${currentStep === 0 && Object.values(fieldErrors).length > 0
                                         ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                        : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                        : currentStep !== 0 && !success
+                                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                            : 'bg-blue-600 hover:bg-blue-700 text-white'
                                         }`}
                                 >
                                     הבא
-                                    {!success && (
+                                    {currentStep === 0 && Object.values(fieldErrors).length > 0 && (
+                                        <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            יש למלא את כל השדות המסומנים בכוכבית
+                                        </span>
+                                    )}
+                                    {currentStep !== 0 && !success && (
                                         <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                             עדיין נותרו נקודות לחלוקה
                                         </span>
