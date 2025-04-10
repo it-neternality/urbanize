@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { RatingStep } from '../types';
 
 export interface RatingFormProps {
@@ -24,10 +24,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({
 
     // Refs for all sliders to manage touch events
     const sliderRefs = useRef<Record<string, HTMLInputElement | null>>({});
-
-    // Touch handling state
-    const [touchActive, setTouchActive] = useState(false);
-    const [scrolling, setScrolling] = useState(false);
+    const isScrolling = useRef(false);
     const touchStartY = useRef(0);
 
     // Effect to set up touch event listeners for the page
@@ -36,7 +33,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({
 
         const handleTouchStart = (e: TouchEvent) => {
             touchStartY.current = e.touches[0].clientY;
-            setScrolling(false);
+            isScrolling.current = false;
         };
 
         const handleTouchMove = (e: TouchEvent) => {
@@ -45,7 +42,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({
 
             // If vertical movement is detected, assume scrolling
             if (deltaY > 10) {
-                setScrolling(true);
+                isScrolling.current = true;
 
                 // Disable all sliders temporarily
                 Object.values(sliderRefs.current).forEach(slider => {
@@ -60,7 +57,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                     Object.values(sliderRefs.current).forEach(slider => {
                         if (slider) slider.disabled = false;
                     });
-                    setScrolling(false);
+                    isScrolling.current = false;
                 }, 500);
             }
         };
@@ -142,9 +139,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                                         <span className="text-indigo-600 font-bold">{formData[item.key] || 0}</span>
                                     </div>
                                     <div
-                                        className="relative slider-container"
-                                        onTouchStart={() => setTouchActive(true)}
-                                        onTouchEnd={() => setTouchActive(false)}
+                                        className={`relative slider-container ${isScrolling.current ? 'scrolling' : ''}`}
                                     >
                                         <input
                                             ref={el => sliderRefs.current[item.key] = el}
