@@ -17,7 +17,12 @@ import { ThankYou } from "./components/ThankYou";
 
 // Import survey configuration and types
 import { firebaseConfig, surveySteps } from "./surveyConfig";
-import { FormData, RatingStep } from "./types";
+import { FormData, RatingStep, SurveyStep } from "./types"; // Import SurveyStep type
+
+// Type guard to check if a step has items
+function hasItems(step: SurveyStep): step is RatingStep {
+    return (step as RatingStep).items !== undefined;
+}
 
 export default function ButterflyParkSurvey() {
     // State for multi-step form
@@ -35,19 +40,19 @@ export default function ButterflyParkSurvey() {
             kupat_cholim: "",
             other_address: ""
         },
-        food: surveySteps.find(step => step.category === 'food' && 'items' in step)?.items.reduce((acc, item) => {
+        food: surveySteps.find(step => step.category === 'food' && hasItems(step))?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
-        shops: surveySteps.find(step => step.category === 'shops' && 'items' in step)?.items.reduce((acc, item) => {
+        shops: surveySteps.find(step => step.category === 'shops' && hasItems(step))?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
-        services: surveySteps.find(step => step.category === 'services' && 'items' in step)?.items.reduce((acc, item) => {
+        services: surveySteps.find(step => step.category === 'services' && hasItems(step))?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
-        pleasure: surveySteps.find(step => step.category === 'pleasure' && 'items' in step)?.items.reduce((acc, item) => {
+        pleasure: surveySteps.find(step => step.category === 'pleasure' && hasItems(step))?.items.reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {} as Record<string, number>) || {},
