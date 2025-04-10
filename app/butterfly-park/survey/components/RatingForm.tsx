@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { RatingStep } from '../types';
 
 export interface RatingFormProps {
@@ -26,6 +26,11 @@ export const RatingForm: React.FC<RatingFormProps> = ({
     const sliderRefs = useRef<Record<string, HTMLInputElement | null>>({});
     const isScrolling = useRef(false);
     const touchStartY = useRef(0);
+
+    // Fix for the ref callback TypeScript error
+    const setSliderRef = useCallback((el: HTMLInputElement | null, key: string) => {
+        sliderRefs.current[key] = el;
+    }, []);
 
     // Effect to set up touch event listeners for the page
     useEffect(() => {
@@ -142,7 +147,7 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                                         className={`relative slider-container ${isScrolling.current ? 'scrolling' : ''}`}
                                     >
                                         <input
-                                            ref={el => sliderRefs.current[item.key] = el}
+                                            ref={(el) => setSliderRef(el, item.key)}
                                             type="range"
                                             min="0"
                                             max="5"
