@@ -269,23 +269,45 @@ export default function ButterflyParkSurvey() {
     // Handle next step
     const handleNextStep = () => {
         if (validateStep()) {
-            if (currentStep < surveySteps.length - 1) {
-                setCurrentStep(prev => prev + 1);
-                setError("");
-                setWarning("");
-                setSuccess(false);
-                window.scrollTo(0, 0);
-            }
+            setCurrentStep(prev => {
+                const newStep = prev + 1;
+
+                // Recalculate success state for the new step
+                const currentStepData = surveySteps[newStep];
+                if ('ratingType' in currentStepData && currentStepData.ratingType && 'items' in currentStepData && 'maxPoints' in currentStepData) {
+                    const sum = calculateRatingSum(currentStepData);
+                    setSuccess(sum === currentStepData.maxPoints);
+                } else {
+                    setSuccess(false);
+                }
+
+                return newStep;
+            });
+            setError("");
+            setWarning("");
+            window.scrollTo(0, 0);
         }
     };
 
     // Handle previous step
     const handlePrevStep = () => {
         if (currentStep > 0) {
-            setCurrentStep(prev => prev - 1);
+            setCurrentStep(prev => {
+                const newStep = prev - 1;
+
+                // Recalculate success state for the new step
+                const currentStepData = surveySteps[newStep];
+                if ('ratingType' in currentStepData && currentStepData.ratingType && 'items' in currentStepData && 'maxPoints' in currentStepData) {
+                    const sum = calculateRatingSum(currentStepData);
+                    setSuccess(sum === currentStepData.maxPoints);
+                } else {
+                    setSuccess(false);
+                }
+
+                return newStep;
+            });
             setError("");
             setWarning("");
-            setSuccess(false);
             window.scrollTo(0, 0);
         }
     };
@@ -454,13 +476,13 @@ export default function ButterflyParkSurvey() {
                     <div className="mb-10">
                         <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
                             <div
-                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
-                                style={{ width: `${totalProgress}%` }}
+                                className="absolute top-0 right-0 h-full bg-gradient-to-l from-blue-500 to-purple-500 transition-all duration-500"
+                                style={{ width: `${currentStep === surveySteps.length - 1 ? 100 : totalProgress}%` }}
                             ></div>
                         </div>
                         <div className="flex justify-between mt-2 text-sm text-gray-600 font-medium px-1">
                             <span>התחלה</span>
-                            <span className="bg-indigo-100 px-3 py-1 rounded-full text-indigo-800">{Math.round(totalProgress)}%</span>
+                            <span className="bg-indigo-100 px-3 py-1 rounded-full text-indigo-800">{Math.round(currentStep === surveySteps.length - 1 ? 100 : totalProgress)}%</span>
                             <span>סיום</span>
                         </div>
                     </div>

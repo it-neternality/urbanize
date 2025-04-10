@@ -30,11 +30,9 @@ export const CommentsForm = ({
                 <textarea
                     value={comments}
                     onChange={(e) => onCommentsChange(e.target.value)}
-                    rows={8}
-                    placeholder="נשמח לקבל הצעות או רעיונות נוספים (תוכלו גם להציע שם למרכז)"
-                    className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-none shadow-inner text-lg relative z-10"
-                    style={{ direction: "rtl" }}
-                />
+                    className="w-full h-32 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-gray-800 placeholder-gray-500 shadow-sm"
+                    placeholder="הזן את ההערות שלך כאן..."
+                ></textarea>
             </div>
         </div>
     );
