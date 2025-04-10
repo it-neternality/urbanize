@@ -35,10 +35,22 @@ export default function ButterflyParkSurvey() {
             kupat_cholim: "",
             other_address: ""
         },
-        food: {},
-        shops: {},
-        services: {},
-        pleasure: {},
+        food: surveySteps.find(step => step.category === 'food')?.items.reduce((acc, item) => {
+            acc[item.key] = 0;
+            return acc;
+        }, {} as Record<string, number>) || {},
+        shops: surveySteps.find(step => step.category === 'shops')?.items.reduce((acc, item) => {
+            acc[item.key] = 0;
+            return acc;
+        }, {} as Record<string, number>) || {},
+        services: surveySteps.find(step => step.category === 'services')?.items.reduce((acc, item) => {
+            acc[item.key] = 0;
+            return acc;
+        }, {} as Record<string, number>) || {},
+        pleasure: surveySteps.find(step => step.category === 'pleasure')?.items.reduce((acc, item) => {
+            acc[item.key] = 0;
+            return acc;
+        }, {} as Record<string, number>) || {},
         other: {
             comments: ""
         }
@@ -464,7 +476,7 @@ export default function ButterflyParkSurvey() {
                             {currentStep > 0 ? (
                                 <button
                                     onClick={handlePrevStep}
-                                    className="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                                    className="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors text-gray-700"
                                 >
                                     הקודם
                                 </button>
@@ -476,12 +488,17 @@ export default function ButterflyParkSurvey() {
                                 <button
                                     onClick={handleNextStep}
                                     disabled={currentStep === 0 ? false : error !== ""}
-                                    className={`px-6 py-2 rounded-md ${error
-                                        ? 'bg-gray-300 cursor-not-allowed'
+                                    className={`px-6 py-2 rounded-md transition-colors relative group ${error
+                                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                         : 'bg-blue-600 hover:bg-blue-700 text-white'
-                                        } transition-colors`}
+                                        }`}
                                 >
                                     הבא
+                                    {error && (
+                                        <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            עדיין נותרו נקודות לחלוקה
+                                        </span>
+                                    )}
                                 </button>
                             ) : (
                                 <button
@@ -508,47 +525,8 @@ export default function ButterflyParkSurvey() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-blue-900 text-white py-8 px-4 mt-auto">
-                <div className="container mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        <div>
-                            <Image
-                                src="/urbanize-logo.png"
-                                alt="Urbanize לוגו"
-                                width={120}
-                                height={40}
-                                className="h-auto invert"
-                            />
-                            <p className="mt-4 text-blue-200">
-                                חברת נדל״ן מובילה המתמחה בפרויקטים חדשניים וטכנולוגיים.
-                            </p>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">פרויקטים</h3>
-                            <ul className="space-y-2">
-                                <li><Link href="/butterfly-park" className="text-blue-200 hover:text-white transition">פארק הפרפרים</Link></li>
-                                <li><Link href="/bsr-rishonim" className="text-blue-200 hover:text-white transition">BSR ראשונים</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">קישורים מהירים</h3>
-                            <ul className="space-y-2">
-                                <li><Link href="/" className="text-blue-200 hover:text-white transition">בית</Link></li>
-                                <li><Link href="/" className="text-blue-200 hover:text-white transition">אודות</Link></li>
-                                <li><Link href="/" className="text-blue-200 hover:text-white transition">יצירת קשר</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">צור קשר</h3>
-                            <p className="text-blue-200 mb-2">רחוב הטכנולוגיה 10, תל אביב</p>
-                            <p className="text-blue-200 mb-2">טלפון: 03-1234567</p>
-                            <p className="text-blue-200">דוא״ל: info@urbanize.co.il</p>
-                        </div>
-                    </div>
-                    <div className="border-t border-blue-800 mt-8 pt-8 text-center text-blue-300">
-                        <p>© כל הזכויות שמורות לאורבנייז {new Date().getFullYear()}</p>
-                    </div>
-                </div>
+            <footer className="bg-blue-900 text-white py-4 text-center">
+                <p>© כל הזכויות שמורות {new Date().getFullYear()}</p>
             </footer>
         </div>
     );
