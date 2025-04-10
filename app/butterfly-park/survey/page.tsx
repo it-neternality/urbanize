@@ -6,7 +6,7 @@ import Link from "next/link";
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInAnonymously } from "firebase/auth";
-import { getDatabase, ref, push } from "firebase/database";
+import { getDatabase, ref, push, get } from "firebase/database";
 import Head from "next/head";
 
 // Import components
@@ -388,6 +388,72 @@ export default function ButterflyParkSurvey() {
         window.location.href = "https://www.urbanize.co.il";
     };
 
+    // Add state for fetched data
+    const [fetchedData, setFetchedData] = useState<any>(null);
+    const [showDebugData, setShowDebugData] = useState(false);
+    const [fetchingData, setFetchingData] = useState(false);
+
+    // Add function to fetch all data from Firebase
+    const fetchAllData = async () => {
+        if (!firebaseInitialized || !firebaseApp) {
+            showAlert("מערכת הטפסים אינה זמינה כרגע, אנא נסו שוב מאוחר יותר", "שגיאה");
+            return;
+        }
+
+        setFetchingData(true);
+
+        try {
+            const db = getDatabase(firebaseApp);
+            const dataRef = ref(db);
+
+            // Get all data from the database
+            const snapshot = await get(dataRef);
+
+            if (snapshot.exists()) {
+                setFetchedData(snapshot.val());
+                setShowDebugData(true);
+            } else {
+                showAlert("אין נתונים בבסיס הנתונים", "מידע");
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            showAlert("אירעה שגיאה בטעינת הנתונים", "שגיאה");
+        } finally {
+            setFetchingData(false);
+        }
+    };
+
+    // Function to copy data to clipboard
+    const copyDataToClipboard = () => {
+        if (fetchedData) {
+            navigator.clipboard.writeText(JSON.stringify(fetchedData, null, 2))
+                .then(() => {
+                    showAlert("הנתונים הועתקו ללוח", "הצלחה");
+                })
+                .catch(err => {
+                    console.error("Failed to copy data: ", err);
+                    showAlert("שגיאה בהעתקת הנתונים", "שגיאה");
+                });
+        }
+    };
+
+    // Function to download data as JSON file
+    const downloadDataAsJson = () => {
+        if (fetchedData) {
+            const dataStr = JSON.stringify(fetchedData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'survey-data.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    };
+
     // Render form based on current step
     const renderForm = () => {
         const step = surveySteps[currentStep];
@@ -460,6 +526,50 @@ export default function ButterflyParkSurvey() {
                     isOpen={alertOpen}
                     onClose={closeAlert}
                 />
+
+                {/* Debug Data Modal */}
+                {showDebugData && (
+                    <div className="custom-alert-overlay animate-fade-in">
+                        <div className="custom-alert-container max-w-4xl w-full animate-slide-up mx-4">
+                            <div className="custom-alert-header flex justify-between items-center">
+                                <h3 className="text-lg font-medium">נתוני הסקר</h3>
+                                <button
+                                    onClick={() => setShowDebugData(false)}
+                                    className="text-white hover:text-gray-200"
+                                >
+                                    &times;
+                                </button>
+                            </div>
+                            <div className="custom-alert-content overflow-auto max-h-[70vh]">
+                                <div className="flex space-x-2 space-x-reverse mb-4">
+                                    <button
+                                        onClick={copyDataToClipboard}
+                                        className="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 text-sm"
+                                    >
+                                        העתק ללוח
+                                    </button>
+                                    <button
+                                        onClick={downloadDataAsJson}
+                                        className="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm"
+                                    >
+                                        הורד כקובץ JSON
+                                    </button>
+                                </div>
+                                <pre className="bg-gray-100 p-4 rounded-md overflow-auto text-left text-xs md:text-sm max-h-[50vh] rtl:text-right" dir="ltr">
+                                    {JSON.stringify(fetchedData, null, 2)}
+                                </pre>
+                            </div>
+                            <div className="custom-alert-footer">
+                                <button
+                                    onClick={() => setShowDebugData(false)}
+                                    className="custom-alert-button"
+                                >
+                                    סגור
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Header - Simplified with only logo */}
                 <header className="p-3 md:p-6 bg-white shadow-md sticky top-0 z-50 mobile-compact-header">
@@ -573,6 +683,18 @@ export default function ButterflyParkSurvey() {
                                 )}
                             </div>
                         )}
+                        {/* Survey Data Button - Add this at the bottom of the main content, after the navigation buttons */}
+                        <div className="mt-8 text-center">
+                            <Link
+                                href="/butterfly-park/survey/data"
+                                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 inline-flex items-center shadow-md transition-all"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+                                </svg>
+                                צפייה בנתוני הסקר
+                            </Link>
+                        </div>
                     </div>
                 </main>
 
