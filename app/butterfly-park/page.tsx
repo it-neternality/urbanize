@@ -17,38 +17,41 @@ export default function ButterflyPark() {
                             className="h-auto"
                         />
                     </Link>
-                    <nav className="hidden md:flex space-x-6">
-                        <Link href="/butterfly-park" className="font-medium text-blue-700 hover:text-blue-900 transition">פארק הפרפרים</Link>
-                        <Link href="/bsr-rishonim" className="font-medium text-gray-700 hover:text-gray-900 transition">BSR ראשונים</Link>
-                        <Link href="/" className="font-medium text-gray-700 hover:text-gray-900 transition">בית</Link>
-                    </nav>
-                    <button className="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
                 </div>
             </header>
 
             {/* Hero Banner */}
-            <div className="relative h-[50vh] bg-blue-800 flex items-center justify-center">
-                <div className="absolute inset-0 opacity-30" style={{
-                    backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-                }}></div>
-                <div className="container mx-auto px-6 z-10 text-center">
-                    <Image
-                        src="/butterfly/shopping-bag.png"
-                        alt="shopping bag"
-                        width={96}
-                        height={96}
-                        className="mx-auto mb-4"
-                    />
-
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">פארק הפרפרים</h1>
-                    <p className="text-xl text-blue-100 max-w-3xl mx-auto">מרכז הקניות והפנאי בשכונת רחובות הצעירה</p>
-
+            <div className="relative h-[50vh] flex items-center justify-center">
+                <div className="absolute inset-0 bg-white opacity-20"></div>
+                <div className="container mx-auto px-6 z-10 flex md:flex-row flex-col items-center">
+                    {/* Text Content */}
+                    <div className="md:w-1/2 p-4 text-center md:text-right flex items-center justify-center md:justify-end">
+                        <h1 className="text-4xl md:text-5xl font-bold text-black mb-0 mr-4">פארק הפרפרים</h1>
+                        <Image
+                            src="/butterfly/shopping-bag.png"
+                            alt="shopping bag"
+                            width={96}
+                            height={96}
+                            className="h-auto"
+                        />
+                    </div>
+                    <p className="text-xl text-blue-900 max-w-3xl mx-auto">מרכז הקניות והפנאי בשכונת רחובות הצעירה</p>
+                    {/* Image */}
+                    <div className="md:w-1/2 p-4 relative">
+                        <div className="absolute inset-0 bg-white opacity-30"></div>
+                        <Image
+                            src="/butterfly/family-shopping-bags.png"
+                            alt="פארק הפרפרים"
+                            width={600}
+                            height={300}
+                            style={{ objectFit: 'contain' }}
+                            className="mx-auto relative z-10"
+                            priority
+                        />
+                    </div>
                 </div>
             </div>
+
 
             {/* Project Details */}
             <section className="py-16 px-6">
