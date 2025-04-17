@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 export default function SurveyLayout({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '/butterfly-park/survey/survey.css';
+        link.rel = 'icon';
+        link.href = '/butterfly/favicon.ico';
         document.head.appendChild(link);
 
         return () => {
