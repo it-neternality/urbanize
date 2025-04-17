@@ -262,40 +262,37 @@ export default function ButterflyPark() {
                     <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                             {/* Contact Info Card */}
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 mx-auto text-center">
-
-                                <div className="space-y-5 rtl">
-                                    <a
-                                        href="https://maps.google.com/?q=רחוב+חזון+איש+5,+רחובות,+ישראל"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex flex-col items-center justify-center transition-all duration-300 hover:bg-blue-600/30 rounded-lg p-3 group"
-                                    >
-                                        <div className="mx-4 p-2 bg-blue-600/30 rounded-full group-hover:bg-yellow-400 group-hover:text-blue-800 transition-all duration-300">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <div className="text-center">
-                                            <p className="font-semibold">כתובת:</p>
-                                            <p className="text-blue-800 group-hover:text-black">רחוב חזון איש 5, רחובות</p>
-                                        </div>
-                                    </a>
-                                    <a
-                                        href="tel:035045041"
-                                        className="flex flex-col items-center justify-center transition-all duration-300 hover:bg-blue-600/30 rounded-lg p-3 group"
-                                    >
-                                        <div className="mx-4 p-2 bg-blue-600/30 rounded-full group-hover:bg-yellow-400 group-hover:text-blue-800 transition-all duration-300">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                            </svg>
-                                        </div>
-                                        <div className="text-center">
-                                            <p className="font-semibold">טלפון:</p>
-                                            <p className="text-blue-800 group-hover:text-black">03-504-504-1</p>
-                                        </div>
-                                    </a>
-                                </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                                <a
+                                    href="https://maps.google.com/?q=רחוב+חזון+איש+5,+רחובות,+ישראל"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex flex-col items-center justify-center transition-all duration-300 hover:bg-blue-600/30 rounded-lg p-3 group"
+                                >
+                                    <div className="mx-4 p-2 bg-blue-600/30 rounded-full group-hover:bg-yellow-400 group-hover:text-blue-800 transition-all duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="font-semibold">כתובת:</p>
+                                        <p className="text-blue-800 group-hover:text-black">רחוב חזון איש 5, רחובות</p>
+                                    </div>
+                                </a>
+                                <a
+                                    href="tel:035045041"
+                                    className="flex flex-col items-center justify-center transition-all duration-300 hover:bg-blue-600/30 rounded-lg p-3 group"
+                                >
+                                    <div className="mx-4 p-2 bg-blue-600/30 rounded-full group-hover:bg-yellow-400 group-hover:text-blue-800 transition-all duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                        </svg>
+                                    </div>
+                                    <div className="text-center">
+                                        <p className="font-semibold">טלפון:</p>
+                                        <p className="text-blue-800 group-hover:text-black">03-504-504-1</p>
+                                    </div>
+                                </a>
                             </div>
 
                             {/* Contact Form Button */}
