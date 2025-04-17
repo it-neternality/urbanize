@@ -542,10 +542,10 @@ export default function ButterflyParkSurvey() {
                 {/* Header - Simplified with only logo */}
                 <header className="p-3 md:p-6 bg-white shadow-md sticky top-0 z-50 mobile-compact-header">
                     <div className="container mx-auto flex justify-center items-center">
-                        <Link href="/">
+                        <Link href="/butterfly-park">
                             <Image
-                                src="/urbanize-logo.png"
-                                alt="Urbanize לוגו"
+                                src="/butterfly/butterfly logo.png"
+                                alt="לוגו פארק הפרפרים"
                                 width={100}
                                 height={33}
                                 priority

@@ -7,10 +7,10 @@ export default function ButterflyPark() {
             {/* Header */}
             <header className="p-4 md:p-6 bg-white shadow-sm">
                 <div className="container mx-auto flex justify-between items-center">
-                    <Link href="/">
+                    <Link href="/butterfly-park" className="flex items-center">
                         <Image
-                            src="/butterfly/Urbanize Properties Logo.png"
-                            alt="Urbanize Properties לוגו"
+                            src="/butterfly/butterfly logo.png"
+                            alt="פארק הפרפרים לוגו"
                             width={180}
                             height={60}
                             priority
@@ -66,7 +66,7 @@ export default function ButterflyPark() {
                         <div className="text-right">
                             <h2 className="text-3xl font-bold mb-6 text-black flex items-center justify-start">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 ml-2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m-1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 אודות הפרויקט
                             </h2>
@@ -107,20 +107,48 @@ export default function ButterflyPark() {
                                     הסופר מרקט השכונתי.
                                 </span>
                             </p>
-                            <div className="flex space-x-4 justify-start">
-                                <Link
-                                    href="/butterfly-park/survey"
-                                    className="bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-all hover:bg-blue-800 flex items-center"
-                                >
-                                    סקר התעניינות
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 mr-2" style={{ paddingLeft: '0.25rem' }}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                </Link>
-                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
+
+            {/* Survey Section */}
+            <section className="py-16 px-6 bg-blue-50 text-center relative overflow-hidden" style={{
+                backgroundImage: 'url("/butterfly/survey-background.png")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}>
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-100 to-blue-50 opacity-80 z-0"></div>
+                <div className="container mx-auto relative z-10">
+                    <div className="flex flex-col items-center text-right animate-fade-in">
+                        <div className="w-20 h-20 mb-6 rounded-full flex items-center justify-center bg-yellow-400 text-yellow-600 shadow-lg animate-bounce">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-10 h-10">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M9 9h.01M15 9h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
+                        <h2 className="text-4xl font-extrabold text-blue-900 mb-6">מוזמנים להשפיע!</h2>
+                        <p className="text-lg text-blue-800 max-w-3xl mx-auto mb-6 leading-relaxed">
+                            על מנת לייצר תמהיל חנויות ושירותים שיתאים בדיוק לצרכים,
+                            בחרנו לשתף אתכם בתכנון המרכז.
+                        </p>
+                        <p className="text-lg text-blue-800 max-w-3xl mx-auto mb-6 leading-relaxed">
+                            בפעם הראשונה בישראל, התושבים הם אלה שייצרו את החוויה והדינמיקה המסחרית אורבנית שלהם, כל השירותים והחנויות שהמשפחה שלכם צריכה והכל מתחת לבית!
+                        </p>
+                        <Link
+                            href="/butterfly-park/survey"
+                            className="bg-blue-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-md transition-all hover:bg-blue-800 flex items-center justify-center animate-pulse"
+                        >
+                            סקר תושבים
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 ml-2">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </Link>
+                    </div>
+                </div>
+                <div className="absolute top-0 left-0 w-40 h-40 bg-yellow-300 rounded-full opacity-50 animate-spin-slow"></div>
+                <div className="absolute bottom-0 right-0 w-60 h-60 bg-blue-300 rounded-full opacity-30 animate-spin-slow"></div>
             </section>
 
             {/* Features */}
@@ -220,18 +248,18 @@ export default function ButterflyPark() {
                 </div>
             </section>
 
-            {/* CTA */}
+            {/* Contact Us Section */}
             <section className="py-16 px-6 bg-blue-700 text-white">
                 <div className="container mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">מעוניינים לשמוע עוד?</h2>
+                    <h2 className="text-3xl font-bold mb-6">צור קשר</h2>
                     <p className="text-blue-100 text-lg max-w-2xl mx-auto mb-8">
-                        השאירו פרטים ונחזור אליכם בהקדם עם מידע מפורט על פארק הפרפרים
+                        נשמח לשמוע מכם! לחצו על הקישור למעבר לטופס יצירת קשר.
                     </p>
                     <Link
-                        href="/butterfly-park/survey"
+                        href="/butterfly-park/contact-us"
                         className="bg-white text-blue-700 px-8 py-3 rounded-md font-medium transition-all hover:bg-gray-100 inline-block"
                     >
-                        למילוי סקר התעניינות
+                        לטופס יצירת קשר
                     </Link>
                 </div>
             </section>
@@ -264,14 +292,8 @@ export default function ButterflyPark() {
                             <ul className="space-y-2">
                                 <li><Link href="/" className="text-blue-200 hover:text-white transition">בית</Link></li>
                                 <li><Link href="/" className="text-blue-200 hover:text-white transition">אודות</Link></li>
-                                <li><Link href="/" className="text-blue-200 hover:text-white transition">יצירת קשר</Link></li>
+                                <li><a href="/butterfly-park/contact-us" className="text-blue-200 hover:text-white transition">יצירת קשר</a></li>
                             </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">צור קשר</h3>
-                            <p className="text-blue-200 mb-2">רחוב הטכנולוגיה 10, תל אביב</p>
-                            <p className="text-blue-200 mb-2">טלפון: 03-1234567</p>
-                            <p className="text-blue-200">דוא״ל: info@urbanize.co.il</p>
                         </div>
                     </div>
                     <div className="border-t border-blue-800 mt-8 pt-8 text-center text-blue-300">
