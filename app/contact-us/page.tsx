@@ -52,7 +52,7 @@ export default function ContactUs() {
                     },
                     body: JSON.stringify({
                         to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
-                        subject: "טופס צור קשר - פנייה חדשה מאתר פארק הפרפרים",
+                        subject: "טופס צור קשר - פנייה חדשה מאתר אורבניז",
                         text: `שם: ${formData.name}\nאימייל: ${formData.email}\nהודעה: ${formData.message}`,
                     }),
                 });
@@ -83,12 +83,12 @@ export default function ContactUs() {
                 <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-500 rounded-full opacity-10 transform translate-x-16 translate-y-16"></div>
                 <div className="container mx-auto text-center relative z-10">
                     <Image
-                        src="/butterfly/butterfly logo.png"
+                        src="/urbanize-logo.png"
                         alt="Urbanize Properties לוגו"
                         width={120}
                         height={40}
                         className="h-auto mb-6 ml-auto mr-4"
-                        onClick={() => window.location.href = '/butterfly-park'}
+                        onClick={() => window.location.href = '/'}
                         style={{ cursor: 'pointer' }}
                     />
                     <h2 className="text-3xl font-bold mb-6" style={{ direction: "rtl" }}>צור קשר</h2>

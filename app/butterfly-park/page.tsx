@@ -27,7 +27,7 @@ export default function ButterflyPark() {
                     {/* Text Content */}
                     <div className="md:w-1/2 p-4 text-center md:text-right flex flex-col items-center md:items-end">
                         <h1 className="text-5xl md:text-6xl font-extrabold text-pink-600 mb-4">פארק הפרפרים</h1>
-                        <p className="text-2xl text-gray-800 max-w-3xl">מרכז הקניות והפנאי המפתיע בשכונת רחובות הצעירה</p>
+                        <p className="text-2xl text-gray-800 max-w-3xl">מרכז הקניות והפנאי בשכונת רחובות הצעירה</p>
                         <p className="text-lg text-gray-600 mt-4">מקום שבו הקהילה נפגשת, המשפחה נהנית, והחברים מבלים יחד.</p>
                     </div>
                     {/* Image */}
@@ -113,11 +113,7 @@ export default function ButterflyPark() {
             </section>
 
             {/* Survey Section */}
-            <section className="py-16 px-6 bg-blue-50 text-center relative overflow-hidden" style={{
-                backgroundImage: 'url("/butterfly/survey-background.png")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}>
+            <section className="py-16 px-6 bg-blue-50 text-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-blue-100 to-blue-50 opacity-80 z-0"></div>
                 <div className="container mx-auto relative z-10">
                     <div className="flex flex-col items-center text-right animate-fade-in">
