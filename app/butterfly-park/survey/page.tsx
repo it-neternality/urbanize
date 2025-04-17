@@ -686,7 +686,7 @@ export default function ButterflyParkSurvey() {
                         {/* Survey Data Button - Add this at the bottom of the main content, after the navigation buttons */}
                         <div className="mt-8 text-center">
                             <Link
-                                href="/butterfly-park/survey/data"
+                                href="/butterfly-park/survey/dashboard"
                                 className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 inline-flex items-center shadow-md transition-all"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">

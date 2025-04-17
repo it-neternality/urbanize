@@ -2,12 +2,25 @@
 
 import { useRef, useEffect } from "react";
 import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels"; // Import the plugin
 import { surveySteps } from "../../surveyConfig";
+
+// Register the plugin globally
+Chart.register(ChartDataLabels);
 
 export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => {
     const categories = ["food", "shops", "services", "pleasure"];
-    const chartRefs = useRef<(HTMLCanvasElement | null)[]>([]);
-    const chartInstances = useRef<(Chart | null)[]>([]);
+    const barChartRefs = useRef<(HTMLCanvasElement | null)[]>([]);
+    const pieChartRefs = useRef<(HTMLCanvasElement | null)[]>([]);
+    const barChartInstances = useRef<(Chart | null)[]>([]);
+    const pieChartInstances = useRef<(Chart | null)[]>([]);
+
+    const categoryTitles: Record<string, string> = {
+        food: "ניקוד כולל עבור מזון והסעדה",
+        shops: "ניקוד כולל עבור חנויות",
+        services: "ניקוד כולל עבור שירותים",
+        pleasure: "ניקוד כולל עבור בילוי ופנאי",
+    };
 
     const getHebrewLabel = (category: string, key: string) => {
         const step = surveySteps.find((step) => step.category === category);
@@ -22,38 +35,51 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
         if (!data) return;
 
         categories.forEach((category, index) => {
-            const chartRef = chartRefs.current[index];
-            if (!chartRef) return;
+            const barChartRef = barChartRefs.current[index];
+            const pieChartRef = pieChartRefs.current[index];
+            if (!barChartRef || !pieChartRef) return;
 
-            const ctx = chartRef.getContext("2d");
-            if (!ctx) return;
+            const barCtx = barChartRef.getContext("2d");
+            const pieCtx = pieChartRef.getContext("2d");
+            if (!barCtx || !pieCtx) return;
 
-            // Destroy existing chart instance if it exists
-            if (chartInstances.current[index]) {
-                chartInstances.current[index]?.destroy();
+            // Destroy existing chart instances if they exist
+            if (barChartInstances.current[index]) {
+                barChartInstances.current[index]?.destroy();
+            }
+            if (pieChartInstances.current[index]) {
+                pieChartInstances.current[index]?.destroy();
             }
 
+            // Calculate total scores for each item in the category
             const categoryData = Object.values(data).reduce((acc: Record<string, number>, entry: any) => {
                 const categoryRatings = entry[category];
-                if (categoryRatings) {
+                if (categoryRatings && typeof categoryRatings === "object") {
                     Object.entries(categoryRatings).forEach(([key, value]) => {
-                        acc[key] = (acc[key] || 0) + (value as number);
+                        const numericValue = parseFloat(value as string); // Ensure the value is numeric
+                        if (!isNaN(numericValue)) {
+                            acc[key] = (acc[key] || 0) + numericValue;
+                        }
                     });
                 }
                 return acc;
             }, {});
 
+            const labels = Object.keys(categoryData).map((key) => getHebrewLabel(category, key));
+            const scores = Object.values(categoryData);
+            const colors = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", "#FF5733", "#33FF57"];
+
             // Create a new bar chart instance
-            chartInstances.current[index] = new Chart(ctx, {
+            barChartInstances.current[index] = new Chart(barCtx, {
                 type: "bar",
                 data: {
-                    labels: Object.keys(categoryData).map((key) => getHebrewLabel(category, key)),
+                    labels,
                     datasets: [
                         {
-                            label: `ניקוד עבור ${category}`,
-                            data: Object.values(categoryData),
-                            backgroundColor: "#36A2EB",
-                            borderColor: "#1E88E5",
+                            label: categoryTitles[category],
+                            data: scores,
+                            backgroundColor: colors.slice(0, labels.length),
+                            borderColor: colors.slice(0, labels.length),
                             borderWidth: 1,
                         },
                     ],
@@ -62,7 +88,19 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
                     plugins: {
                         title: {
                             display: true,
-                            text: `ניקוד עבור ${category}`,
+                            text: categoryTitles[category],
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `${context.raw.toLocaleString()} נקודות`,
+                            },
+                        },
+                        datalabels: {
+                            display: true,
+                            color: "#000",
+                            anchor: "end",
+                            align: "top",
+                            formatter: (value: number) => value.toLocaleString(),
                         },
                     },
                     responsive: true,
@@ -80,15 +118,45 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
                                 display: true,
                                 text: "ניקוד כולל",
                             },
+                            ticks: {
+                                callback: function (value) {
+                                    return Number(value).toLocaleString(); // Format numbers with commas
+                                },
+                            },
                         },
                     },
+                },
+            });
+
+            // Create a new pie chart instance
+            pieChartInstances.current[index] = new Chart(pieCtx, {
+                type: "pie",
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            data: scores,
+                            backgroundColor: colors.slice(0, labels.length),
+                        },
+                    ],
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `התפלגות ניקוד עבור ${categoryTitles[category]}`,
+                        },
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
                 },
             });
         });
 
         // Cleanup function to destroy all chart instances
         return () => {
-            chartInstances.current.forEach((chart) => chart?.destroy());
+            barChartInstances.current.forEach((chart) => chart?.destroy());
+            pieChartInstances.current.forEach((chart) => chart?.destroy());
         };
     }, [data]);
 
@@ -96,9 +164,12 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {categories.map((category, index) => (
                 <div key={category} className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-lg font-bold text-indigo-700 mb-4">{`ניקוד עבור ${category}`}</h3>
+                    <h3 className="text-lg font-bold text-indigo-700 mb-4">{categoryTitles[category]}</h3>
+                    <div className="relative h-96 mb-6">
+                        <canvas ref={(el) => (barChartRefs.current[index] = el)}></canvas>
+                    </div>
                     <div className="relative h-64">
-                        <canvas ref={(el) => (chartRefs.current[index] = el)}></canvas>
+                        <canvas ref={(el) => (pieChartRefs.current[index] = el)}></canvas>
                     </div>
                 </div>
             ))}
