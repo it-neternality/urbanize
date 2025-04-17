@@ -57,27 +57,24 @@ export default function ContactUs() {
 
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
-            <header className="p-4 md:p-6 bg-white shadow-sm">
-                <div className="container mx-auto flex justify-between items-center">
+            <section className="flex-grow py-8 px-6 bg-gradient-to-b from-white-100 to-blue-200 text-black relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-48 h-48 bg-blue-400 rounded-full opacity-10 transform -translate-x-16 -translate-y-16"></div>
+                <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-500 rounded-full opacity-10 transform translate-x-16 translate-y-16"></div>
+                <div className="container mx-auto text-center relative z-10">
                     <Image
                         src="/butterfly/butterfly logo.png"
                         alt="Urbanize Properties לוגו"
                         width={120}
                         height={40}
-                        className="h-auto"
+                        className="h-auto mb-6 ml-auto mr-4"
                     />
-                </div>
-            </header>
-
-            <section className="py-16 px-6 bg-blue-700 text-white">
-                <div className="container mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-6" style={{ direction: "rtl" }}>צור קשר</h2>
-                    <p className="text-blue-100 text-lg max-w-2xl mx-auto mb-8" style={{ direction: "rtl" }}>
+                    <p className="text-blue-800 text-lg max-w-2xl mx-auto mb-8" style={{ direction: "rtl" }}>
                         נשמח לשמוע מכם! מלאו את הטופס ונחזור אליכם בהקדם.
                     </p>
                     <form
                         onSubmit={handleSubmit}
-                        className="bg-white text-blue-700 p-8 rounded-lg shadow-lg max-w-lg mx-auto space-y-6"
+                        className="text-blue-700 p-4 rounded-lg max-w-sm mx-auto space-y-4"
                     >
                         <div className="text-right">
                             <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
@@ -89,7 +86,7 @@ export default function ContactUs() {
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                className={`w-full p-3 border ${errors.name ? "border-red-500" : "border-gray-300"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`w-full p-2 border ${errors.name ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
                             />
                             {errors.name && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.name}</p>}
                         </div>
@@ -104,7 +101,7 @@ export default function ContactUs() {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={`w-full p-3 border ${errors.email ? "border-red-500" : "border-gray-300"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
                             />
                             {errors.email && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.email}</p>}
                         </div>
@@ -116,13 +113,14 @@ export default function ContactUs() {
                             <textarea
                                 id="message"
                                 name="message"
-                                rows={4}
+                                rows={3}
                                 value={formData.message}
                                 onChange={handleChange}
-                                className={`w-full p-3 border ${errors.message ? "border-red-500" : "border-gray-300"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`w-full p-2 border ${errors.message ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
                             ></textarea>
                             {errors.message && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.message}</p>}
                         </div>
+
                         <div className="text-right">
                             {turnstileSiteKey && (
                                 <div
@@ -135,7 +133,7 @@ export default function ContactUs() {
 
                         <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-md hover:from-blue-600 hover:to-blue-800 transition-colors font-bold text-lg"
+                            className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-md hover:from-blue-600 hover:to-blue-800 transition-colors font-bold text-lg"
                         >
                             שלח
                         </button>
@@ -144,7 +142,7 @@ export default function ContactUs() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-blue-900 text-white py-2 md:py-4 text-center text-sm md:text-base">
+            <footer className="bg-blue-900 text-white py-2 md:py-4 text-center text-sm md:text-base mt-auto">
                 <p>© כל הזכויות שמורות {new Date().getFullYear()}</p>
             </footer>
         </div>
