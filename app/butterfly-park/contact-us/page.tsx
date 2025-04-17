@@ -53,7 +53,7 @@ export default function ContactUs() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+    const turnstileSiteKey = process.env.TURNSTILE_SITE_KEY || "";
 
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -122,7 +122,7 @@ export default function ContactUs() {
                             {errors.message && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.message}</p>}
                         </div>
 
-                        <div className="text-right">
+                        <div className="text-center">
                             {turnstileSiteKey && (
                                 <div
                                     className="cf-turnstile"
