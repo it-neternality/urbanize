@@ -60,7 +60,7 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
             }
             return acc;
         }, {});
-    }, [data, activeCategory, genderFilter, statusFilter, addressFilter]);
+    }, [data, activeCategory, genderFilter, statusFilter, addressFilter, applyFilters]);
 
     return (
         <div className="flex flex-row gap-6">
