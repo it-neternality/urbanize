@@ -19,7 +19,6 @@ import { ThankYou } from "./components/ThankYou";
 // Import survey configuration and types
 import { firebaseConfig, surveySteps } from "./surveyConfig";
 import { FormData, RatingStep, SurveyStep } from "./types"; // Import SurveyStep type
-import { SurveyData } from "./dashboard/types";
 
 // Type guard to check if a step has items
 function hasItems(step: SurveyStep): step is RatingStep {

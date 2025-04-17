@@ -4,8 +4,9 @@ import { useState } from "react";
 import { RawDataTable } from "./RawDataTable";
 import { AnalyticsCharts } from "./AnalyticsCharts";
 import { ScoresCharts } from "./ScoresCharts";
+import { SurveyData } from "../types";
 
-export const DashboardTabs = ({ data }: { data: Record<string, Record<string, unknown>> | null }) => {
+export const DashboardTabs = ({ data }: { data: SurveyData | null }) => {
     const [activeTab, setActiveTab] = useState("raw");
 
     return (

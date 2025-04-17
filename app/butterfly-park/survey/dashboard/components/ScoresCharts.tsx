@@ -5,6 +5,7 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { surveySteps } from "../../surveyConfig";
 import { SurveyData, SurveyDataEntry } from "../types";
+import { TooltipItem } from "chart.js";
 
 Chart.register(ChartDataLabels);
 
@@ -125,7 +126,12 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
                     },
                     tooltip: {
                         callbacks: {
-                            label: (context) => `${context.raw.toLocaleString()} נקודות`,
+                            label: (context: TooltipItem<"bar">) => {
+                                if (typeof context.raw === "number") {
+                                    return `${context.raw.toLocaleString()} נקודות`;
+                                }
+                                return "";
+                            },
                         },
                     },
                     datalabels: {
