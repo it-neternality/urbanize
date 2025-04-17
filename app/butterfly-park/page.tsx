@@ -21,31 +21,28 @@ export default function ButterflyPark() {
             </header>
 
             {/* Hero Banner */}
-            <div className="relative h-[50vh] flex items-center justify-center">
+            <div className="relative h-[60vh] flex items-center justify-center bg-gradient-to-b from-orange-100 to-yellow-100">
                 <div className="absolute inset-0 bg-white opacity-20"></div>
                 <div className="container mx-auto px-6 z-10 flex md:flex-row flex-col items-center">
                     {/* Text Content */}
-                    <div className="md:w-1/2 p-4 text-center md:text-right flex items-center justify-center md:justify-end">
-                        <h1 className="text-4xl md:text-5xl font-bold text-black mb-0 mr-4">פארק הפרפרים</h1>
-                        <Image
-                            src="/butterfly/shopping-bag.png"
-                            alt="shopping bag"
-                            width={96}
-                            height={96}
-                            className="h-auto"
-                        />
+                    <div className="md:w-1/2 p-4 text-center md:text-right flex flex-col items-center md:items-end">
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-pink-600 mb-4">פארק הפרפרים</h1>
+                        <p className="text-2xl text-gray-800 max-w-3xl">מרכז הקניות והפנאי המפתיע בשכונת רחובות הצעירה</p>
+                        <p className="text-lg text-gray-600 mt-4">מקום שבו הקהילה נפגשת, המשפחה נהנית, והחברים מבלים יחד.</p>
                     </div>
-                    <p className="text-xl text-blue-900 max-w-3xl mx-auto">מרכז הקניות והפנאי בשכונת רחובות הצעירה</p>
                     {/* Image */}
-                    <div className="md:w-1/2 p-4 relative">
-                        <div className="absolute inset-0 bg-white opacity-30"></div>
+                    <div className="relative z-10 rounded-xl hover:scale-120 transition-transform duration-500 md:ml-auto overflow-hidden">
                         <Image
                             src="/butterfly/family-shopping-bags.png"
                             alt="פארק הפרפרים"
                             width={600}
                             height={300}
-                            style={{ objectFit: 'contain' }}
-                            className="mx-auto relative z-10"
+                            style={{
+                                objectFit: 'contain',
+                                maskImage: 'radial-gradient(circle, black 10%, transparent 80%)',
+                                WebkitMaskImage: 'radial-gradient(circle, black 10%, transparent 80%)'
+                            }}
+                            className="mx-auto"
                             priority
                         />
                     </div>
