@@ -39,8 +39,8 @@ export default function ButterflyPark() {
                             height={300}
                             style={{
                                 objectFit: 'contain',
-                                maskImage: 'radial-gradient(circle, black 10%, transparent 80%)',
-                                WebkitMaskImage: 'radial-gradient(circle, black 10%, transparent 80%)'
+                                maskImage: 'radial-gradient(ellipse, black 10%, transparent 70%)',
+                                WebkitMaskImage: 'radial-gradient(ellipse, black 10%, transparent 70%)'
                             }}
                             className="mx-auto"
                             priority
