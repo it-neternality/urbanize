@@ -155,22 +155,14 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                                             value={displayValue}
                                             onChange={(e) => handleSliderChange(step.category, item.key, parseInt(e.target.value, 10))}
                                             className={`w-full h-2 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 transition-colors duration-300 rtl-slider ${formData[item.key] === 0 ? 'bg-green-50' :
-                                                    formData[item.key] === 1 ? 'bg-green-100' :
-                                                        formData[item.key] === 2 ? 'bg-green-200' :
-                                                            formData[item.key] === 3 ? 'bg-green-300' :
-                                                                formData[item.key] === 4 ? 'bg-green-400' :
-                                                                    'bg-green-500'
+                                                formData[item.key] === 1 ? 'bg-green-100' :
+                                                    formData[item.key] === 2 ? 'bg-green-200' :
+                                                        formData[item.key] === 3 ? 'bg-green-300' :
+                                                            formData[item.key] === 4 ? 'bg-green-400' :
+                                                                'bg-green-500'
                                                 }`}
                                             style={{ direction: 'rtl' }}
                                         />
-                                        <div className="slider-labels">
-                                            <span className="slider-number">5</span>
-                                            <span className="slider-number">4</span>
-                                            <span className="slider-number">3</span>
-                                            <span className="slider-number">2</span>
-                                            <span className="slider-number">1</span>
-                                            <span className="slider-number">0</span>
-                                        </div>
                                     </div>
                                 </div>
                             );
@@ -182,11 +174,11 @@ export const RatingForm: React.FC<RatingFormProps> = ({
             {/* Fixed footer on mobile showing current score */}
             <div className="fixed-score-footer">
                 <div className="fixed-score-content">
-                    <div className="fixed-score-number">
+                    <div className="fixed-score-number" style={{ color: pointsLeft > 0 ? 'red' : pointsLeft < 0 ? 'orange' : 'green' }}>
                         {ratingSum}/{step.maxPoints} נקודות
                     </div>
                     {!success && (
-                        <div className="fixed-score-message">
+                        <div className="fixed-score-message" style={{ color: pointsLeft > 0 ? 'red' : pointsLeft < 0 ? 'orange' : 'green' }}>
                             {pointsLeft > 0
                                 ? `נותרו עוד ${pointsLeft} נקודות לחלק`
                                 : pointsLeft < 0
@@ -196,8 +188,8 @@ export const RatingForm: React.FC<RatingFormProps> = ({
                         </div>
                     )}
                     {success && (
-                        <div className="fixed-score-message bg-green-100 text-green-800">
-                            <svg className="w-4 h-4 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <div className="fixed-score-message bg-green-500 text-white flex items-center justify-center">
+                            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             הושלם בהצלחה

@@ -599,7 +599,7 @@ export default function ButterflyParkSurvey() {
                                 {currentStep > 0 ? (
                                     <button
                                         onClick={handlePrevStep}
-                                        className="nav-button-prev"
+                                        className="relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md"
                                     >
                                         הקודם
                                     </button>
@@ -611,11 +611,12 @@ export default function ButterflyParkSurvey() {
                                     <button
                                         onClick={handleNextStep}
                                         disabled={currentStep === 0 ? Object.values(fieldErrors).length > 0 : !success}
-                                        className={`nav-button-next relative group ${currentStep === 0 && Object.values(fieldErrors).length > 0
-                                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                            : currentStep !== 0 && !success
+                                        className={`relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200
+                                            ${currentStep === 0 && Object.values(fieldErrors).length > 0
                                                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                                : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                                : currentStep !== 0 && !success
+                                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                    : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md'
                                             }`}
                                     >
                                         הבא
@@ -634,7 +635,11 @@ export default function ButterflyParkSurvey() {
                                     <button
                                         onClick={handleSubmit}
                                         disabled={submitting}
-                                        className="submit-button px-6 py-3 md:px-8 md:py-4"
+                                        className={`relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200
+                                            ${submitting
+                                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md'
+                                            }`}
                                     >
                                         {submitting ? (
                                             <span className="flex items-center">
@@ -651,18 +656,19 @@ export default function ButterflyParkSurvey() {
                                 )}
                             </div>
                         )}
-                        {/* Survey Data Button - Add this at the bottom of the main content, after the navigation buttons */}
-                        <div className="mt-8 text-center">
-                            <Link
-                                href="/butterfly-park/survey/dashboard"
-                                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 inline-flex items-center shadow-md transition-all"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
-                                </svg>
-                                צפייה בנתוני הסקר
-                            </Link>
-                        </div>
+                        {currentStep === 0 && (
+                            <div className="mt-8 text-center">
+                                <Link
+                                    href="/butterfly-park/survey/dashboard"
+                                    className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 inline-flex items-center shadow-md transition-all"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+                                    </svg>
+                                    צפייה בנתוני הסקר
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 </main>
 
