@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { SurveyData, SurveyDataEntry } from "../types";
 import { ScoresChartsClient } from "./ScoresChartsClient";
 
@@ -35,14 +35,14 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
         setStatuses(Array.from(uniqueStatuses).sort());
     }, [data]);
 
-    const applyFilters = (data: SurveyData) => {
+    const applyFilters = useCallback((data: SurveyData) => {
         return Object.values(data).filter((entry: SurveyDataEntry) => {
             const matchesGender = genderFilter === "All" || entry.profile?.gender === genderFilter;
             const matchesStatus = !statusFilter.length || statusFilter.includes(entry.profile?.sibiling);
             const matchesAddress = !addressFilter || entry.profile?.address === addressFilter;
             return matchesGender && matchesStatus && matchesAddress;
         });
-    };
+    }, [genderFilter, statusFilter, addressFilter]); // Wrapped applyFilters in useCallback
 
     const filteredData = useMemo(() => {
         if (!data) return {};
@@ -60,7 +60,7 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
             }
             return acc;
         }, {});
-    }, [data, activeCategory, genderFilter, statusFilter, addressFilter, applyFilters]);
+    }, [data, activeCategory, applyFilters]);
 
     return (
         <div className="flex flex-row gap-6">
