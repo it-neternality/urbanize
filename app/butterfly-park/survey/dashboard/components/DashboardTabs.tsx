@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { RawDataTable } from "./RawDataTable";
-import { AnalyticsChart } from "./AnalyticsChart";
+import { AnalyticsCharts } from "./AnalyticsCharts";
 import { ScoresCharts } from "./ScoresCharts";
 
 export const DashboardTabs = ({ data }: { data: Record<string, any> | null }) => {
@@ -12,20 +12,13 @@ export const DashboardTabs = ({ data }: { data: Record<string, any> | null }) =>
         <>
             <div className="flex justify-center mb-6">
                 <nav className="flex space-x-4">
-                    {[
-                        { key: "raw", label: "נתונים גולמיים" },
-                        { key: "gender", label: "לפי מגדר" },
-                        { key: "address", label: "לפי כתובת" },
-                        { key: "sibiling", label: "לפי סטטוס משפחתי" },
-                        { key: "kupat_cholim", label: "לפי קופת חולים" },
-                        { key: "scores", label: "ניקוד" },
-                    ].map((tab) => (
+                    {[{ key: "raw", label: "נתונים גולמיים" }, { key: "analytics", label: "אנליטיקה" }, { key: "scores", label: "ניקוד" }].map((tab) => (
                         <button
                             key={tab.key}
                             onClick={() => setActiveTab(tab.key)}
                             className={`px-4 py-2 rounded-md font-medium ${activeTab === tab.key
-                                    ? "bg-indigo-600 text-white"
-                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                ? "bg-indigo-600 text-white"
+                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                 }`}
                         >
                             {tab.label}
@@ -34,9 +27,7 @@ export const DashboardTabs = ({ data }: { data: Record<string, any> | null }) =>
                 </nav>
             </div>
             {activeTab === "raw" && <RawDataTable data={data} />}
-            {["gender", "address", "sibiling", "kupat_cholim"].includes(activeTab) && (
-                <AnalyticsChart data={data} category={activeTab} />
-            )}
+            {activeTab === "analytics" && <AnalyticsCharts data={data} />}
             {activeTab === "scores" && <ScoresCharts data={data} />}
         </>
     );

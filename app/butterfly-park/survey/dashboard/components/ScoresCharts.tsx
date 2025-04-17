@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { surveySteps } from "../../surveyConfig";
@@ -189,78 +189,103 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
         };
     }, [data, activeCategory, genderFilter, statusFilter, addressFilter]);
 
+    // Extract gender options from surveyConfig (surveySteps)
+    const genderOptions = useMemo(() => {
+        const profileStep = surveySteps.find((step) => step.category === "profile");
+        if (!profileStep) return [];
+        // Try to find the gender field in the profile step
+        const genderField =
+            profileStep.fields?.find((field) =>
+                field.inputs?.some((input) => input.key === "gender")
+            );
+        if (!genderField) return [];
+        const genderInput = genderField.inputs?.find((input) => input.key === "gender");
+        if (!genderInput) return [];
+        return genderInput.options || [];
+    }, []);
+
+    // Calculate total and filtered rows
+    const totalRows = data ? Object.values(data).length : 0;
+    const filteredRows = data ? applyFilters(data).length : 0;
+
     return (
-        <div>
-            {/* Filters */}
-            <div className="bg-gray-100 p-6 rounded-lg mb-6 shadow-md">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <select
-                        value={genderFilter}
-                        onChange={(e) => setGenderFilter(e.target.value)}
-                        className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
-                    >
-                        <option value="All">כל המגדרים</option>
-                        {surveySteps
-                            .find((step) => step.category === "profile")
-                            ?.fields.find((field) => field.inputs.some((input) => input.key === "gender"))
-                            ?.inputs.find((input) => input.key === "gender")
-                            ?.options.map((option) => (
-                                <option key={option} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                    </select>
-                    <select
-                        multiple
-                        value={statusFilter}
-                        onChange={(e) =>
-                            setStatusFilter(Array.from(e.target.selectedOptions, (option) => option.value))
-                        }
-                        className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
-                    >
-                        {statuses.map((status) => (
-                            <option key={status} value={status}>
-                                {status}
-                            </option>
+        <div className="flex flex-row gap-6">
+            {/* Sidebar: Filters + Sub-category Tabs (make much smaller, e.g. 12%) */}
+            <div className="flex flex-col gap-6 md:w-[12%]">
+                {/* Filters */}
+                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <div className="mb-6">
+                        <h3 className="text-lg font-bold text-gray-700 mb-4">סינון</h3>
+                        <div className="grid grid-cols-1 gap-4">
+                            <select
+                                value={genderFilter}
+                                onChange={(e) => setGenderFilter(e.target.value)}
+                                className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
+                            >
+                                <option value="All">כל המגדרים</option>
+                                {genderOptions.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                            <select
+                                multiple
+                                value={statusFilter}
+                                onChange={(e) =>
+                                    setStatusFilter(Array.from(e.target.selectedOptions, (option) => option.value))
+                                }
+                                className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
+                            >
+                                {statuses.map((status) => (
+                                    <option key={status} value={status}>
+                                        {status}
+                                    </option>
+                                ))}
+                            </select>
+                            <select
+                                value={addressFilter || ""}
+                                onChange={(e) => setAddressFilter(e.target.value || null)}
+                                className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
+                            >
+                                <option value="">בחר כתובת</option>
+                                {addresses.map((address) => (
+                                    <option key={address} value={address}>
+                                        {address}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {/* Sub-category Tabs */}
+                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 className="text-lg font-bold text-gray-700 mb-4">קטגוריות</h3>
+                    <div className="flex flex-col gap-2">
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                className={`px-4 py-2 rounded ${activeCategory === category ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+                                    }`}
+                                onClick={() => setActiveCategory(category)}
+                            >
+                                {categoryTitles[category]}
+                            </button>
                         ))}
-                    </select>
-                    <select
-                        value={addressFilter || ""}
-                        onChange={(e) => setAddressFilter(e.target.value || null)}
-                        className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
-                    >
-                        <option value="">בחר כתובת</option>
-                        {addresses.map((address) => (
-                            <option key={address} value={address}>
-                                {address}
-                            </option>
-                        ))}
-                    </select>
+                    </div>
                 </div>
             </div>
-
-            {/* Sub-menu for tabs */}
-            <div className="flex space-x-4 mb-6">
-                {categories.map((category) => (
-                    <button
-                        key={category}
-                        className={`px-4 py-2 rounded ${activeCategory === category ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
-                            }`}
-                        onClick={() => setActiveCategory(category)}
-                    >
-                        {categoryTitles[category]}
-                    </button>
-                ))}
-            </div>
-
-            {/* Charts for the active category */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            {/* Main Content: Charts (make larger, e.g. 88%) */}
+            <div className="md:w-[88%] bg-white p-6 rounded-lg shadow-md">
+                <div className="mb-4 text-sm text-gray-600">
+                    סך הכל {totalRows} תגובות, מוצגות {filteredRows} לאחר סינון
+                </div>
                 <h3 className="text-lg font-bold text-indigo-700 mb-4">{categoryTitles[activeCategory]}</h3>
                 <div className="relative h-96 mb-6">
-                    <canvas ref={(el) => (barChartRefs.current[categories.indexOf(activeCategory)] = el)}></canvas>
+                    <canvas ref={(el) => { barChartRefs.current[categories.indexOf(activeCategory)] = el; }}></canvas>
                 </div>
                 <div className="relative h-64">
-                    <canvas ref={(el) => (pieChartRefs.current[categories.indexOf(activeCategory)] = el)}></canvas>
+                    <canvas ref={(el) => { pieChartRefs.current[categories.indexOf(activeCategory)] = el; }}></canvas>
                 </div>
             </div>
         </div>
