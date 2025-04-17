@@ -43,6 +43,12 @@ export const DashboardLogin = ({ onLogin }: { onLogin: () => void }) => {
                     >
                         Login
                     </button>
+                    <button
+                        onClick={() => window.location.href = '/butterfly-park'}
+                        className="w-full bg-gray-500 text-white py-3 rounded-md hover:bg-gray-600 transition-colors mt-4"
+                    >
+                        Back to Site
+                    </button>
                 </div>
             </div>
         </div>
