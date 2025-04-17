@@ -83,7 +83,7 @@ export default function ButterflyPark() {
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-1">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                     </svg>
-                                    לוותר על הרכב ולבלות עם הילדים אחה"צ ממש מתחת לביתך.
+                                    לוותר על הרכב ולבלות עם הילדים אחה&quot;צ ממש מתחת לביתך.
                                 </span>
                                 <br />
                                 <span className="inline-flex items-center">
@@ -249,58 +249,87 @@ export default function ButterflyPark() {
             </section>
 
             {/* Contact Us Section */}
-            <section className="py-16 px-6 bg-blue-700 text-white">
-                <div className="container mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">צור קשר</h2>
-                    <p className="text-blue-100 text-lg max-w-2xl mx-auto mb-8">
-                        נשמח לשמוע מכם! לחצו על הקישור למעבר לטופס יצירת קשר.
-                    </p>
-                    <Link
-                        href="/butterfly-park/contact-us"
-                        className="bg-white text-blue-700 px-8 py-3 rounded-md font-medium transition-all hover:bg-gray-100 inline-block"
-                    >
-                        לטופס יצירת קשר
-                    </Link>
+            <section className="py-20 bg-gradient-to-b from-blue-100 to-blue-200 text-black relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-48 h-48 bg-blue-400 rounded-full opacity-10 transform -translate-x-16 -translate-y-16"></div>
+                <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-500 rounded-full opacity-10 transform translate-x-16 translate-y-16"></div>
+
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold mb-3 ">צור קשר</h2>
+                        <div className="w-24 h-1 bg-yellow-400 mx-auto"></div>
+                    </div>
+
+                    <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            {/* Contact Info Card */}
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 mx-auto text-center">
+
+                                <div className="space-y-5 rtl">
+                                    <a
+                                        href="https://maps.google.com/?q=רחוב+חזון+איש+5,+רחובות,+ישראל"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex flex-col items-center justify-center transition-all duration-300 hover:bg-blue-600/30 rounded-lg p-3 group"
+                                    >
+                                        <div className="mx-4 p-2 bg-blue-600/30 rounded-full group-hover:bg-yellow-400 group-hover:text-blue-800 transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div className="text-center">
+                                            <p className="font-semibold">כתובת:</p>
+                                            <p className="text-blue-800 group-hover:text-black">רחוב חזון איש 5, רחובות</p>
+                                        </div>
+                                    </a>
+                                    <a
+                                        href="tel:035045041"
+                                        className="flex flex-col items-center justify-center transition-all duration-300 hover:bg-blue-600/30 rounded-lg p-3 group"
+                                    >
+                                        <div className="mx-4 p-2 bg-blue-600/30 rounded-full group-hover:bg-yellow-400 group-hover:text-blue-800 transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                            </svg>
+                                        </div>
+                                        <div className="text-center">
+                                            <p className="font-semibold">טלפון:</p>
+                                            <p className="text-blue-800 group-hover:text-black">03-504-504-1</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Contact Form Button */}
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 flex flex-col justify-center items-center text-center">
+                                <div className="w-16 h-16 mb-4 rounded-full flex items-center justify-center bg-yellow-400 text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-xl font-semibold mb-3">יש לך שאלה?</h3>
+                                <p className="text-blue-800 mb-6">
+                                    נשמח לשמוע ממך ולענות על כל שאלה או הצעה!
+                                </p>
+                                <Link
+                                    href="/butterfly-park/contact-us"
+                                    className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-8 py-3 rounded-full font-bold transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center"
+                                >
+                                    <span>טופס יצירת קשר</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 rtl:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="bg-blue-900 text-white py-10 px-6 mt-auto">
-                <div className="container mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        <div>
-                            <Image
-                                src="/butterfly/Urbanize Properties Logo.png"
-                                alt="Urbanize Properties לוגו"
-                                width={120}
-                                height={40}
-                                className="h-auto invert"
-                            />
-                            <p className="mt-4 text-blue-200">
-                                חברת נדל״ן מובילה המתמחה בפרויקטים חדשניים וטכנולוגיים.
-                            </p>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">פרויקטים</h3>
-                            <ul className="space-y-2">
-                                <li><Link href="/butterfly-park" className="text-blue-200 hover:text-white transition">פארק הפרפרים</Link></li>
-                                <li><Link href="/bsr-rishonim" className="text-blue-200 hover:text-white transition">BSR ראשונים</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">קישורים מהירים</h3>
-                            <ul className="space-y-2">
-                                <li><Link href="/" className="text-blue-200 hover:text-white transition">בית</Link></li>
-                                <li><Link href="/" className="text-blue-200 hover:text-white transition">אודות</Link></li>
-                                <li><a href="/butterfly-park/contact-us" className="text-blue-200 hover:text-white transition">יצירת קשר</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="border-t border-blue-800 mt-8 pt-8 text-center text-blue-300">
-                        <p>© כל הזכויות שמורות לאורבנייז {new Date().getFullYear()}</p>
-                    </div>
+            < footer className="bg-blue-900 text-white py-6 mt-auto" >
+                <div className="container mx-auto text-center">
+                    <p className="text-sm text-blue-300">© אורבנייז {new Date().getFullYear()}</p>
                 </div>
-            </footer>
+            </footer >
         </div >
     );
 }

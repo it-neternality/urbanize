@@ -97,7 +97,7 @@ export default function ContactUs() {
 
                         <div className="text-right">
                             <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
-                                דוא"ל
+                                דוא&quot;ל
                             </label>
                             <input
                                 type="email"
@@ -162,15 +162,15 @@ export default function ContactUs() {
                         <div>
                             <h3 className="text-lg font-bold mb-4">פרויקטים</h3>
                             <ul className="space-y-2">
-                                <li><a href="/butterfly-park" className="text-blue-200 hover:text-white transition">פארק הפרפרים</a></li>
-                                <li><a href="/bsr-rishonim" className="text-blue-200 hover:text-white transition">BSR ראשונים</a></li>
+                                <li><Link href="/butterfly-park" className="text-blue-200 hover:text-white transition">פארק הפרפרים</Link></li>
+                                <li><Link href="/bsr-rishonim" className="text-blue-200 hover:text-white transition">BSR ראשונים</Link></li>
                             </ul>
                         </div>
                         <div>
                             <h3 className="text-lg font-bold mb-4">קישורים מהירים</h3>
                             <ul className="space-y-2">
-                                <li><a href="/" className="text-blue-200 hover:text-white transition">בית</a></li>
-                                <li><a href="/" className="text-blue-200 hover:text-white transition">אודות</a></li>
+                                <li><Link href="/" className="text-blue-200 hover:text-white transition">בית</Link></li>
+                                <li><Link href="/" className="text-blue-200 hover:text-white transition">אודות</Link></li>
                                 <li><a href="/butterfly-park/contact-us" className="text-blue-200 hover:text-white transition">יצירת קשר</a></li>
                             </ul>
                         </div>
