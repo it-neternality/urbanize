@@ -16,6 +16,7 @@ export default function ContactUs() {
 
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
     const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const validateForm = () => {
         const newErrors = { name: "", email: "", message: "" };
@@ -40,11 +41,31 @@ export default function ContactUs() {
         return isValid;
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (validateForm()) {
-            // Submit the form
-            console.log("Form submitted", formData);
+            try {
+                const response = await fetch("/api/send-email", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        to: "nadlan@urbanize.co.il",
+                        subject: "Contact Us Form Submission",
+                        text: `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`,
+                    }),
+                });
+
+                if (response.ok) {
+                    console.log("Email sent successfully");
+                    setIsSubmitted(true);
+                } else {
+                    console.error("Failed to send email");
+                }
+            } catch (error) {
+                console.error("Error sending email:", error);
+            }
         }
     };
 
@@ -72,73 +93,81 @@ export default function ContactUs() {
                     <p className="text-blue-800 text-lg max-w-2xl mx-auto mb-8" style={{ direction: "rtl" }}>
                         נשמח לשמוע מכם! מלאו את הטופס ונחזור אליכם בהקדם.
                     </p>
-                    <form
-                        onSubmit={handleSubmit}
-                        className="text-blue-700 p-4 rounded-lg max-w-sm mx-auto space-y-4"
-                        noValidate
-                    >
-                        <div className="text-right">
-                            <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
-                                שם מלא
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className={`w-full p-2 border ${errors.name ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
-                            />
-                            {errors.name && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.name}</p>}
+                    {isSubmitted ? (
+                        <div className="text-blue-700 p-4 rounded-lg max-w-sm mx-auto space-y-4">
+                            <p className="text-lg font-bold" style={{ direction: "rtl" }}>
+                                תודה! פנייתך נשלחה בהצלחה. נחזור אליך בהקדם האפשרי.
+                            </p>
                         </div>
-
-                        <div className="text-right">
-                            <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
-                                דוא&quot;ל
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
-                            />
-                            {errors.email && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.email}</p>}
-                        </div>
-
-                        <div className="text-right">
-                            <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
-                                הודעה
-                            </label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows={3}
-                                value={formData.message}
-                                onChange={handleChange}
-                                className={`w-full p-2 border ${errors.message ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
-                            ></textarea>
-                            {errors.message && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.message}</p>}
-                        </div>
-
-                        <div className="text-center">
-                            {turnstileSiteKey && (
-                                <div
-                                    className="cf-turnstile"
-                                    data-sitekey={turnstileSiteKey}
-                                    data-theme="light"
-                                ></div>
-                            )}
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-md hover:from-blue-600 hover:to-blue-800 transition-colors font-bold text-lg"
+                    ) : (
+                        <form
+                            onSubmit={handleSubmit}
+                            className="text-blue-700 p-4 rounded-lg max-w-sm mx-auto space-y-4"
+                            noValidate
                         >
-                            שלח
-                        </button>
-                    </form>
+                            <div className="text-right">
+                                <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
+                                    שם מלא
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    className={`w-full p-2 border ${errors.name ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
+                                />
+                                {errors.name && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.name}</p>}
+                            </div>
+
+                            <div className="text-right">
+                                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
+                                    דוא&quot;ל
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
+                                />
+                                {errors.email && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.email}</p>}
+                            </div>
+
+                            <div className="text-right">
+                                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
+                                    הודעה
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows={3}
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    className={`w-full p-2 border ${errors.message ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
+                                ></textarea>
+                                {errors.message && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.message}</p>}
+                            </div>
+
+                            <div className="text-center">
+                                {turnstileSiteKey && (
+                                    <div
+                                        className="cf-turnstile"
+                                        data-sitekey={turnstileSiteKey}
+                                        data-theme="light"
+                                    ></div>
+                                )}
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-md hover:from-blue-600 hover:to-blue-800 transition-colors font-bold text-lg"
+                            >
+                                שלח
+                            </button>
+                        </form>
+                    )}
                 </div>
             </section>
 
