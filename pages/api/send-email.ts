@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         try {
             const emailResponse = await resend.emails.send({
-                from: "nadlan@urbanize.co.il", // Replace with your verified sender email
+                from: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
                 to,
                 subject,
                 text,

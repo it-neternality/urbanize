@@ -51,7 +51,7 @@ export default function ContactUs() {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        to: "nadlan@urbanize.co.il",
+                        to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
                         subject: "Contact Us Form Submission",
                         text: `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`,
                     }),
@@ -88,6 +88,8 @@ export default function ContactUs() {
                         width={120}
                         height={40}
                         className="h-auto mb-6 ml-auto mr-4"
+                        onClick={() => window.location.href = '/butterfly-park'}
+                        style={{ cursor: 'pointer' }}
                     />
                     <h2 className="text-3xl font-bold mb-6" style={{ direction: "rtl" }}>צור קשר</h2>
                     <p className="text-blue-800 text-lg max-w-2xl mx-auto mb-8" style={{ direction: "rtl" }}>

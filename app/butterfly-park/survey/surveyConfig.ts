@@ -12,14 +12,14 @@ export const ratingOptions: RatingOption[] = [
 
 // Firebase configuration
 export const firebaseConfig = {
-  apiKey: "AIzaSyAqWug5VeDWY972KKkQf5FgTccnqGDIT4o",
-  authDomain: "rehovot-poll.firebaseapp.com",
-  databaseURL: "https://rehovot-poll.firebaseio.com",
-  projectId: "rehovot-poll",
-  storageBucket: "rehovot-poll.appspot.com",
-  messagingSenderId: "939148001003",
-  appId: "1:939148001003:web:3d797a740fc5cb146048ae",
-  measurementId: "G-21KV3FNQDK"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || ""
 };
 
 // Survey data for each step
