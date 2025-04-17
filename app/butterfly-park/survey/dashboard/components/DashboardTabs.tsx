@@ -5,7 +5,7 @@ import { RawDataTable } from "./RawDataTable";
 import { AnalyticsCharts } from "./AnalyticsCharts";
 import { ScoresCharts } from "./ScoresCharts";
 
-export const DashboardTabs = ({ data }: { data: Record<string, any> | null }) => {
+export const DashboardTabs = ({ data }: { data: Record<string, Record<string, unknown>> | null }) => {
     const [activeTab, setActiveTab] = useState("raw");
 
     return (

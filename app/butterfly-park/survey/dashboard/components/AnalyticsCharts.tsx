@@ -17,7 +17,7 @@ const categoryLabels: Record<string, string> = {
     kupat_cholim: "קופת חולים",
 };
 
-export const AnalyticsCharts = ({ data }: { data: Record<string, any> | null }) => {
+export const AnalyticsCharts = ({ data }: { data: Record<string, Record<string, unknown>> | null }) => {
     const [activeCategory, setActiveCategory] = useState(analyticsCategories[0].key);
     const chartRef = useRef<HTMLCanvasElement | null>(null);
     const chartInstanceRef = useRef<Chart | null>(null);
@@ -27,8 +27,9 @@ export const AnalyticsCharts = ({ data }: { data: Record<string, any> | null }) 
         if (chartInstanceRef.current) {
             chartInstanceRef.current.destroy();
         }
-        const chartData = Object.values(data).reduce((acc: Record<string, number>, entry: any) => {
-            const value = entry.profile?.[activeCategory];
+        const chartData = Object.values(data).reduce((acc: Record<string, number>, entry: Record<string, unknown>) => {
+            const profile = entry.profile as Record<string, string> | undefined;
+            const value = profile?.[activeCategory];
             if (value) acc[value] = (acc[value] || 0) + 1;
             return acc;
         }, {});
@@ -93,8 +94,9 @@ export const AnalyticsCharts = ({ data }: { data: Record<string, any> | null }) 
                     סך הכל {data ? Object.values(data).length : 0} תגובות
                 </div>
                 <div className="mb-4 text-sm text-gray-600">
-                    מוצגות {data ? Object.values(data).filter((entry: any) => {
-                        const value = entry.profile?.[activeCategory];
+                    מוצגות {data ? Object.values(data).filter((entry: Record<string, unknown>) => {
+                        const profile = entry.profile as Record<string, string> | undefined;
+                        const value = profile?.[activeCategory];
                         return value !== undefined && value !== null && value !== '';
                     }).length : 0} תגובות לאחר סינון
                 </div>

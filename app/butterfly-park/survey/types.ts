@@ -83,3 +83,16 @@ export interface CustomAlertProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+export interface SurveyDataEntry {
+  id: string;
+  timestamp: string;
+  profile: ProfileData; // Ensuring compatibility with ProfileData
+  food: Record<string, number>;
+  shops: Record<string, number>;
+  services: Record<string, number>;
+  pleasure: Record<string, number>;
+  other: {
+    comments: string;
+  };
+}

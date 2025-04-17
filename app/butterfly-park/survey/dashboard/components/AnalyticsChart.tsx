@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import Chart from "chart.js/auto";
 
-export const AnalyticsChart = ({ data, category }: { data: Record<string, any> | null; category: string }) => {
+export const AnalyticsChart = ({ data, category }: { data: Record<string, Record<string, unknown>> | null; category: string }) => {
     const chartRef = useRef<HTMLCanvasElement | null>(null);
     const chartInstanceRef = useRef<Chart | null>(null);
 
@@ -13,8 +13,9 @@ export const AnalyticsChart = ({ data, category }: { data: Record<string, any> |
         }
 
         const chartData = data
-            ? Object.values(data).reduce((acc: Record<string, number>, entry: any) => {
-                const value = entry.profile[category];
+            ? Object.values(data).reduce((acc: Record<string, number>, entry: Record<string, unknown>) => {
+                const profile = entry.profile as Record<string, string>;
+                const value = profile[category];
                 if (value) acc[value] = (acc[value] || 0) + 1;
                 return acc;
             }, {})

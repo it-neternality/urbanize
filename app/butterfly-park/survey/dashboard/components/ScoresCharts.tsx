@@ -4,10 +4,11 @@ import { useRef, useEffect, useState, useMemo } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { surveySteps } from "../../surveyConfig";
+import { SurveyData, SurveyDataEntry } from "../types";
 
 Chart.register(ChartDataLabels);
 
-export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => {
+export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
     const categories = ["food", "shops", "services", "pleasure"];
     const [activeCategory, setActiveCategory] = useState(categories[0]); // State for active tab
     const [genderFilter, setGenderFilter] = useState<string>("All"); // Gender filter with "All" as default
@@ -37,8 +38,8 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
         return key;
     };
 
-    const applyFilters = (data: Record<string, any>) => {
-        return Object.values(data).filter((entry: any) => {
+    const applyFilters = (data: SurveyData) => {
+        return Object.values(data).filter((entry: SurveyDataEntry) => {
             const matchesGender = genderFilter === "All" || entry.profile?.gender === genderFilter;
             const matchesStatus = !statusFilter.length || statusFilter.includes(entry.profile?.sibiling);
             const matchesAddress = !addressFilter || entry.profile?.address === addressFilter;

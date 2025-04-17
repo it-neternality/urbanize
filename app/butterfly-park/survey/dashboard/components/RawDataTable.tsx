@@ -1,9 +1,16 @@
-"use client";
-
 import { useState } from "react";
 import { surveySteps } from "../../surveyConfig";
+import { SurveyData, SurveyDataEntry } from "../types";
+import { ProfileData } from "../../types";
 
-export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => {
+const formatCellValue = (value: unknown): string => {
+    if (typeof value === "object" && value !== null) {
+        return JSON.stringify(value); // Convert objects to JSON strings
+    }
+    return String(value || ""); // Return value as string or an empty string for null/undefined
+};
+
+export const RawDataTable = ({ data }: { data: SurveyData | null }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -14,7 +21,7 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
             "lname",
             "address",
             "address_number",
-            "phone", // Move phone after address_number
+            "phone",
             "gender",
             "kupat_cholim",
             "food",
@@ -23,11 +30,11 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
             "pleasure",
             "other",
         ];
-        const firstEntry = Object.values(data)[0];
-        const profileKeys = firstEntry?.profile ? Object.keys(firstEntry.profile) : [];
+        const firstEntry = Object.values(data)[0] as SurveyDataEntry;
+        const profileKeys = Object.keys(firstEntry.profile);
         const otherKeys = Object.keys(firstEntry).filter((key) => key !== "profile");
-        const allKeys = [...profileKeys, ...otherKeys].filter((key) => key !== "phone_prefix"); // Exclude phone_prefix
-        return orderedKeys.filter((key) => allKeys.includes(key)); // Return keys in the specified order
+        const allKeys = [...profileKeys, ...otherKeys].filter((key) => key !== "phone_prefix");
+        return orderedKeys.filter((key) => allKeys.includes(key));
     };
 
     const columnHeaders: Record<string, string> = {
@@ -44,13 +51,6 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
         services: "שירותים",
         pleasure: "בילוי ופנאי",
         other: "הערות",
-    };
-
-    const formatCellValue = (value: any) => {
-        if (typeof value === "object" && value !== null) {
-            return JSON.stringify(value); // Convert objects to JSON strings
-        }
-        return value || ""; // Return value or an empty string for null/undefined
     };
 
     const getHebrewLabel = (category: string, key: string) => {
@@ -211,13 +211,13 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
                         </tr>
                     </thead>
                     <tbody>
-                        {paginatedData.map((entry: any, index) => (
+                        {paginatedData.map((entry: SurveyDataEntry, index) => (
                             <tr key={index} className="hover:bg-indigo-50">
                                 {getAllColumns().map((col) => {
                                     if (col === "phone") {
                                         return (
                                             <td key={col} className="border border-gray-300 p-3 text-gray-700">
-                                                {`${entry.profile?.phone_prefix || entry.phone_prefix}-${entry.profile?.[col] || entry[col]}`}
+                                                {`${entry.profile?.phone_prefix || ""}-${entry.profile?.[col] || entry[col]}`}
                                             </td>
                                         );
                                     } else if (["food", "pleasure", "services", "shops"].includes(col)) {
