@@ -10,6 +10,12 @@ Chart.register(ChartDataLabels);
 export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => {
     const categories = ["food", "shops", "services", "pleasure"];
     const [activeCategory, setActiveCategory] = useState(categories[0]); // State for active tab
+    const [genderFilter, setGenderFilter] = useState<string>("All"); // Gender filter with "All" as default
+    const [statusFilter, setStatusFilter] = useState<string[]>([]); // Status filter (multiselect)
+    const [addressFilter, setAddressFilter] = useState<string | null>(null); // Address filter
+    const [addresses, setAddresses] = useState<string[]>([]); // Dynamic address options
+    const [statuses, setStatuses] = useState<string[]>([]); // Dynamic family status options
+
     const barChartRefs = useRef<(HTMLCanvasElement | null)[]>([]);
     const pieChartRefs = useRef<(HTMLCanvasElement | null)[]>([]);
     const barChartInstances = useRef<(Chart | null)[]>([]);
@@ -31,9 +37,34 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
         return key;
     };
 
+    const applyFilters = (data: Record<string, any>) => {
+        return Object.values(data).filter((entry: any) => {
+            const matchesGender = genderFilter === "All" || entry.profile?.gender === genderFilter;
+            const matchesStatus = !statusFilter.length || statusFilter.includes(entry.profile?.sibiling);
+            const matchesAddress = !addressFilter || entry.profile?.address === addressFilter;
+            return matchesGender && matchesStatus && matchesAddress;
+        });
+    };
+
     useEffect(() => {
         if (!data) return;
 
+        // Extract unique addresses and statuses from the data
+        const uniqueAddresses = new Set<string>();
+        const uniqueStatuses = new Set<string>();
+        Object.values(data).forEach((entry: any) => {
+            if (entry.profile?.address) uniqueAddresses.add(entry.profile.address);
+            if (entry.profile?.sibiling) uniqueStatuses.add(entry.profile.sibiling);
+        });
+
+        setAddresses(Array.from(uniqueAddresses).sort());
+        setStatuses(Array.from(uniqueStatuses).sort());
+    }, [data]);
+
+    useEffect(() => {
+        if (!data) return;
+
+        const filteredData = applyFilters(data); // Apply filters to the data
         const index = categories.indexOf(activeCategory);
         const barChartRef = barChartRefs.current[index];
         const pieChartRef = pieChartRefs.current[index];
@@ -52,7 +83,7 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
         }
 
         // Calculate total scores for each item in the category
-        const categoryData = Object.values(data).reduce((acc: Record<string, number>, entry: any) => {
+        const categoryData = filteredData.reduce((acc: Record<string, number>, entry: any) => {
             const categoryRatings = entry[activeCategory];
             if (categoryRatings && typeof categoryRatings === "object") {
                 Object.entries(categoryRatings).forEach(([key, value]) => {
@@ -156,10 +187,58 @@ export const ScoresCharts = ({ data }: { data: Record<string, any> | null }) => 
             barChartInstances.current[index]?.destroy();
             pieChartInstances.current[index]?.destroy();
         };
-    }, [data, activeCategory]);
+    }, [data, activeCategory, genderFilter, statusFilter, addressFilter]);
 
     return (
         <div>
+            {/* Filters */}
+            <div className="bg-gray-100 p-6 rounded-lg mb-6 shadow-md">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <select
+                        value={genderFilter}
+                        onChange={(e) => setGenderFilter(e.target.value)}
+                        className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
+                    >
+                        <option value="All">כל המגדרים</option>
+                        {surveySteps
+                            .find((step) => step.category === "profile")
+                            ?.fields.find((field) => field.inputs.some((input) => input.key === "gender"))
+                            ?.inputs.find((input) => input.key === "gender")
+                            ?.options.map((option) => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                    </select>
+                    <select
+                        multiple
+                        value={statusFilter}
+                        onChange={(e) =>
+                            setStatusFilter(Array.from(e.target.selectedOptions, (option) => option.value))
+                        }
+                        className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
+                    >
+                        {statuses.map((status) => (
+                            <option key={status} value={status}>
+                                {status}
+                            </option>
+                        ))}
+                    </select>
+                    <select
+                        value={addressFilter || ""}
+                        onChange={(e) => setAddressFilter(e.target.value || null)}
+                        className="border border-gray-300 rounded-md p-3 bg-white text-gray-700"
+                    >
+                        <option value="">בחר כתובת</option>
+                        {addresses.map((address) => (
+                            <option key={address} value={address}>
+                                {address}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
             {/* Sub-menu for tabs */}
             <div className="flex space-x-4 mb-6">
                 {categories.map((category) => (
