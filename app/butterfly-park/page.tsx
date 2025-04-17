@@ -322,11 +322,9 @@ export default function ButterflyPark() {
             </section>
 
             {/* Footer */}
-            < footer className="bg-blue-900 text-white py-6 mt-auto" >
-                <div className="container mx-auto text-center">
-                    <p className="text-sm text-blue-300">© אורבנייז {new Date().getFullYear()}</p>
-                </div>
-            </footer >
+            <footer className="bg-blue-900 text-white py-2 md:py-4 text-center text-sm md:text-base">
+                <p>© כל הזכויות שמורות {new Date().getFullYear()}</p>
+            </footer>
         </div >
     );
 }
