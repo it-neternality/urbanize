@@ -25,7 +25,7 @@ export const AnalyticsChart = ({ data, category }: { data: Record<string, any> |
             chartInstanceRef.current = new Chart(ctx, {
                 type: "pie",
                 data: {
-                    labels: Object.keys(chartData),
+                    labels: Object.keys(chartData).map((label) => label), // Labels in Hebrew
                     datasets: [
                         {
                             data: Object.values(chartData),
@@ -37,7 +37,7 @@ export const AnalyticsChart = ({ data, category }: { data: Record<string, any> |
                     plugins: {
                         title: {
                             display: true,
-                            text: `Distribution by ${category}`,
+                            text: `התפלגות לפי ${getHebrewCategoryLabel(category)}`, // Title in Hebrew
                         },
                     },
                     responsive: true,
@@ -47,9 +47,19 @@ export const AnalyticsChart = ({ data, category }: { data: Record<string, any> |
         }
     }, [data, category]);
 
+    const getHebrewCategoryLabel = (category: string) => {
+        const categoryLabels: Record<string, string> = {
+            gender: "מגדר",
+            address: "כתובת",
+            sibiling: "סטטוס משפחתי",
+            kupat_cholim: "קופת חולים",
+        };
+        return categoryLabels[category] || category;
+    };
+
     return (
         <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-bold text-indigo-700 mb-4 capitalize">{`Analytics: ${category}`}</h2>
+            <h2 className="text-lg font-bold text-indigo-700 mb-4">{`התפלגות לפי ${getHebrewCategoryLabel(category)}`}</h2>
             <div className="relative h-64">
                 <canvas ref={chartRef}></canvas>
             </div>

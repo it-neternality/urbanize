@@ -9,10 +9,25 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
 
     const getAllColumns = () => {
         if (!data) return [];
+        const orderedKeys = [
+            "fname",
+            "lname",
+            "address",
+            "address_number",
+            "phone", // Move phone after address_number
+            "gender",
+            "kupat_cholim",
+            "food",
+            "shops",
+            "services",
+            "pleasure",
+            "other",
+        ];
         const firstEntry = Object.values(data)[0];
         const profileKeys = firstEntry?.profile ? Object.keys(firstEntry.profile) : [];
         const otherKeys = Object.keys(firstEntry).filter((key) => key !== "profile");
-        return [...profileKeys, ...otherKeys];
+        const allKeys = [...profileKeys, ...otherKeys].filter((key) => key !== "phone_prefix"); // Exclude phone_prefix
+        return orderedKeys.filter((key) => allKeys.includes(key)); // Return keys in the specified order
     };
 
     const columnHeaders: Record<string, string> = {
@@ -99,8 +114,8 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
                 onClick={() => handlePageChange(1)}
                 disabled={currentPage === 1}
                 className={`px-4 py-2 rounded-md ${currentPage === 1
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-indigo-600 text-white hover:bg-indigo-700"
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-indigo-600 text-white hover:bg-indigo-700"
                     }`}
             >
                 ראשון
@@ -109,8 +124,8 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
                 className={`px-4 py-2 rounded-md ${currentPage === 1
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-indigo-600 text-white hover:bg-indigo-700"
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-indigo-600 text-white hover:bg-indigo-700"
                     }`}
             >
                 הקודם
@@ -121,8 +136,8 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
                         key={page}
                         onClick={() => handlePageChange(page)}
                         className={`px-3 py-1 rounded-md ${currentPage === page
-                                ? "bg-indigo-600 text-white"
-                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                            ? "bg-indigo-600 text-white"
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                             }`}
                     >
                         {page}
@@ -133,8 +148,8 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 className={`px-4 py-2 rounded-md ${currentPage === totalPages
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-indigo-600 text-white hover:bg-indigo-700"
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-indigo-600 text-white hover:bg-indigo-700"
                     }`}
             >
                 הבא
@@ -143,8 +158,8 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
                 onClick={() => handlePageChange(totalPages)}
                 disabled={currentPage === totalPages}
                 className={`px-4 py-2 rounded-md ${currentPage === totalPages
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-indigo-600 text-white hover:bg-indigo-700"
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-indigo-600 text-white hover:bg-indigo-700"
                     }`}
             >
                 אחרון
@@ -199,17 +214,22 @@ export const RawDataTable = ({ data }: { data: Record<string, any> | null }) => 
                         {paginatedData.map((entry: any, index) => (
                             <tr key={index} className="hover:bg-indigo-50">
                                 {getAllColumns().map((col) => {
-                                    if (["food", "pleasure", "services", "shops"].includes(col)) {
+                                    if (col === "phone") {
+                                        return (
+                                            <td key={col} className="border border-gray-300 p-3 text-gray-700">
+                                                {`${entry.profile?.phone_prefix || entry.phone_prefix}-${entry.profile?.[col] || entry[col]}`}
+                                            </td>
+                                        );
+                                    } else if (["food", "pleasure", "services", "shops"].includes(col)) {
                                         const categoryData = entry[col];
                                         if (typeof categoryData === "object" && categoryData !== null) {
                                             return (
-                                                <td key={col} className="border border-gray-300 p-3 text-gray-700">
-                                                    {Object.entries(categoryData)
-                                                        .map(
-                                                            ([key, value]) =>
-                                                                `${getHebrewLabel(col, key)}: ${value}`
-                                                        )
-                                                        .join(", ")}
+                                                <td key={col} className="border border-gray-300 p-3 text-gray-700 whitespace-nowrap">
+                                                    {Object.entries(categoryData).map(([key, value]) => (
+                                                        <div key={key}>
+                                                            {`${getHebrewLabel(col, key)}: ${value}`}
+                                                        </div>
+                                                    ))}
                                                 </td>
                                             );
                                         }
