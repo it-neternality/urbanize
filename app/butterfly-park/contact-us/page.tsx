@@ -75,6 +75,7 @@ export default function ContactUs() {
                     <form
                         onSubmit={handleSubmit}
                         className="text-blue-700 p-4 rounded-lg max-w-sm mx-auto space-y-4"
+                        noValidate
                     >
                         <div className="text-right">
                             <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
