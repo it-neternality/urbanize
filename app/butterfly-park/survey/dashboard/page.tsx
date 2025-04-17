@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { DashboardLogin } from "./components/DashboardLogin";
 import { DashboardTabs } from "./components/DashboardTabs";
 import { fetchSurveyData } from "./utils/fetchSurveyData";
+import { SurveyData } from "./types";
 
 export default function Dashboard() {
     const [authenticated, setAuthenticated] = useState(false);
-    const [data, setData] = useState<Record<string, any> | null>(null);
+    const [data, setData] = useState<SurveyData | null>(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {

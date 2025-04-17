@@ -6,7 +6,7 @@ import Link from "next/link";
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInAnonymously } from "firebase/auth";
-import { getDatabase, ref, push, get } from "firebase/database";
+import { getDatabase, ref, push } from "firebase/database";
 import Head from "next/head";
 
 // Import components
@@ -19,6 +19,7 @@ import { ThankYou } from "./components/ThankYou";
 // Import survey configuration and types
 import { firebaseConfig, surveySteps } from "./surveyConfig";
 import { FormData, RatingStep, SurveyStep } from "./types"; // Import SurveyStep type
+import { SurveyData } from "./dashboard/types";
 
 // Type guard to check if a step has items
 function hasItems(step: SurveyStep): step is RatingStep {
@@ -389,44 +390,12 @@ export default function ButterflyParkSurvey() {
     };
 
     // Add state for fetched data
-    const [fetchedData, setFetchedData] = useState<any>(null);
     const [showDebugData, setShowDebugData] = useState(false);
-    const [fetchingData, setFetchingData] = useState(false);
-
-    // Add function to fetch all data from Firebase
-    const fetchAllData = async () => {
-        if (!firebaseInitialized || !firebaseApp) {
-            showAlert("מערכת הטפסים אינה זמינה כרגע, אנא נסו שוב מאוחר יותר", "שגיאה");
-            return;
-        }
-
-        setFetchingData(true);
-
-        try {
-            const db = getDatabase(firebaseApp);
-            const dataRef = ref(db);
-
-            // Get all data from the database
-            const snapshot = await get(dataRef);
-
-            if (snapshot.exists()) {
-                setFetchedData(snapshot.val());
-                setShowDebugData(true);
-            } else {
-                showAlert("אין נתונים בבסיס הנתונים", "מידע");
-            }
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            showAlert("אירעה שגיאה בטעינת הנתונים", "שגיאה");
-        } finally {
-            setFetchingData(false);
-        }
-    };
 
     // Function to copy data to clipboard
     const copyDataToClipboard = () => {
-        if (fetchedData) {
-            navigator.clipboard.writeText(JSON.stringify(fetchedData, null, 2))
+        if (showDebugData) {
+            navigator.clipboard.writeText(JSON.stringify(showDebugData, null, 2))
                 .then(() => {
                     showAlert("הנתונים הועתקו ללוח", "הצלחה");
                 })
@@ -439,8 +408,8 @@ export default function ButterflyParkSurvey() {
 
     // Function to download data as JSON file
     const downloadDataAsJson = () => {
-        if (fetchedData) {
-            const dataStr = JSON.stringify(fetchedData, null, 2);
+        if (showDebugData) {
+            const dataStr = JSON.stringify(showDebugData, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(dataBlob);
 
@@ -556,7 +525,7 @@ export default function ButterflyParkSurvey() {
                                     </button>
                                 </div>
                                 <pre className="bg-gray-100 p-4 rounded-md overflow-auto text-left text-xs md:text-sm max-h-[50vh] rtl:text-right" dir="ltr">
-                                    {JSON.stringify(fetchedData, null, 2)}
+                                    {JSON.stringify(showDebugData, null, 2)}
                                 </pre>
                             </div>
                             <div className="custom-alert-footer">

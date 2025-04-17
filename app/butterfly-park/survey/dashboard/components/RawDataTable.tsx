@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { surveySteps } from "../../surveyConfig";
 import { SurveyData, SurveyDataEntry } from "../types";
-import { ProfileData } from "../../types";
 
 const formatCellValue = (value: unknown): string => {
     if (typeof value === "object" && value !== null) {

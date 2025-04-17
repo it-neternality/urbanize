@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { surveySteps } from "../../surveyConfig";
@@ -9,7 +9,15 @@ import { SurveyData, SurveyDataEntry } from "../types";
 Chart.register(ChartDataLabels);
 
 export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
-    const categories = ["food", "shops", "services", "pleasure"];
+    const categories = useMemo(() => ["food", "shops", "services", "pleasure"], []);
+
+    const categoryTitles: Record<string, string> = useMemo(() => ({
+        food: "ניקוד כולל עבור מזון והסעדה",
+        shops: "ניקוד כולל עבור חנויות",
+        services: "ניקוד כולל עבור שירותים",
+        pleasure: "ניקוד כולל עבור בילוי ופנאי",
+    }), []);
+
     const [activeCategory, setActiveCategory] = useState(categories[0]); // State for active tab
     const [genderFilter, setGenderFilter] = useState<string>("All"); // Gender filter with "All" as default
     const [statusFilter, setStatusFilter] = useState<string[]>([]); // Status filter (multiselect)
@@ -22,13 +30,6 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
     const barChartInstances = useRef<(Chart | null)[]>([]);
     const pieChartInstances = useRef<(Chart | null)[]>([]);
 
-    const categoryTitles: Record<string, string> = {
-        food: "ניקוד כולל עבור מזון והסעדה",
-        shops: "ניקוד כולל עבור חנויות",
-        services: "ניקוד כולל עבור שירותים",
-        pleasure: "ניקוד כולל עבור בילוי ופנאי",
-    };
-
     const getHebrewLabel = (category: string, key: string) => {
         const step = surveySteps.find((step) => step.category === category);
         if (step && "items" in step) {
@@ -38,14 +39,14 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
         return key;
     };
 
-    const applyFilters = (data: SurveyData) => {
+    const applyFilters = useCallback((data: SurveyData) => {
         return Object.values(data).filter((entry: SurveyDataEntry) => {
             const matchesGender = genderFilter === "All" || entry.profile?.gender === genderFilter;
             const matchesStatus = !statusFilter.length || statusFilter.includes(entry.profile?.sibiling);
             const matchesAddress = !addressFilter || entry.profile?.address === addressFilter;
             return matchesGender && matchesStatus && matchesAddress;
         });
-    };
+    }, [genderFilter, statusFilter, addressFilter]);
 
     useEffect(() => {
         if (!data) return;
@@ -53,7 +54,7 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
         // Extract unique addresses and statuses from the data
         const uniqueAddresses = new Set<string>();
         const uniqueStatuses = new Set<string>();
-        Object.values(data).forEach((entry: any) => {
+        Object.values(data).forEach((entry: SurveyDataEntry) => {
             if (entry.profile?.address) uniqueAddresses.add(entry.profile.address);
             if (entry.profile?.sibiling) uniqueStatuses.add(entry.profile.sibiling);
         });
@@ -84,7 +85,7 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
         }
 
         // Calculate total scores for each item in the category
-        const categoryData = filteredData.reduce((acc: Record<string, number>, entry: any) => {
+        const categoryData = filteredData.reduce((acc: Record<string, number>, entry: SurveyDataEntry) => {
             const categoryRatings = entry[activeCategory];
             if (categoryRatings && typeof categoryRatings === "object") {
                 Object.entries(categoryRatings).forEach(([key, value]) => {
@@ -184,11 +185,14 @@ export const ScoresCharts = ({ data }: { data: SurveyData | null }) => {
             },
         });
 
+        const barChartInstance = barChartInstances.current[index];
+        const pieChartInstance = pieChartInstances.current[index];
+
         return () => {
-            barChartInstances.current[index]?.destroy();
-            pieChartInstances.current[index]?.destroy();
+            barChartInstance?.destroy();
+            pieChartInstance?.destroy();
         };
-    }, [data, activeCategory, genderFilter, statusFilter, addressFilter]);
+    }, [data, activeCategory, genderFilter, statusFilter, addressFilter, applyFilters, categories, categoryTitles]);
 
     // Extract gender options from surveyConfig (surveySteps)
     const genderOptions = useMemo(() => {
