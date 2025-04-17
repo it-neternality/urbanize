@@ -124,41 +124,45 @@ export default function ButterflyPark() {
             </section>
 
             {/* Features */}
-            <section className="py-16 px-6 bg-gray-50">
+            <section className="py-16 px-6 bg-gray-100">
                 <div className="container mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">יתרונות הפרויקט</h2>
+                    <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">יתרונות מרכז הקניות</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="bg-white p-8 rounded-lg shadow-md text-right">
-                            <div className="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mb-6 mr-auto ml-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
+                        <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 text-right">
+                            <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center bg-blue-50 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-10 h-10">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                             </div>
-                            <h3 className="text-xl font-bold mb-3">עיצוב ארכיטקטוני</h3>
-                            <p className="text-gray-600">
-                                עיצוב מודרני המשלב אסתטיקה וחדשנות. המבנים מתוכננים להעניק חללים מרווחים עם תאורה טבעית מקסימלית.
+                            <h3 className="text-xl font-semibold mb-3 text-gray-700">מגוון חנויות ושירותים</h3>
+                            <p className="text-gray-500 leading-relaxed">
+                                מבחר גדול של חנויות, בתי קפה ומסעדות במקום אחד.
                             </p>
                         </div>
-                        <div className="bg-white p-8 rounded-lg shadow-md text-right">
-                            <div className="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mb-6 mr-auto ml-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 text-right">
+                            <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center bg-green-50 text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-10 h-10">
+                                    <rect x="2" y="2" width="20" height="20" rx="3" ry="3" fill="#3B82F6" />
+                                    <text x="12" y="16" textAnchor="middle" fontSize="12" fill="white" fontFamily="Arial, sans-serif" fontWeight="bold">
+                                        P
+                                    </text>
                                 </svg>
                             </div>
-                            <h3 className="text-xl font-bold mb-3">טכנולוגיה חכמה</h3>
-                            <p className="text-gray-600">
-                                מערכות בית חכם מתקדמות המאפשרות שליטה על תאורה, מיזוג, ביטחון ומערכות נוספות באמצעות אפליקציה ייעודית.
+                            <h3 className="text-xl font-semibold mb-3 text-gray-700">חווית קנייה נוחה</h3>
+                            <p className="text-gray-500 leading-relaxed">
+                                חניה בשפע, גישה נוחה, ושירותים מגוונים לרווחת הקונים.
                             </p>
                         </div>
-                        <div className="bg-white p-8 rounded-lg shadow-md text-right">
-                            <div className="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mb-6 mr-auto ml-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 text-right">
+                            <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center bg-yellow-50 text-yellow-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke="red" className="w-10 h-10">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C8.686 2 6 4.686 6 8c0 5.25 6 10 6 10s6-4.75 6-10c0-3.314-2.686-6-6-6z" />
+                                    <circle cx="12" cy="8" r="2" fill="white" />
                                 </svg>
                             </div>
-                            <h3 className="text-xl font-bold mb-3">קיימות וחיסכון באנרגיה</h3>
-                            <p className="text-gray-600">
-                                מערכות מתקדמות לניהול אנרגיה, בידוד איכותי, ושימוש בחומרים ידידותיים לסביבה לחיסכון בהוצאות ולשמירה על הסביבה.
+                            <h3 className="text-xl font-semibold mb-3 text-gray-700">מיקום מרכזי</h3>
+                            <p className="text-gray-500 leading-relaxed">
+                                נגישות קלה לכל תושבי השכונה והסביבה.
                             </p>
                         </div>
                     </div>
@@ -168,7 +172,7 @@ export default function ButterflyPark() {
             {/* Gallery */}
             <section className="py-16 px-6">
                 <div className="container mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">גלריית הדמיות</h2>
+                    <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">גלריית הדמיות</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div className="col-span-1 md:col-span-2 relative h-80 rounded-lg overflow-hidden shadow-lg">
                             <Image
