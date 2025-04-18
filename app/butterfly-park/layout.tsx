@@ -1,18 +1,26 @@
-export const metadata = {
-    title: "פארק הפרפרים | אורבנייז",
-    description: "גלו את פרויקטי הנדל'ן החדשניים והמתקדמים בפארק הפרפרים של אורבנייז.",
-};
+// Dynamically merge classes from RootLayout with ButterflyParkLayout
+import { Geist, Geist_Mono } from "next/font/google";
+import "./butterfly.css";
+
+
+const geistSans = Geist({
+    variable: "--font-geist-sans",
+    subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+    variable: "--font-geist-mono",
+    subsets: ["latin"],
+});
 
 export default function ButterflyParkLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="he" dir="rtl">
             <head>
-                <link rel="icon" href="/butterfly/favicon-32x32.png" sizes="32x32" />
-                <link rel="icon" href="/butterfly/favicon-16x16.png" sizes="16x16" />
+                <link rel="manifest" href="/butterfly/site.webmanifest" />
                 <link rel="apple-touch-icon" href="/butterfly/apple-touch-icon.png" />
-                <link rel="manifest" href="/site.webmanifest" />
             </head>
-            <body>
+            <body className={`${geistSans.variable} ${geistMono.variable} butterfly-park antialiased`}>
                 {children}
             </body>
         </html>
