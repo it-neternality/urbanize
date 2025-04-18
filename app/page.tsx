@@ -62,13 +62,13 @@ export default function Home() {
             </section>
 
             {/* Featured Projects */}
-            <section className="py-20 px-6">
+            <section className="py-10 px-6">
                 <a id="projects"></a>
                 <div className="container mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">הפרויקטים המובילים שלנו</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 justify-center">
+                    <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">הפרויקטים המובילים שלנו</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {/* Project 1 */}
-                        <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:-translate-y-1">
+                        <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:-translate-y-1">
                             <div className="h-48 relative">
                                 <Image
                                     src="/butterfly/6911_01.jpg"
@@ -77,13 +77,13 @@ export default function Home() {
                                     style={{ objectFit: 'cover' }}
                                 />
                             </div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold mb-2 text-gray-800">פארק הפרפרים</h3>
-                                <p className="text-gray-600 mb-4">מרכז הקניות והפנאי בשכונת רחובות הצעירה</p>
-                                <p className="text-gray-600 mb-4">פרויקט יוקרתי המשלב מסחר, שירותים וחוויית בילוי במיקום אסטרטגי לצד פארק בלב השכונה</p>
+                            <div className="p-4">
+                                <h3 className="text-lg font-semibold mb-1 text-gray-800">פארק הפרפרים</h3>
+                                <p className="text-gray-600 text-sm mb-2">מרכז הקניות והפנאי בשכונת רחובות הצעירה</p>
+                                <p className="text-gray-600 text-sm mb-2">פרויקט יוקרתי המשלב מסחר, שירותים וחוויית בילוי במיקום אסטרטגי לצד פארק בלב השכונה</p>
                                 <Link
                                     href="/butterfly-park"
-                                    className="text-blue-700 font-medium hover:underline"
+                                    className="text-blue-700 font-medium hover:underline text-sm"
                                 >
                                     לפרטים נוספים &larr;
                                 </Link>
@@ -91,17 +91,39 @@ export default function Home() {
                         </div>
 
                         {/* Project 2 */}
-                        <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:-translate-y-1">
-                            <div className="h-48 bg-blue-700"></div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold mb-2 text-gray-800">BSR ראשונים</h3>
-                                <p className="text-gray-600 mb-4">משרדים להשכרה/מכירה במגדל העסקים החדש והיוקרתי בראשל&quot;צ</p>
+                        <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:-translate-y-1">
+                            <div className="h-48 relative">
+                                <Image
+                                    src="/bsr-rishonim/top-building.jpg"
+                                    alt="BSR ראשונים"
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                />
+                            </div>
+                            <div className="p-4">
+                                <h3 className="text-lg font-semibold mb-1 text-gray-800">BSR ראשונים</h3>
+                                <p className="text-gray-600 text-sm mb-2">משרדים להשכרה/מכירה במגדל העסקים החדש והיוקרתי בראשל&quot;צ</p>
                                 <Link
                                     href="/bsr-rishonim"
-                                    className="text-blue-700 font-medium hover:underline"
+                                    className="text-blue-700 font-medium hover:underline text-sm"
                                 >
                                     לפרטים נוספים &larr;
                                 </Link>
+                            </div>
+                        </div>
+                        {/* Project 3 */}
+                        <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:-translate-y-1">
+                            <div className="h-48 relative">
+                                <Image
+                                    src="/havot11/front.png"
+                                    alt="האבות 11 – ראשון לציון"
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                />
+                            </div>
+                            <div className="p-4">
+                                <h3 className="text-lg font-semibold mb-1 text-gray-800">פרוייקט עבר - האבות 11 – ראשון לציון</h3>
+                                <p className="text-gray-600 text-sm mb-2">בניין מגורים בוטיק בן 8 יח''ד, שתוכנן בקפידה על מגרש קטן-ממדים. הפרויקט משלב תכנון יצירתי עם ניצול חכם של שטח, תוך שמירה על איכות חיים גבוהה לדיירים.</p>
                             </div>
                         </div>
                     </div>
@@ -169,7 +191,7 @@ export default function Home() {
                                 className="h-auto invert"
                             />
                             <p className="mt-4 text-blue-200">
-                                חברת נדל״ן מובילה המתמחה בפרויקטים חדשניים וטכנולוגיים.
+                                מתכננים, בונים ומנהלים נכסים במיקומים שמייצרים ערך אמיתי לאורך זמן
                             </p>
                         </div>
                         <div>
@@ -184,14 +206,8 @@ export default function Home() {
                             <ul className="space-y-2">
                                 <li><Link href="/" className="text-blue-200 hover:text-white transition">בית</Link></li>
                                 <li><Link href="/" className="text-blue-200 hover:text-white transition">אודות</Link></li>
-                                <li><Link href="/" className="text-blue-200 hover:text-white transition">יצירת קשר</Link></li>
+                                <li><Link href="/contact-us" className="text-blue-200 hover:text-white transition">יצירת קשר</Link></li>
                             </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">צור קשר</h3>
-                            <p className="text-blue-200 mb-2">רחוב הטכנולוגיה 10, תל אביב</p>
-                            <p className="text-blue-200 mb-2">טלפון: 03-1234567</p>
-                            <p className="text-blue-200">דוא״ל: info@urbanize.co.il</p>
                         </div>
                     </div>
                     <div className="border-t border-blue-800 mt-8 pt-8 text-center text-blue-300">
