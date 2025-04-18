@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Image from 'next/image';
 
 export default function ModelD() {
     return (
@@ -18,14 +19,13 @@ export default function ModelD() {
                     </div>
                 </div>
             </section>
-
             <section className="py-20 px-8 bg-white">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <img src="/bsr-rishonim/D7.jpg" alt="Model D" className="rounded-lg shadow-lg" />
-                        <img src="/bsr-rishonim/floor-plan.jpg" alt="Floor Plan" className="rounded-lg shadow-lg" />
-                        <img src="/bsr-rishonim/birdeye-2buildings.jpg" alt="Bird's Eye View" className="rounded-lg shadow-lg" />
-                        <img src="/bsr-rishonim/look-from-balcony.jpg" alt="View from Balcony" className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/D7.jpg" alt="Model D" width={500} height={300} className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/floor-plan.jpg" alt="Floor Plan" width={500} height={300} className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/birdeye-2buildings.jpg" alt="Bird's Eye View" width={500} height={300} className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/look-from-balcony.jpg" alt="View from Balcony" width={500} height={300} className="rounded-lg shadow-lg" />
                     </div>
                 </div>
             </section>
@@ -52,6 +52,6 @@ export default function ModelD() {
                     </p>
                 </div>
             </footer>
-        </div>
+        </div >
     );
 }
