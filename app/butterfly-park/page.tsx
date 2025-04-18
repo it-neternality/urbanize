@@ -9,7 +9,7 @@ export default function ButterflyPark() {
                 <div className="container mx-auto flex justify-center md:justify-between items-center">
                     <Link href="/butterfly-park" className="flex items-center">
                         <Image
-                            src="/butterfly/butterfly logo.png"
+                            src="/butterfly/butterfly-logo.png"
                             alt="פארק הפרפרים לוגו"
                             width={180}
                             height={60}

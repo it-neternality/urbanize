@@ -544,7 +544,7 @@ export default function ButterflyParkSurvey() {
                     <div className="container mx-auto flex justify-center items-center">
                         <Link href="/butterfly-park">
                             <Image
-                                src="/butterfly/butterfly logo.png"
+                                src="/butterfly/butterfly-logo.png"
                                 alt="לוגו פארק הפרפרים"
                                 width={100}
                                 height={33}

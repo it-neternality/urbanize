@@ -83,7 +83,7 @@ export default function ContactUs() {
                 <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-500 rounded-full opacity-10 transform translate-x-16 translate-y-16"></div>
                 <div className="container mx-auto text-center relative z-10">
                     <Image
-                        src="/butterfly/butterfly logo.png"
+                        src="/butterfly/butterfly-logo.png"
                         alt="Urbanize Properties לוגו"
                         width={120}
                         height={40}
