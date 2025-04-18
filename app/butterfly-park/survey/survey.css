@@ -12,7 +12,7 @@ body {
 /* Fix survey page layout */
 .survey-page {
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -605,4 +605,15 @@ body {
     margin-bottom: 0.5rem;
     color: #4a5568;
     text-align: right;
+}
+
+/* Adjust absolute elements to prevent overflow */
+.absolute.top-0.right-0 {
+    transform: translateX(0) translateY(-50%);
+    /* Adjusted to prevent overflow */
+}
+
+.absolute.bottom-0.left-0 {
+    transform: translateX(0) translateY(50%);
+    /* Adjusted to prevent overflow */
 }

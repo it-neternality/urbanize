@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from 'react';
+import './globals.css';
+import './survey.css';
 
 export default function SurveyLayout({ children }: { children: React.ReactNode }) {
     useEffect(() => {
@@ -15,7 +17,7 @@ export default function SurveyLayout({ children }: { children: React.ReactNode }
     }, []);
 
     return (
-        <div className="survey-page">
+        <div className="survey-page overflow-x-hidden">
             {children}
         </div>
     );

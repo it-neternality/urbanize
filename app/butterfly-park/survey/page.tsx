@@ -486,7 +486,7 @@ export default function ButterflyParkSurvey() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                 <title>סקר פארק הפרפרים</title>
             </Head>
-            <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-white mobile-full-screen" dir="rtl">
+            <div className="flex flex-col h-screen w-screen overflow-x-hidden bg-gradient-to-br from-blue-100 via-purple-50 to-white" dir="rtl">
                 {/* Custom Alert Component */}
                 <CustomAlert
                     message={alertMessage}
