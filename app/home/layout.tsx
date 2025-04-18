@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: "Urbanize | נדל״ן מתקדם",
     description: "חברת נדל״ן מובילה עם פרויקטים חדשניים",
+    keywords: 'נדל"ן, פרויקטים חדשניים, חברת נדל"ן, אורבנייז',
+    authors: [{ name: "Urbanize" }],
+    viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({
