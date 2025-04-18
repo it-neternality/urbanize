@@ -64,48 +64,29 @@ export default function ButterflyPark() {
                             />
                         </div>
                         <div className="text-right">
-                            <h2 className="text-3xl font-bold mb-6 text-black flex items-center justify-start">
+                            <h2 className="text-3xl font-bold mb-6 text-black flex items-center justify-start whitespace-nowrap">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 ml-2">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m-1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                אודות הפרויקט
+                                מרכז החיים של השכונה – מסחר, קהילה ופנאי בלב הפארק
                             </h2>
                             <p className="text-gray-700 mb-6 leading-relaxed">
-                                <span className="inline-flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-1">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                    מקום המפגש של הקהילה, המשפחה והחברים.
-                                </span>
+                                פארק הפרפרים הוא מרכז מסחרי ייחודי, המהווה חלק אינטגרלי בפארק המרכזי של שכונת רחובות הצעירה.
+                                <br /><br />
+                                הוא משתלב בטבעיות לצד מדשאות רחבות, מתקני משחקים ופינות ישיבה – ומציע חוויית בילוי, קניות ופנאי במרחק הליכה מהבית.
+                                <br /><br />
+                                <ul className="list-disc pr-5">
+                                    <li>בית קפה עם אווירה</li>
+                                    <li>גלידה איכותית</li>
+                                    <li>מאפים טריים</li>
+                                    <li>סופר שכונתי</li>
+                                    <li>פיצרייה</li>
+                                    <li>חנויות נוחות</li>
+                                    <li>סטודיו כושר</li>
+                                    <li>מרפאות ושירותים נוספים</li>
+                                </ul>
                                 <br />
-                                <span className="inline-flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-1">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                    לוותר על הרכב ולבלות עם הילדים אחה&quot;צ ממש מתחת לביתך.
-                                </span>
-                                <br />
-                                <span className="inline-flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-1">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                    גלידה, פיצה ומאפים מפנקים בזמן הבילוי בפארק.
-                                </span>
-                                <br />
-                                <span className="inline-flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-1">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                    בית הקפה לשבת בו עם השכנים בשישי בבוקר.
-                                </span>
-                                <br />
-                                <span className="inline-flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-1">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                    הסופר מרקט השכונתי.
-                                </span>
+                                מרכז שמשרת את צרכי היומיום של התושבים – וגם מזמין אותם להישאר, להיפגש, וליהנות.
                             </p>
                         </div>
                     </div>
