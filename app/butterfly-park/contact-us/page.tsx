@@ -123,16 +123,16 @@ export default function ContactUs() {
                             </div>
 
                             <div className="text-right">
-                                <label htmlFor="email" className="block text-sm
+                                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
                                     דוא&quot;ל
                                 </label>
                                 <input
                                     type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
                                 />
                                 {errors.email && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.email}</p>}
                             </div>

@@ -558,123 +558,123 @@ export default function ButterflyParkSurvey() {
                 {/* Main content */}
                 <main className="flex-grow mobile-full-width">
                     <div className="container mx-auto py-4 md:py-10 px-2 md:px-4 max-w-4xl mobile-compact-padding">
-                        <div className="mb-4 md:mb-10
+                        <div className="mb-4 md:mb-10">
                             <div className="absolute -top-10 -left-10 w-32 h-32 bg-purple-200 rounded-full opacity-30 blur-2xl z-0"></div>
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-200 rounded-full opacity-30 blur-2xl z-0"></div>
-                    <div className="text-center relative z-10">
-                        <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-3 text-indigo-900 relative inline-block">
-                            סקר פארק הפרפרים
-                            <div className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full transform -rotate-1"></div>
-                        </h1>
-                        <p className="text-sm md:text-lg text-gray-700 mt-4 md:mt-6 mx-auto max-w-2xl leading-relaxed px-2 md:px-0">
-                            נשמח אם תקדישו שתי דקות מזמנכם למענה על סקר קצר בו תדרגו את החנויות הכי נחוצות לדעתכם במרכז.
-                            <br className="hidden md:block" />בכל קטגוריה יש מכסת נקודות לחלק בין אותן חנויות.
-                        </p>
-                    </div>
-            </div>
+                            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-200 rounded-full opacity-30 blur-2xl z-0"></div>
+                            <div className="text-center relative z-10">
+                                <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-3 text-indigo-900 relative inline-block">
+                                    סקר פארק הפרפרים
+                                    <div className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full transform -rotate-1"></div>
+                                </h1>
+                                <p className="text-sm md:text-lg text-gray-700 mt-4 md:mt-6 mx-auto max-w-2xl leading-relaxed px-2 md:px-0">
+                                    נשמח אם תקדישו שתי דקות מזמנכם למענה על סקר קצר בו תדרגו את החנויות הכי נחוצות לדעתכם במרכז.
+                                    <br className="hidden md:block" />בכל קטגוריה יש מכסת נקודות לחלק בין אותן חנויות.
+                                </p>
+                            </div>
+                        </div>
 
-            {/* Progress bar */}
-            <div className="mb-4 md:mb-10">
-                <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
-                    <div
-                        className="absolute top-0 right-0 h-full bg-gradient-to-l from-blue-500 to-purple-500 transition-all duration-500"
-                        style={{ width: `${currentStep === surveySteps.length - 1 ? 100 : totalProgress}%` }}
-                    ></div>
-                </div>
-                <div className="flex justify-between mt-2 text-xs md:text-sm text-gray-600 font-medium px-1">
-                    <span>התחלה</span>
-                    <span className="bg-indigo-100 px-2 md:px-3 py-1 rounded-full text-indigo-800">{Math.round(currentStep === surveySteps.length - 1 ? 100 : totalProgress)}%</span>
-                    <span>סיום</span>
-                </div>
-            </div>
+                        {/* Progress bar */}
+                        <div className="mb-4 md:mb-10">
+                            <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                                <div
+                                    className="absolute top-0 right-0 h-full bg-gradient-to-l from-blue-500 to-purple-500 transition-all duration-500"
+                                    style={{ width: `${currentStep === surveySteps.length - 1 ? 100 : totalProgress}%` }}
+                                ></div>
+                            </div>
+                            <div className="flex justify-between mt-2 text-xs md:text-sm text-gray-600 font-medium px-1">
+                                <span>התחלה</span>
+                                <span className="bg-indigo-100 px-2 md:px-3 py-1 rounded-full text-indigo-800">{Math.round(currentStep === surveySteps.length - 1 ? 100 : totalProgress)}%</span>
+                                <span>סיום</span>
+                            </div>
+                        </div>
 
-            {/* Form content */}
-            <div className="mb-4 md:mb-8 mobile-full-width mobile-no-padding">
-                {renderForm()}
-            </div>
+                        {/* Form content */}
+                        <div className="mb-4 md:mb-8 mobile-full-width mobile-no-padding">
+                            {renderForm()}
+                        </div>
 
-            {/* Navigation buttons */}
-            {!formSubmitted && (
-                <div className="flex justify-between mt-6 md:mt-8 pb-6 md:pb-0">
-                    {currentStep > 0 ? (
-                        <button
-                            onClick={handlePrevStep}
-                            className="relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md"
-                        >
-                            הקודם
-                        </button>
-                    ) : (
-                        <div></div>
-                    )}
+                        {/* Navigation buttons */}
+                        {!formSubmitted && (
+                            <div className="flex justify-between mt-6 md:mt-8 pb-6 md:pb-0">
+                                {currentStep > 0 ? (
+                                    <button
+                                        onClick={handlePrevStep}
+                                        className="relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md"
+                                    >
+                                        הקודם
+                                    </button>
+                                ) : (
+                                    <div></div>
+                                )}
 
-                    {currentStep < surveySteps.length - 1 ? (
-                        <button
-                            onClick={handleNextStep}
-                            disabled={currentStep === 0 ? Object.values(fieldErrors).length > 0 : !success}
-                            className={`relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200
+                                {currentStep < surveySteps.length - 1 ? (
+                                    <button
+                                        onClick={handleNextStep}
+                                        disabled={currentStep === 0 ? Object.values(fieldErrors).length > 0 : !success}
+                                        className={`relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200
                                             ${currentStep === 0 && Object.values(fieldErrors).length > 0
-                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                    : currentStep !== 0 && !success
-                                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                        : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md'
-                                }`}
-                        >
-                            הבא
-                            {currentStep === 0 && Object.values(fieldErrors).length > 0 && (
-                                <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                    יש למלא את כל השדות המסומנים בכוכבית
-                                </span>
-                            )}
-                            {currentStep !== 0 && !success && (
-                                <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                    עדיין נותרו נקודות לחלוקה
-                                </span>
-                            )}
-                        </button>
-                    ) : (
-                        <button
-                            onClick={handleSubmit}
-                            disabled={submitting}
-                            className={`relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200
+                                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                : currentStep !== 0 && !success
+                                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                    : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md'
+                                            }`}
+                                    >
+                                        הבא
+                                        {currentStep === 0 && Object.values(fieldErrors).length > 0 && (
+                                            <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                                יש למלא את כל השדות המסומנים בכוכבית
+                                            </span>
+                                        )}
+                                        {currentStep !== 0 && !success && (
+                                            <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                                עדיין נותרו נקודות לחלוקה
+                                            </span>
+                                        )}
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleSubmit}
+                                        disabled={submitting}
+                                        className={`relative group px-4 py-2 rounded-md font-semibold transition-colors duration-200
                                             ${submitting
-                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                    : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md'
-                                }`}
-                        >
-                            {submitting ? (
-                                <span className="flex items-center">
-                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md'
+                                            }`}
+                                    >
+                                        {submitting ? (
+                                            <span className="flex items-center">
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                שולח...
+                                            </span>
+                                        ) : (
+                                            'שלח'
+                                        )}
+                                    </button>
+                                )}
+                            </div>
+                        )}
+                        {currentStep === 0 && (
+                            <div className="mt-8 text-center">
+                                <Link
+                                    href="/butterfly-park/survey/dashboard"
+                                    className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 inline-flex items-center shadow-md transition-all"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
                                     </svg>
-                                    שולח...
-                                </span>
-                            ) : (
-                                'שלח'
-                            )}
-                        </button>
-                    )}
-                </div>
-            )}
-            {currentStep === 0 && (
-                <div className="mt-8 text-center">
-                    <Link
-                        href="/butterfly-park/survey/dashboard"
-                        className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 inline-flex items-center shadow-md transition-all"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
-                        </svg>
-                        צפייה בנתוני הסקר
-                    </Link>
-                </div>
-            )}
-        </div >
+                                    צפייה בנתוני הסקר
+                                </Link>
+                            </div>
+                        )}
+                    </div >
                 </main >
 
-        {/* Footer */ }
-        < footer className = "bg-blue-900 text-white py-2 md:py-4 text-center text-sm md:text-base" >
-            <p>© כל הזכויות שמורות {new Date().getFullYear()}</p>
+                {/* Footer */}
+                < footer className="bg-blue-900 text-white py-2 md:py-4 text-center text-sm md:text-base" >
+                    <p>© כל הזכויות שמורות {new Date().getFullYear()}</p>
                 </footer >
             </div >
         </>
