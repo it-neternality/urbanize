@@ -1,6 +1,7 @@
 // Dynamically merge classes from RootLayout with ButterflyParkLayout
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./butterfly.css";
 
 
@@ -37,6 +38,7 @@ export default function ButterflyParkLayout({ children }: { children: React.Reac
                 <meta name="twitter:image" content="/butterfly/butterfly-logo.png" />
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} butterfly-park antialiased`}>
+                <SpeedInsights />
                 <Analytics />
                 {children}
             </body>
