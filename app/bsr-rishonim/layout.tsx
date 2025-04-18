@@ -21,7 +21,9 @@ export default function BsrRishonimLayout({ children }: { children: React.ReactN
                 <meta property="og:title" content="משרדים יוקרתיים למכירה ולהשכרה בראשון לציון | ב.ס.ר ראשונים" />
                 <meta property="og:description" content="הזדמנות נדירה להצטרף למגדל העסקים החדש והיוקרתי בראשון לציון. משרדים עם נוף לים, עיצוב מפואר ומיקום מנצח. למכירה ולהשכרה." />
                 <meta property="og:image" content="/bsr-rishonim/highres-building.jpg" />
-                <meta property="og:url" content="https://www.facebook.com/profile.php?id=61574839536479" />
+                <meta property="og:url" content="https://urbanize.co.il/bsr-rishonim" />
+                <meta property="og:homepage" content="https://urbanize.co.il" />
+                <meta property="og:facebook" content="https://www.facebook.com/UrbanizeProperties" />
                 <meta name="twitter:card" content="summary_large_image" />
             </head>
             <body className="font-sans text-gray-800 bg-gray-100">
