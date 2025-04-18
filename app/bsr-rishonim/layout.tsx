@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import "./bsr.css";
 export const metadata = {
     title: "משרדים יוקרתיים למכירה ולהשכרה בראשון לציון | ב.ס.ר ראשונים",
@@ -23,6 +24,7 @@ export default function BsrRishonimLayout({ children }: { children: React.ReactN
                 <meta name="twitter:card" content="summary_large_image" />
             </head>
             <body className="font-sans text-gray-800 bg-gray-100">
+                <Analytics />
                 {children}
             </body>
         </html>
