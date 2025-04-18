@@ -30,7 +30,7 @@ export default function ButterflyParkLayout({ children }: { children: React.Reac
                 <meta property="og:title" content="פארק הפרפרים" />
                 <meta property="og:description" content="חוויה ייחודית של טבע, יופי ושלווה בלב העיר. בואו לגלות את עולמם הקסום של הפרפרים." />
                 <meta property="og:image" content="/butterfly/butterfly-logo.png" />
-                <meta property="og:url" content="https://yourwebsite.com/butterfly-park" />
+                <meta property="og:url" content="https://urbanize.co.il/butterfly-park" />
                 <meta property="og:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="פארק הפרפרים" />

@@ -35,6 +35,12 @@ export default function RootLayout({
                 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
                 <link rel="manifest" href="/site.webmanifest" />
                 <link rel="icon" href="/favicon.ico" />
+                <meta property="og:title" content="Urbanize | נדל״ן מתקדם" />
+                <meta property="og:description" content="חברת נדל״ן מובילה עם פרויקטים חדשניים" />
+                <meta property="og:image" content="/urbanize-logo.png" />
+                <meta property="og:url" content="https://urbanize.co.il" />
+                <meta property="og:type" content="website" />
+                <meta property="og:locale" content="he_IL" />
             </head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
