@@ -181,9 +181,8 @@ export default function ContactUs() {
                         <Image
                             src="/bsr-rishonim/highres-building.jpg"
                             alt="BSR Rishonim Building"
-                            fill
-                            style={{ objectFit: "cover", objectPosition: "center" }}
                             className="object-cover"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
                         />
                     </div>
                 </div>

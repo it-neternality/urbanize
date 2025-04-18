@@ -6,10 +6,9 @@ export default function BuildingShowcase() {
             <Image
                 src="/bsr-rishonim/highres-building.jpg"
                 alt="BSR Rishonim Building"
-                layout="fill"
-                objectFit="contain"
-                objectPosition="center"
+                fill
                 className="absolute inset-0 z-0"
+                style={{ objectFit: 'contain', objectPosition: 'center' }}
             />
             <div className="relative z-10 text-center px-6">
                 <div className="inline-block bg-white/[0.75] p-6 rounded-md">
