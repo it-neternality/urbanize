@@ -35,7 +35,7 @@ export default function BsrRishonim() {
                 <div className="container mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-6">מעוניינים לשמוע עוד?</h2>
                     <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-                        השאירו פרטים ונחזור אליכם בהקדם עם מידע מפורט על BSR ראשונים
+                        השאירו פרטים ונחזור אליכם בהקדם עם מידע מפורט על ב.ס.ר ראשונים
                     </p>
                     <Link href="/bsr-rishonim/contact-us">
                         <button className="bg-white text-gray-800 px-8 py-3 rounded-md font-medium transition-all hover:bg-gray-100 inline-block">

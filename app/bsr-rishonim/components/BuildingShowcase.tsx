@@ -12,6 +12,7 @@ export default function BuildingShowcase() {
             />
             <div className="relative z-10 text-center px-6">
                 <div className="inline-block bg-white/[0.75] p-6 rounded-md">
+                    <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-gray-800 font-sans">ב.ס.ר ראשונים</h1>
                     <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-gray-800 font-sans">מגדל העסקים החדש והיוקרתי</h1>
                     <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-700 font-light">
                         מיקום מנצח | נוף לים | עיצוב מפואר | שמירה
