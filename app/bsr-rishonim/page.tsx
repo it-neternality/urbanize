@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import BuildingShowcase from "./components/BuildingShowcase";
 import Gallery from "./components/Gallery";
+import OfficeDetails from "./components/OfficeDetails";
 import Link from "next/link";
 
 export default function BsrRishonim() {
@@ -10,38 +11,7 @@ export default function BsrRishonim() {
             <BuildingShowcase />
             <Gallery />
             {/* Office Details */}
-            <section className="py-16 px-6 bg-white">
-                <div className="container mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">מה יש לנו להציע</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="bg-gray-50 p-6 rounded-lg shadow-lg border border-gray-200">
-                            <h3 className="text-xl font-bold mb-2">דגם D</h3>
-                            <p className="text-gray-600 mb-3">177 מ"ר | נוף פתוח דרום | קומה 7</p>
-                            <p className="text-gray-600 mb-3">למכירה: 11,990 ₪ למ"ר</p>
-                            <p className="text-gray-600 mb-3">להשכרה: 58 ₪ למ"ר (מעטפת)</p>
-                            <Link href="/bsr-rishonim/model-d">
-                                <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                                    פרטים נוספים
-                                </button>
-                            </Link>
-                        </div>
-                        <div className="bg-gray-50 p-6 rounded-lg shadow-lg border border-gray-200">
-                            <h3 className="text-xl font-bold mb-2">דגם G</h3>
-                            <p className="text-gray-600 mb-3">140 מ"ר + 13 מ"ר מרפסת | נוף לים ולשקיעה | קומה 7</p>
-                            <p className="text-gray-600 mb-3">למכירה: 11,990 ₪ למ"ר</p>
-                            <p className="text-gray-600 mb-3">להשכרה: 58 ₪ למ"ר (מעטפת)</p>
-                            <Link href="/bsr-rishonim/model-g">
-                                <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                                    פרטים נוספים
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="mt-8">
-                        <img src="/bsr-rishonim/floor-plan.jpg" alt="Floor Plan" className="rounded-lg shadow-lg mx-auto" />
-                    </div>
-                </div>
-            </section>
+            <OfficeDetails />
 
             {/* CTA Section */}
             <section className="py-16 px-6 bg-gray-800 text-white">

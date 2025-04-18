@@ -1,0 +1,77 @@
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+
+export default function OfficeDetails() {
+    const [modalImage, setModalImage] = useState<string | null>(null);
+    const [zoomLevel, setZoomLevel] = useState(1);
+
+    const handleWheel = (e: React.WheelEvent) => {
+        e.preventDefault();
+        setZoomLevel((prevZoom) => Math.min(Math.max(prevZoom + e.deltaY * -0.001, 1), 5));
+    };
+
+    return (
+        <section className="py-16 px-6 bg-white">
+            <div className="container mx-auto">
+                <h2 className="text-3xl font-bold text-center mb-12">מה יש לנו להציע</h2>
+                <div className="flex flex-wrap justify-center gap-12 items-stretch">
+                    <div className="bg-[#f4adb3] p-6 rounded-lg shadow-lg border border-gray-200 transform transition-transform hover:scale-105 flex-1 max-w-md">
+                        <h3 className="text-xl font-bold mb-2 text-black">דגם D</h3>
+                        <p className="text-black mb-3">177 מ&quot;ר | נוף פתוח דרום | קומה 7</p>
+                        <p className="text-black mb-3">למכירה: 11,990 ₪ למ&quot;ר</p>
+                        <p className="text-black mb-3">להשכרה: 58 ₪ למ&quot;ר (מעטפת)</p>
+                    </div>
+                    <div className="bg-[#d5699b] p-6 rounded-lg shadow-lg border border-gray-200 transform transition-transform hover:scale-105 flex-1 max-w-md">
+                        <h3 className="text-xl font-bold mb-2 text-black">דגם G</h3>
+                        <p className="text-black mb-3">140 מ&quot;ר + 13 מ&quot;ר מרפסת | נוף לים ולשקיעה | קומה 7</p>
+                        <p className="text-black mb-3">למכירה: 11,990 ₪ למ&quot;ר</p>
+                        <p className="text-black mb-3">להשכרה: 58 ₪ למ&quot;ר (מעטפת)</p>
+                    </div>
+                </div>
+                <div className="mt-8">
+                    <div className="relative mx-auto w-1/2 overflow-hidden rounded-lg shadow-lg cursor-pointer" onClick={() => setModalImage("/bsr-rishonim/floor-plan.jpg")}>
+                        <Image
+                            src="/bsr-rishonim/floor-plan.jpg"
+                            alt="Floor Plan"
+                            width={800}
+                            height={600}
+                            className="transition-transform duration-300 ease-in-out"
+                        />
+                    </div>
+                </div>
+                {modalImage && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/[0.8] backdrop-blur-sm" onClick={() => setModalImage(null)}>
+                        <div
+                            className="relative max-w-6xl max-h-screen overflow-hidden cursor-grab active:cursor-grabbing"
+                            onClick={(e) => e.stopPropagation()}
+                            onWheel={handleWheel}
+                        >
+                            <button
+                                onClick={() => setModalImage(null)}
+                                className="absolute top-4 right-4 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 focus:outline-none shadow-md"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <div
+                                className="relative"
+                                style={{ transform: `scale(${zoomLevel})`, transformOrigin: "center" }}
+                            >
+                                <Image
+                                    src={modalImage}
+                                    alt="Full Size Floor Plan"
+                                    width={3840}
+                                    height={2160}
+                                    style={{ objectFit: "contain" }}
+                                    className="rounded-lg shadow-lg"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </section>
+    );
+}
