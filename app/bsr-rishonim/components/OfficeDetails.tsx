@@ -5,10 +5,27 @@ import Image from "next/image";
 export default function OfficeDetails() {
     const [modalImage, setModalImage] = useState<string | null>(null);
     const [zoomLevel, setZoomLevel] = useState(1);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [dragging, setDragging] = useState(false);
+    const [startDrag, setStartDrag] = useState({ x: 0, y: 0 });
 
     const handleWheel = (e: React.WheelEvent) => {
         e.preventDefault();
         setZoomLevel((prevZoom) => Math.min(Math.max(prevZoom + e.deltaY * -0.001, 1), 5));
+    };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        setDragging(true);
+        setStartDrag({ x: e.clientX - position.x, y: e.clientY - position.y });
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!dragging) return;
+        setPosition({ x: e.clientX - startDrag.x, y: e.clientY - startDrag.y });
+    };
+
+    const handleMouseUp = () => {
+        setDragging(false);
     };
 
     return (
@@ -46,6 +63,10 @@ export default function OfficeDetails() {
                             className="relative max-w-6xl max-h-screen overflow-hidden cursor-grab active:cursor-grabbing"
                             onClick={(e) => e.stopPropagation()}
                             onWheel={handleWheel}
+                            onMouseDown={handleMouseDown}
+                            onMouseMove={handleMouseMove}
+                            onMouseUp={handleMouseUp}
+                            onMouseLeave={handleMouseUp}
                         >
                             <button
                                 onClick={() => setModalImage(null)}
@@ -57,7 +78,10 @@ export default function OfficeDetails() {
                             </button>
                             <div
                                 className="relative"
-                                style={{ transform: `scale(${zoomLevel})`, transformOrigin: "center" }}
+                                style={{
+                                    transform: `scale(${zoomLevel}) translate(${position.x / zoomLevel}px, ${position.y / zoomLevel}px)`,
+                                    transformOrigin: "center",
+                                }}
                             >
                                 <Image
                                     src={modalImage}
