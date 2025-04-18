@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent horizontal scrolling */
+html,
+body {
+    overflow-x: hidden;
+}
+
 /* Touch handling improvements */
 .slider-container {
     touch-action: pan-x;
@@ -16,18 +22,24 @@
 }
 
 /* Mobile utility classes */
+/* Ensure the survey page opens as full screen */
 .mobile-full-screen {
     min-height: 100vh;
-    width: 100%;
+    width: 100vw;
+    /* Ensure it spans the full viewport width */
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    /* Prevent any scrollbars */
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-full-width {
     width: 100%;
     margin: 0;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 0;
+    /* Removed padding to eliminate gaps */
 }
 
 .mobile-compact-header {
