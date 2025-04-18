@@ -87,7 +87,7 @@ export default function ContactUs() {
                         alt="Urbanize Properties לוגו"
                         width={120}
                         height={40}
-                        className="h-auto mb-6 ml-auto mr-4"
+                        className="h-auto mb-6 mx-auto"
                         onClick={() => window.location.href = '/'}
                         style={{ cursor: 'pointer' }}
                     />

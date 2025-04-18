@@ -6,7 +6,7 @@ export default function ButterflyPark() {
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
             {/* Header */}
             <header className="p-4 md:p-6 bg-white shadow-sm">
-                <div className="container mx-auto flex justify-between items-center">
+                <div className="container mx-auto flex justify-center md:justify-between items-center">
                     <Link href="/butterfly-park" className="flex items-center">
                         <Image
                             src="/butterfly/butterfly logo.png"
