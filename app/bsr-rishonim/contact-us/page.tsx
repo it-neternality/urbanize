@@ -77,8 +77,8 @@ export default function ContactUs() {
     const turnstileSiteKey = process.env.TURNSTILE_SITE_KEY || "";
 
     return (
-        <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
-            <section className="flex-grow py-8 px-6 bg-gradient-to-b from-white-100 to-blue-200 text-black relative overflow-hidden">
+        <div className="flex flex-col min-h-screen bg-gray-100">
+            <section className="flex-grow py-8 px-6 bg-gradient-to-b from-white-100 to-gray-300 text-black relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-48 h-48 bg-blue-400 rounded-full opacity-10 transform -translate-x-16 -translate-y-16"></div>
                 <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-500 rounded-full opacity-10 transform translate-x-16 translate-y-16"></div>
                 <div className="container mx-auto text-center relative z-10">
@@ -93,7 +93,8 @@ export default function ContactUs() {
                     />
                     <h2 className="text-3xl font-bold mb-6" style={{ direction: "rtl" }}>צור קשר</h2>
                     <p className="text-blue-800 text-lg max-w-2xl mx-auto mb-8" style={{ direction: "rtl" }}>
-                        נשמח לשמוע מכם! מלאו את הטופס ונחזור אליכם בהקדם.
+                        מעוניינים לקבל עוד פרטים ו/או לקבוע פגישה במשרדים ?<br />
+                        מלאו את הטופס ונחזור אליכם בהקדם.
                     </p>
                     {isSubmitted ? (
                         <div className="text-blue-700 p-4 rounded-lg max-w-sm mx-auto space-y-4">
@@ -170,6 +171,21 @@ export default function ContactUs() {
                             </button>
                         </form>
                     )}
+                </div>
+            </section>
+
+            <section className="py-12 bg-gray-100">
+                <div className="container mx-auto text-center">
+                    <h2 className="text-3xl font-bold mb-6">המגדל שלנו</h2>
+                    <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
+                        <Image
+                            src="/bsr-rishonim/highres-building.jpg"
+                            alt="BSR Rishonim Building"
+                            fill
+                            style={{ objectFit: "cover", objectPosition: "center" }}
+                            className="object-cover"
+                        />
+                    </div>
                 </div>
             </section>
 

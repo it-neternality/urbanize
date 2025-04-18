@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-
 export default function BsrRishonimLandingPage() {
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
