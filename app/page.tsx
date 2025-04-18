@@ -6,7 +6,7 @@ export default function Home() {
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
             {/* Header */}
             <header className="p-4 md:p-6 bg-white shadow-sm">
-                <div className="container mx-auto flex justify-between items-center">
+                <div className="container mx-auto flex justify-center md:justify-between items-center">
                     <Link href="/">
                         <Image
                             src="/urbanize-logo.png"
@@ -17,16 +17,6 @@ export default function Home() {
                             className="h-auto"
                         />
                     </Link>
-                    {/* <nav className="hidden md:flex space-x-6">
-                        <Link href="/butterfly-park" className="font-medium text-gray-700 hover:text-gray-900 transition">פארק הפרפרים</Link>
-                        <Link href="/bsr-rishonim" className="font-medium text-gray-700 hover:text-gray-900 transition">BSR ראשונים</Link>
-                        <Link href="/" className="font-medium text-gray-700 hover:text-gray-900 transition">בית</Link>
-                    </nav> */}
-                    <button className="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
                 </div>
             </header>
 
