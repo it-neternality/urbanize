@@ -21,12 +21,12 @@ export default function ButterflyPark() {
             </header>
 
             {/* Hero Banner */}
-            <div className="relative h-[60vh] flex items-center justify-center bg-gradient-to-b from-orange-100 to-yellow-100">
+            <div className="relative h-[60vh] flex items-center justify-center md:bg-gradient-to-b from-orange-100 to-yellow-100">
                 <div className="absolute inset-0 bg-white opacity-20"></div>
                 <div className="container mx-auto px-6 z-10 flex md:flex-row flex-col items-center">
                     {/* Text Content */}
                     <div className="md:w-1/2 p-4 text-center md:text-right flex flex-col items-center md:items-end">
-                        <h1 className="text-5xl md:text-6xl font-extrabold text-pink-600 mb-4">פארק הפרפרים</h1>
+                        <h1 className="text-5xl md:text-6xl font-extrabold text-pink-600 mb-4 hidden md:block">פארק הפרפרים</h1>
                         <p className="text-2xl text-gray-800 max-w-3xl">מרכז הקניות והפנאי בשכונת רחובות הצעירה</p>
                         <p className="text-lg text-gray-600 mt-4">מקום שבו הקהילה נפגשת, המשפחה נהנית, והחברים מבלים יחד.</p>
                     </div>
