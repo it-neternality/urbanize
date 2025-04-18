@@ -176,7 +176,6 @@ export default function ContactUs() {
 
             <section className="py-12 bg-gray-100">
                 <div className="container mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-6">המגדל שלנו</h2>
                     <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-lg">
                         <Image
                             src="/bsr-rishonim/highres-building.jpg"

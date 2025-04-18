@@ -8,9 +8,9 @@ export default function ModelG() {
             <section className="py-8 px-6 bg-gray-50">
                 <div className="container mx-auto text-center">
                     <h1 className="text-4xl font-extrabold mb-4">דגם G - קומה 7</h1>
-                    <p className="text-gray-700 text-lg">140 מ"ר + 13 מ"ר מרפסת | נוף לים ולשקיעה</p>
-                    <p className="text-gray-700 text-lg">למכירה: 11,990 ₪ למ"ר</p>
-                    <p className="text-gray-700 text-lg">להשכרה: 58 ₪ למ"ר (מעטפת)</p>
+                    <p className="text-gray-700 text-lg">140 מ&quot;ר + 13 מ&quot;ר מרפסת | נוף לים ולשקיעה</p>
+                    <p className="text-gray-700 text-lg">למכירה: 11,990 ₪ למ&quot;ר</p>
+                    <p className="text-gray-700 text-lg">להשכרה: 58 ₪ למ&quot;ר (מעטפת)</p>
                     <div className="mt-6">
                         <a href="/bsr-rishonim/model-d" className="text-blue-600 text-lg font-bold underline hover:text-blue-800 transition-all">
                             רוצים לראות את דגם D? לחצו כאן
@@ -25,6 +25,8 @@ export default function ModelG() {
                         <img src="/bsr-rishonim/G7-1.jpg" alt="Model G - Image 1" className="rounded-lg shadow-lg" />
                         <img src="/bsr-rishonim/G7-2.jpg" alt="Model G - Image 2" className="rounded-lg shadow-lg" />
                         <img src="/bsr-rishonim/floor-plan.jpg" alt="Floor Plan" className="rounded-lg shadow-lg" />
+                        <img src="/bsr-rishonim/birdeye-2buildings.jpg" alt="Bird's Eye View" className="rounded-lg shadow-lg" />
+                        <img src="/bsr-rishonim/look-from-balcony.jpg" alt="View from Balcony" className="rounded-lg shadow-lg" />
                     </div>
                 </div>
             </section>
