@@ -181,6 +181,8 @@ export default function ContactUs() {
                         <Image
                             src="/bsr-rishonim/highres-building.jpg"
                             alt="BSR Rishonim Building"
+                            width={500} // Specify the width
+                            height={300} // Specify the height
                             className="object-cover"
                             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
                         />

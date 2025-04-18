@@ -10,7 +10,6 @@ export default function BsrRishonim() {
             <Header />
             <BuildingShowcase />
             <Gallery />
-            {/* Office Details */}
             <OfficeDetails />
 
             {/* CTA Section */}
