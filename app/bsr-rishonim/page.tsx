@@ -31,12 +31,12 @@ export default function BsrRishonim() {
                     className="absolute inset-0 z-0"
                 />
                 <div className="relative z-10 text-center px-6">
-                    <div className="inline-block bg-white bg-opacity-80 p-6 rounded-md">
-                        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gray-800">מגדל העסקים החדש והיוקרתי</h1>
-                        <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-700">
+                    <div className="inline-block bg-white/[0.75] p-6 rounded-md">
+                        <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-gray-800 font-sans">מגדל העסקים החדש והיוקרתי</h1>
+                        <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-700 font-light">
                             מיקום מנצח | נוף לים | עיצוב מפואר | שמירה
                         </p>
-                        <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-700">
+                        <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-700 font-light">
                             מרכז מסחרי בקומת הקרקע
                         </p>
                     </div>
@@ -81,6 +81,11 @@ export default function BsrRishonim() {
             <footer className="bg-gray-900 text-white py-10 px-6 mt-auto">
                 <div className="container mx-auto text-center">
                     <p>© כל הזכויות שמורות לאורבנייז {new Date().getFullYear()}</p>
+                    <p className="mt-4">
+                        <a href="https://www.facebook.com/profile.php?id=61574839536479" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                            בקרו אותנו בפייסבוק
+                        </a>
+                    </p>
                 </div>
             </footer>
         </div>
