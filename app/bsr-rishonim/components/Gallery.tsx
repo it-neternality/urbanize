@@ -10,9 +10,9 @@ export default function Gallery() {
             <div className="container mx-auto">
                 <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">גלריה</h2>
 
-                <div className="flex gap-6">
+                <div className="flex flex-wrap gap-6">
                     {["/bsr-rishonim/2buildings.jpg", "/bsr-rishonim/birdeye-2buildings.jpg", "/bsr-rishonim/look-from-balcony.jpg"].map((src, index) => (
-                        <div key={index} className="relative w-1/3">
+                        <div key={index} className="relative w-full sm:w-1/3">
                             <button onClick={() => setModalImage(src)} className="block w-full h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <Image
                                     src={src}
