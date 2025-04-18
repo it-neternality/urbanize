@@ -32,8 +32,8 @@ export default function OfficeDetails() {
         <section className="py-16 px-6 bg-white">
             <div className="container mx-auto">
                 <h2 className="text-3xl font-bold text-center mb-12">מה יש לנו להציע</h2>
-                <div className="flex flex-wrap justify-center gap-12 items-stretch">
-                    <div className="bg-[#f4adb3] p-6 rounded-lg shadow-lg border border-gray-200 transform transition-transform hover:scale-105 flex-1 max-w-md">
+                <div className="flex flex-wrap justify-center gap-12 items-stretch md:flex-row flex-col">
+                    <div className="bg-[#f4adb3] p-6 rounded-lg shadow-lg border border-gray-200 transform transition-transform hover:scale-105 flex-1 max-w-md mb-6 md:mb-0">
                         <h3 className="text-xl font-bold mb-2 text-black">דגם D</h3>
                         <p className="text-black mb-3">177 מ&quot;ר | נוף פתוח דרום | קומה 7</p>
                         <p className="text-black mb-3">למכירה: 11,990 ₪ למ&quot;ר</p>
@@ -49,7 +49,7 @@ export default function OfficeDetails() {
                     </div>
                 </div>
                 <div className="mt-8">
-                    <div className="relative mx-auto w-1/2 overflow-hidden rounded-lg shadow-lg cursor-pointer" onClick={() => setModalImage("/bsr-rishonim/floor-plan.jpg")}>
+                    <div className="relative mx-auto w-full md:w-1/2 overflow-hidden rounded-lg shadow-lg cursor-pointer" onClick={() => setModalImage("/bsr-rishonim/floor-plan.jpg")}>
                         <Image
                             src="/bsr-rishonim/floor-plan.jpg"
                             alt="Floor Plan"

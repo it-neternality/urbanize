@@ -22,23 +22,23 @@ export default function ModelG() {
 
             <section className="py-20 px-8 bg-white">
                 <div className="container mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <Image src="/bsr-rishonim/G7-1.jpg" alt="Model G - Image 1" width={500} height={300} className="rounded-lg shadow-lg" />
-                        <Image src="/bsr-rishonim/G7-2.jpg" alt="Model G - Image 2" width={500} height={300} className="rounded-lg shadow-lg" />
-                        <Image src="/bsr-rishonim/floor-plan.jpg" alt="Floor Plan" width={500} height={300} className="rounded-lg shadow-lg" />
-                        <Image src="/bsr-rishonim/birdeye-2buildings.jpg" alt="Bird's Eye View" width={500} height={300} className="rounded-lg shadow-lg" />
-                        <Image src="/bsr-rishonim/look-from-balcony.jpg" alt="View from Balcony" width={500} height={300} className="rounded-lg shadow-lg" />
+                    <div className="grid grid-cols-1 gap-8 justify-items-center">
+                        <Image src="/bsr-rishonim/G7-1.jpg" alt="Model G - Image 1" width={1200} height={800} className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/G7-2.jpg" alt="Model G - Image 2" width={1200} height={800} className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/floor-plan.jpg" alt="Floor Plan" width={1200} height={800} className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/birdeye-2buildings.jpg" alt="Bird's Eye View" width={1200} height={800} className="rounded-lg shadow-lg" />
+                        <Image src="/bsr-rishonim/look-from-balcony.jpg" alt="View from Balcony" width={1200} height={800} className="rounded-lg shadow-lg" />
                     </div>
                 </div>
             </section>
 
             <section className="py-20 px-8 bg-gray-800 text-white">
                 <div className="container mx-auto text-center">
-                    <h2 className="text-4xl font-extrabold mb-6">מעוניינים לשמוע עוד?</h2>
+                    <h2 className="text-4xl font-extrabold mb-6 whitespace-nowrap">מעוניינים לשמוע עוד?</h2>
                     <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
                         השאירו פרטים ונחזור אליכם בהקדם עם מידע מפורט על דגם G
                     </p>
-                    <a href="/bsr-rishonim/contact-us" className="bg-white text-gray-800 px-8 py-3 rounded-md font-medium transition-all hover:bg-gray-100 inline-block">
+                    <a href="/bsr-rishonim/contact-us" className="bg-white text-gray-800 px-6 py-2 rounded-md font-medium transition-all hover:bg-gray-100 inline-block text-sm md:text-base">
                         צור קשר עכשיו
                     </a>
                 </div>
