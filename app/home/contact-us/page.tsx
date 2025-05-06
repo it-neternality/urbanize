@@ -14,12 +14,12 @@ export default function ContactUs() {
         };
     }, []);
 
-    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-    const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", message: "", phone: "" });
+    const [errors, setErrors] = useState({ name: "", email: "", message: "", phone: "" });
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const validateForm = () => {
-        const newErrors = { name: "", email: "", message: "" };
+        const newErrors = { name: "", email: "", message: "", phone: "" };
         let isValid = true;
 
         if (!formData.name.trim()) {
@@ -34,6 +34,11 @@ export default function ContactUs() {
 
         if (!formData.message.trim()) {
             newErrors.message = "אנא הזן הודעה.";
+            isValid = false;
+        }
+
+        if (!formData.phone.trim() || !/^[0-9\s-]+$/.test(formData.phone)) {
+            newErrors.phone = "אנא הזן מספר טלפון תקין.";
             isValid = false;
         }
 
@@ -53,7 +58,7 @@ export default function ContactUs() {
                     body: JSON.stringify({
                         to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
                         subject: "טופס צור קשר - פנייה חדשה מאתר אורבניז",
-                        text: `שם: ${formData.name}\nאימייל: ${formData.email}\nהודעה: ${formData.message}`,
+                        text: `שם: ${formData.name}\nאימייל: ${formData.email}\nטלפון: ${formData.phone}\nהודעה: ${formData.message}`,
                     }),
                 });
 
@@ -135,6 +140,21 @@ export default function ContactUs() {
                                     className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
                                 />
                                 {errors.email && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.email}</p>}
+                            </div>
+
+                            <div className="text-right">
+                                <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ direction: "rtl" }}>
+                                    טלפון
+                                </label>
+                                <input
+                                    type="text"
+                                    id="phone"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    className={`w-full p-2 border ${errors.phone ? "border-red-500" : "border-blue-500"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black`}
+                                />
+                                {errors.phone && <p className="text-red-500 text-sm mt-1" style={{ direction: "rtl" }}>{errors.phone}</p>}
                             </div>
 
                             <div className="text-right">
