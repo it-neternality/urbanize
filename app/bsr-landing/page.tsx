@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MapPin, ExternalLink } from 'lucide-react'; // Assuming lucide-react for icons
+import { MapPin, ExternalLink, Sun } from 'lucide-react'; // Assuming lucide-react for icons
 import ContactForm from './components/ContactForm'; // Import the new ContactForm using absolute path
 
 const stats = [
@@ -55,25 +55,45 @@ export default function BsrLandingPage() {
               priority
             />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 leading-tight">
-            ב.ס.ר ראשונים
-          </h1>
-          <p className="text-2xl sm:text-3xl font-semibold text-blue-400 mb-6">
-            מגדל העסקים החדש והיוקרתי
-          </p>
+          
+          {/* Building Image - Hidden on desktop */}
+          <div className="mb-6 w-full relative md:hidden" style={{ height: '300px' }}>
+            <Image 
+              src="/bsr-rishonim/highres-building-with-logo.jpg" 
+              alt="מגדל ב.ס.ר ראשונים" 
+              fill
+              className="object-cover rounded-lg shadow-lg"
+              style={{
+                objectPosition: 'center 30%'
+              }}
+              priority
+            />
+          </div>
+          <div className="text-right mb-8">
+            <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 leading-tight">
+              ב.ס.ר ראשונים
+            </h1>
+            <p className="text-2xl sm:text-3xl font-semibold text-blue-400 mb-6 leading-tight">
+              מגדל העסקים החדש והיוקרתי
+            </p>
+            
+            <p className="text-gray-500 flex items-center">
+              <MapPin className="h-5 w-5 mr-3 text-blue-500" />
+              &nbsp;מיקום מנצח
+              <Sun className="h-5 w-5 mr-3 text-yellow-500" />
+              &nbsp;נוף לים
+            </p>
+          </div>
           
           <div className="mb-6 border-t border-gray-700 pt-6">
-            <p className="text-lg text-gray-300 mb-4">
-              מיקום מנצח | נוף לים | עיצוב מפואר | שמירה
-              <br />
-              מרכז מסחרי בקומת הקרקע
-            </p>
-            <ul className="space-y-2 text-gray-300 list-inside list-disc marker:text-blue-500 mb-8 text-right pl-1">
-              <li>נגישות מושלמת - על רכבת משה דיין והמחלף ל 431/איילון</li>
-              <li>מאוכלס כעת - כניסה מיידית</li>
-              <li>יותר שטח נטו בפחות כסף</li>
-              <li>בהזדמנות לפני שהשוק מתיישר עם מחירי בניין G הסמוך</li>
-            </ul>
+            <div className="text-right">
+              <ul className="space-y-3 text-gray-300 list-outside list-disc pr-5 mb-8 text-right">
+                <li className="leading-relaxed">נגישות מושלמת - על רכבת משה דיין והמחלף ל 431/איילון</li>
+                <li className="leading-relaxed">מאוכלס כעת - כניסה מיידית</li>
+                <li className="leading-relaxed">יותר שטח נטו בפחות כסף</li>
+                <li className="leading-relaxed">בהזדמנות לפני שהשוק מתיישר עם מחירי בניין G הסמוך</li>
+              </ul>
+            </div>
           </div>
           
           <div className="mt-auto w-full">
@@ -86,8 +106,8 @@ export default function BsrLandingPage() {
         </div>
       </section>
 
-      {/* Stats Section - Refined Styling */}
-      <section className="bg-white py-12 sm:py-16">
+      {/* Stats Section - Refined Styling - Hidden on mobile */}
+      <section className="hidden md:block bg-white py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((stat) => (
             <div key={stat.label} className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
@@ -98,8 +118,8 @@ export default function BsrLandingPage() {
         </div>
       </section>
 
-      {/* Why BSR Section - Incorporating look-from-balcony.jpg */}
-      <section className="relative py-16 sm:py-24 bg-gray-800 text-white">
+      {/* Why BSR Section - Incorporating look-from-balcony.jpg - Hidden on mobile */}
+      <section className="hidden md:block relative py-16 sm:py-24 bg-gray-800 text-white">
         <div className="absolute inset-0 opacity-30"> {/* Increased opacity for better visibility of text */}
           <Image
             src="/bsr-rishonim/look-from-balcony.jpg"
@@ -130,8 +150,8 @@ export default function BsrLandingPage() {
         </div>
       </section>
 
-      {/* Location Section - Updated with LocationMap.png and Google Maps Link */}
-      <section className="py-16 sm:py-24 bg-gray-100">
+      {/* Location Section - Updated with LocationMap.png and Google Maps Link - Hidden on mobile */}
+      <section className="hidden md:block py-16 sm:py-24 bg-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-gray-800">מיקום מושלם לעסק שלכם</h2>
           <div className="flex flex-col lg:flex-row gap-8 items-stretch">
