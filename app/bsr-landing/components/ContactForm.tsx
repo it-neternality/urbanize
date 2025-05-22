@@ -1,15 +1,6 @@
 "use client";
 import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
 
-// Declare the Turnstile widget type
-declare global {
-  interface Window {
-    turnstile?: {
-      getResponse: (widgetId: string) => string;
-    };
-  }
-}
-
 interface FormData {
   name: string;
   email: string;
@@ -83,9 +74,9 @@ export default function ContactForm() {
       let turnstileResponse = null;
       // Attempt to get the response from the Turnstile widget within this form
       const turnstileWidgetElement = e.currentTarget.querySelector('.cf-turnstile');
-      if (turnstileWidgetElement && window.turnstile) {
+      if (turnstileWidgetElement && (window as any).turnstile) {
         try {
-            turnstileResponse = window.turnstile.getResponse(turnstileWidgetElement.id);
+            turnstileResponse = (window as any).turnstile.getResponse(turnstileWidgetElement.id);
         } catch (error) {
             console.warn("Error getting Turnstile response:", error);
         }
