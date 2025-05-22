@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, ExternalLink } from 'lucide-react'; // Assuming lucide-react for icons
-import ContactForm from '@/app/bsr-landing/components/ContactForm'; // Import the new ContactForm using absolute path
+import ContactForm from './components/ContactForm'; // Import the new ContactForm using absolute path
 
 const stats = [
   { value: '65,000', label: 'מ"ר שטחי משרדים' },
@@ -14,7 +14,7 @@ export default function BsrLandingPage() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
       {/* Hero Section - New Structure */}
-      <section className="relative w-full min-h-screen flex items-stretch bg-black">
+      <section className="relative w-full min-h-screen flex items-stretch" style={{ backgroundColor: '#000e26' }}>
         {/* Background Image Container */}
         <div className="absolute inset-0 z-0 pr-[33%]">
           <div className="h-full w-full flex items-center justify-center">
@@ -39,6 +39,22 @@ export default function BsrLandingPage() {
           {/* Logo or Project Title - Optional, G-City has a prominent logo */}
           {/* <Image src="/your-logo-white.png" alt="BSR Logo" width={150} height={50} className="mb-8" /> */}
           
+          <div className="mb-6 w-full relative" style={{ height: '240px' }}>
+            <div className="absolute inset-0 bg-gradient-to-b from-[#000e26] via-transparent to-[#000e26] opacity-80"></div>
+            <Image 
+              src="/bsr-rishonim/big-sale.png" 
+              alt="מבצע מיוחד" 
+              width={400} 
+              height={150} 
+              className="mx-auto h-full w-auto"
+              style={{
+                mixBlendMode: 'lighten',
+                opacity: 1,
+                objectFit: 'contain'
+              }}
+              priority
+            />
+          </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 leading-tight">
             ב.ס.ר ראשונים
           </h1>
