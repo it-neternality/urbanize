@@ -20,7 +20,7 @@ export default function BsrLandingPage() {
           <div className="h-full w-full flex items-center justify-center">
             <div className="relative w-full h-full">
               <Image
-                src="/bsr-rishonim/highres-building.jpg"
+                src="/bsr-rishonim/highres-building-with-logo.jpg"
                 alt="מגדל ב.ס.ר ראשונים - רקע דרמטי"
                 fill
                 className="object-contain"
@@ -28,13 +28,14 @@ export default function BsrLandingPage() {
               />
             </div>
           </div>
+          
           {/* Optional: Dark overlay for better text contrast if the image is too bright */}
           <div className="absolute inset-0 bg-black/50 z-1"></div> 
         </div>
 
         {/* Content Panel - Positioned on the right for RTL */}
         {/* On mobile, this panel will likely be at the top or take full width below a smaller image portion */}
-        <div className="relative z-10 w-full md:w-2/5 lg:w-1/3 bg-gradient-to-br from-slate-900 to-gray-800 text-white flex flex-col justify-center p-6 sm:p-8 lg:p-12 shadow-2xl min-h-full ml-auto">
+        <div className="relative z-10 w-full md:w-2/5 lg:w-1/3 bg-gradient-to-br from-slate-900 to-gray-800 text-gray-100 flex flex-col justify-center p-6 sm:p-8 lg:p-12 shadow-2xl min-h-full ml-auto">
           {/* Logo or Project Title - Optional, G-City has a prominent logo */}
           {/* <Image src="/your-logo-white.png" alt="BSR Logo" width={150} height={50} className="mb-8" /> */}
           

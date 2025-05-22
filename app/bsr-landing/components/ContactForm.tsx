@@ -151,7 +151,7 @@ export default function ContactForm() {
           value={formData.name} 
           onChange={handleChange} 
           placeholder="שם מלא"
-          className={`w-full p-3 rounded-md border ${errors.name ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500`}
+          className={`w-full p-3 rounded-md border ${errors.name ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500 text-gray-900 bg-white`}
           required 
           aria-describedby={errors.name ? "name-error" : undefined}
         />
@@ -166,7 +166,7 @@ export default function ContactForm() {
           value={formData.phone} 
           onChange={handleChange} 
           placeholder="טלפון"
-          className={`w-full p-3 rounded-md border ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500`}
+          className={`w-full p-3 rounded-md border ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500 text-gray-900 bg-white`}
           required 
           aria-describedby={errors.phone ? "phone-error" : undefined}
         />
@@ -181,7 +181,7 @@ export default function ContactForm() {
           value={formData.email} 
           onChange={handleChange} 
           placeholder="אימייל"
-          className={`w-full p-3 rounded-md border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500`}
+          className={`w-full p-3 rounded-md border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500 text-gray-900 bg-white`}
           required 
           aria-describedby={errors.email ? "email-error" : undefined}
         />
@@ -196,7 +196,7 @@ export default function ContactForm() {
           value={formData.message} 
           onChange={handleChange} 
           placeholder="הודעה (אופציונלי)"
-          className="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500"
+          className="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500 text-gray-900 bg-white"
         ></textarea>
       </div>
       
