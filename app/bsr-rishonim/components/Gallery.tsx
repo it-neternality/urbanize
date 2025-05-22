@@ -11,7 +11,7 @@ export default function Gallery() {
                 <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">גלריה</h2>
 
                 <div className="flex flex-wrap gap-6 lg:flex-nowrap">
-                    {["/bsr-rishonim/2buildings.jpg", "/bsr-rishonim/birdeye-2buildings.jpg", "/bsr-rishonim/look-from-balcony.jpg"].map((src, index) => (
+                    {["/bsr-rishonim/wide-building.jpg", "/bsr-rishonim/streetview.jpg", "/bsr-rishonim/look-from-balcony.jpg"].map((src, index) => (
                         <div key={index} className="relative w-full sm:w-1/2 lg:w-1/3">
                             <button onClick={() => setModalImage(src)} className="block w-full h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <Image
