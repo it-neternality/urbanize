@@ -1,6 +1,15 @@
 "use client";
 import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
 
+declare global {
+  interface Window {
+    turnstile?: {
+      getResponse: (widgetId: string) => string;
+      reset: (widgetId: string) => void;
+    };
+  }
+}
+
 interface FormData {
   name: string;
   email: string;
@@ -57,7 +66,7 @@ export default function ContactForm() {
       isValid = false;
     }
 
-    if (!formData.phone.trim() || !/^[0-9\s-]+$/.test(formData.phone)) {
+    if (!formData.phone.trim() || !/^[\(\)0-9\s-]+$/.test(formData.phone) || formData.phone.replace(/\D/g, '').length < 9) {
       newErrors.phone = "אנא הזן מספר טלפון תקין.";
       isValid = false;
     }
@@ -73,12 +82,12 @@ export default function ContactForm() {
     if (validateForm()) {
       let turnstileResponse = null;
       // Attempt to get the response from the Turnstile widget within this form
-      const turnstileWidgetElement = e.currentTarget.querySelector('.cf-turnstile');
-      if (turnstileWidgetElement && (window as any).turnstile) {
+      const turnstileWidgetElement = e.currentTarget.querySelector('.cf-turnstile') as HTMLElement;
+      if (turnstileWidgetElement && window.turnstile) {
         try {
-            turnstileResponse = (window as any).turnstile.getResponse(turnstileWidgetElement.id);
+          turnstileResponse = window.turnstile.getResponse(turnstileWidgetElement.id);
         } catch (error) {
-            console.warn("Error getting Turnstile response:", error);
+          console.warn("Error getting Turnstile response:", error);
         }
       }
       
@@ -86,8 +95,8 @@ export default function ContactForm() {
       if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !turnstileResponse) {
         setSubmitError("אנא השלם את אימות האבטחה (CAPTCHA).");
         // Optionally, try to reset the widget if it exists and failed.
-        // if (turnstileWidgetElement && (window as any).turnstile) {
-        //   (window as any).turnstile.reset(turnstileWidgetElement.id);
+        // if (turnstileWidgetElement && window.turnstile) {
+        //   window.turnstile.reset(turnstileWidgetElement.id);
         // }
         return;
       }
@@ -122,9 +131,31 @@ export default function ContactForm() {
     }
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    // Allow only numbers, parentheses, spaces, and hyphens
+    const formattedValue = value.replace(/[^0-9()\s-]/g, '');
+    // Format as user types: (xxx) xxx-xxxx
+    let formattedPhone = formattedValue.replace(/\D/g, '');
+    if (formattedPhone.length > 0) {
+      formattedPhone = `(${formattedPhone}`;
+    }
+    if (formattedPhone.length > 4) {
+      formattedPhone = `${formattedPhone.slice(0, 4)}) ${formattedPhone.slice(4)}`;
+    }
+    if (formattedPhone.length > 9) {
+      formattedPhone = `${formattedPhone.slice(0, 9)}-${formattedPhone.slice(9, 13)}`;
+    }
+    setFormData({ ...formData, phone: formattedPhone });
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === 'phone') {
+      handlePhoneChange(e as React.ChangeEvent<HTMLInputElement>);
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""; 
@@ -160,12 +191,13 @@ export default function ContactForm() {
       <div>
         <label htmlFor="bsrLandingContactPhone" className="sr-only">טלפון</label>
         <input 
-          type="tel" 
+          type="tel"
+          inputMode="numeric" 
           id="bsrLandingContactPhone" 
           name="phone" 
           value={formData.phone} 
           onChange={handleChange} 
-          placeholder="טלפון"
+          placeholder="(05X) XXX-XXXX"
           className={`w-full p-3 rounded-md border ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-500 text-gray-900 bg-white`}
           required 
           aria-describedby={errors.phone ? "phone-error" : undefined}
