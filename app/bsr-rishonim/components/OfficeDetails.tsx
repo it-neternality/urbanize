@@ -36,15 +36,15 @@ export default function OfficeDetails() {
                     <div className="bg-[#f4adb3] p-6 rounded-lg shadow-lg border border-gray-200 transform transition-transform hover:scale-105 flex-1 max-w-md mb-6 md:mb-0">
                         <h3 className="text-xl font-bold mb-2 text-black">דגם D</h3>
                         <p className="text-black mb-3">177 מ&quot;ר | נוף פתוח דרום | קומה 7</p>
-                        <p className="text-black mb-3">למכירה: 11,990 ₪ למ&quot;ר</p>
-                        <p className="text-black mb-3">להשכרה: 58 ₪ למ&quot;ר (מעטפת)</p>
+                        <p className="text-black mb-3">למכירה: 12,400 ₪ למ&quot;ר</p>
+                        <p className="text-black mb-3">להשכרה: 60 ₪ למ&quot;ר (מעטפת)</p>
                         <a href="/bsr-rishonim/model-d" className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 shadow-md">פרטים נוספים</a>
                     </div>
                     <div className="bg-[#d5699b] p-6 rounded-lg shadow-lg border border-gray-200 transform transition-transform hover:scale-105 flex-1 max-w-md">
                         <h3 className="text-xl font-bold mb-2 text-black">דגם G</h3>
                         <p className="text-black mb-3">140 מ&quot;ר + 13 מ&quot;ר מרפסת | נוף לים ולשקיעה | קומה 7</p>
-                        <p className="text-black mb-3">למכירה: 11,990 ₪ למ&quot;ר</p>
-                        <p className="text-black mb-3">להשכרה: 58 ₪ למ&quot;ר (מעטפת)</p>
+                        <p className="text-black mb-3">למכירה: 12,400 ₪ למ&quot;ר</p>
+                        <p className="text-black mb-3">להשכרה: 60 ₪ למ&quot;ר (מעטפת)</p>
                         <a href="/bsr-rishonim/model-g" className="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 shadow-md">פרטים נוספים</a>
                     </div>
                 </div>

@@ -52,14 +52,14 @@ export default function BsrRishonimLandingPage() {
                         <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                             <h3 className="text-xl font-bold mb-2">דגם D</h3>
                             <p className="text-gray-600 mb-3">177 מ&quot;ר | נוף פתוח דרום</p>
-                            <p className="text-gray-600 mb-3">למכירה: 11,990 ₪ למ&quot;ר</p>
-                            <p className="text-gray-600 mb-3">להשכרה: 58 ₪ למ&quot;ר (מעטפת)</p>
+                            <p className="text-gray-600 mb-3">למכירה: 12,400 ₪ למ&quot;ר</p>
+                            <p className="text-gray-600 mb-3">להשכרה: 60 ₪ למ&quot;ר (מעטפת)</p>
                         </div>
                         <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                             <h3 className="text-xl font-bold mb-2">דגם G</h3>
                             <p className="text-gray-600 mb-3">140 מ&quot;ר + 13 מ&quot;ר מרפסת | נוף לים ולשקיעה</p>
-                            <p className="text-gray-600 mb-3">למכירה: 11,990 ₪ למ&quot;ר</p>
-                            <p className="text-gray-600 mb-3">להשכרה: 58 ₪ למ&quot;ר (מעטפת)</p>
+                            <p className="text-gray-600 mb-3">למכירה: 12,400 ₪ למ&quot;ר</p>
+                            <p className="text-gray-600 mb-3">להשכרה: 60 ₪ למ&quot;ר (מעטפת)</p>
                         </div>
                     </div>
                 </div>
