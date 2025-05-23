@@ -54,7 +54,6 @@ const MobileView = () => {
           </div>
         </div>
         <ImageCarousel onSlideChange={setCurrentSlide} />
-        <div className="absolute inset-0 bg-black/50 z-1"></div>
       </div>
       
       <div className="relative z-10 w-full bg-gradient-to-b from-slate-900 to-gray-800 text-gray-100 p-6">
