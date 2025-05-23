@@ -21,6 +21,22 @@ const MobileView = () => {
   };
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [showScrollButton, setShowScrollButton] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+      // Show button when scrolling up or at top, hide when scrolling down
+      setShowScrollButton(position <= 100 || position < scrollPosition);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrollPosition]);
 
   return (
     <div className="block md:hidden w-full">
@@ -80,13 +96,18 @@ const MobileView = () => {
         </p>
       </div>
 
-      {/* Scroll Down Button - Mobile Only */}
+      {/* Scroll to form button */}
       <button 
         onClick={scrollToForm}
-        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-[90%] bg-blue-600/70 hover:bg-blue-700/70 text-white font-medium py-3 px-6 rounded-full shadow-lg z-50 flex items-center justify-center gap-2 animate-bounce md:hidden"
+        style={{
+          opacity: showScrollButton ? 1 : 0,
+          pointerEvents: showScrollButton ? 'auto' : 'none',
+          transition: 'opacity 300ms ease-in-out',
+        }}
+        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-blue-600/70 hover:bg-blue-700/70 text-white font-bold py-3 px-6 rounded-full shadow-lg z-50 flex items-center justify-center w-[90%] transition-all duration-300"
       >
         להשארת פרטים
-        <ChevronDown className="h-5 w-5" />
+        <ChevronDown className="mr-2 h-5 w-5" />
       </button>
     </div>
   );
