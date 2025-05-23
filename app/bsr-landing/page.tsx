@@ -108,9 +108,23 @@ const MobileView = () => {
 const DesktopView = () => (
   <div className="hidden md:flex w-full min-h-screen rtl">
     {/* Left side - Content */}
-    <div className="w-[30%] bg-gradient-to-br from-slate-900 to-gray-800 text-gray-100 p-6 lg:p-8 shadow-2xl z-10">
+    <div className="w-[30%] bg-gradient-to-br from-slate-900 to-gray-800 text-gray-100 p-6 lg:p-8 shadow-2xl z-10 relative">
+      {/* Urbanize Logo */}
+      <div className="absolute top-8 left-8 z-20">
+        <div className="bg-black/20 p-2 rounded-lg">
+          <Image 
+            src="/bsr-rishonim/urbanize-office-logo-white.png" 
+            alt="Urbanize Office Logo"
+            width={140}
+            height={50}
+            className="h-12 w-auto"
+            priority
+          />
+        </div>
+      </div>
+      
       <div className="flex flex-col h-full justify-center">
-        <div className="text-right mb-8">
+        <div className="text-center mb-8 mt-16">
           <h1 className="text-5xl font-extrabold mb-3">
             ב.ס.ר ראשונים
           </h1>
