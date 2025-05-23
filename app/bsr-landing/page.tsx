@@ -33,29 +33,7 @@ export default function BsrLandingPage() {
           <div className="absolute inset-0 bg-black/50 z-1"></div> 
         </div>
 
-        {/* Content Panel - Positioned on the right for RTL */}
-        {/* On mobile, this panel will likely be at the top or take full width below a smaller image portion */}
         <div className="relative z-10 w-full md:w-2/5 lg:w-1/3 bg-gradient-to-br from-slate-900 to-gray-800 text-gray-100 flex flex-col justify-center p-6 sm:p-8 lg:p-12 shadow-2xl min-h-full ml-auto">
-          {/* Logo or Project Title - Optional, G-City has a prominent logo */}
-          {/* <Image src="/your-logo-white.png" alt="BSR Logo" width={150} height={50} className="mb-8" /> */}
-          
-          <div className="mb-6 w-full relative" style={{ height: '240px' }}>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#000e26] via-transparent to-[#000e26] opacity-80"></div>
-            <Image 
-              src="/bsr-rishonim/big-sale.png" 
-              alt="מבצע מיוחד" 
-              width={400} 
-              height={150} 
-              className="mx-auto h-full w-auto"
-              style={{
-                mixBlendMode: 'lighten',
-                opacity: 1,
-                objectFit: 'contain'
-              }}
-              priority
-            />
-          </div>
-          
           {/* Building Image - Hidden on desktop */}
           <div className="mb-6 w-full relative md:hidden" style={{ height: '300px' }}>
             <Image 
@@ -69,7 +47,7 @@ export default function BsrLandingPage() {
               priority
             />
           </div>
-          <div className="text-right mb-8">
+          <div className="text-center md:text-right mb-8">
             <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 leading-tight">
               ב.ס.ר ראשונים
             </h1>
@@ -77,12 +55,14 @@ export default function BsrLandingPage() {
               מגדל העסקים החדש והיוקרתי
             </p>
             
-            <p className="text-gray-500 flex items-center">
-              <MapPin className="h-5 w-5 mr-3 text-blue-500" />
-              &nbsp;מיקום מנצח
-              <Sun className="h-5 w-5 mr-3 text-yellow-500" />
-              &nbsp;נוף לים
-            </p>
+            <div className="flex justify-center md:justify-start">
+              <p className="text-gray-500 flex items-center">
+                <MapPin className="h-5 w-5 mr-3 text-blue-500" />
+                &nbsp;מיקום מנצח
+                <Sun className="h-5 w-5 mr-3 text-yellow-500" />
+                &nbsp;נוף לים
+              </p>
+            </div>
           </div>
           
           <div className="mb-6 border-t border-gray-700 pt-6">

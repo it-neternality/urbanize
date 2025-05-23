@@ -117,6 +117,14 @@ export default function ContactForm() {
 
         if (response.ok) {
           console.log("Email sent successfully");
+          // Track Google Ads conversion
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'conversion', {
+              'send_to': 'AW-17106589091/4A4aCJTJgMwaEKOrh90_',
+              'value': 1.0,
+              'currency': 'ILS'
+            });
+          }
           setIsSubmitted(true);
           setFormData({ name: "", email: "", phone: "", message: "" }); 
         } else {
