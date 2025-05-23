@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { MapPin, ExternalLink, Sun } from 'lucide-react'; // Assuming lucide-react for icons
 import ContactForm from './components/ContactForm'; // Import the new ContactForm using absolute path
 import GlowingText from './components/GlowingText'; // Import the GlowingText component
+import ImageCarousel from './components/ImageCarousel'; // Import the ImageCarousel component
 
 export default function BsrLandingPage() {
   return (
@@ -13,13 +14,7 @@ export default function BsrLandingPage() {
         <div className="absolute inset-0 z-0 pr-[33%]">
           <div className="h-full w-full flex items-center justify-center">
             <div className="relative w-full h-full">
-              <Image
-                src="/bsr-rishonim/highres-building-with-logo.jpg"
-                alt="מגדל ב.ס.ר ראשונים - רקע דרמטי"
-                fill
-                className="object-contain"
-                priority
-              />
+              <ImageCarousel />
             </div>
           </div>
           
@@ -30,16 +25,9 @@ export default function BsrLandingPage() {
         <div className="relative z-10 w-full md:w-2/5 lg:w-1/3 bg-gradient-to-br from-slate-900 to-gray-800 text-gray-100 flex flex-col justify-center p-6 sm:p-8 lg:p-12 shadow-2xl min-h-full ml-auto">
           {/* Building Image - Hidden on desktop */}
           <div className="mb-6 w-full relative md:hidden" style={{ height: '300px' }}>
-            <Image 
-              src="/bsr-rishonim/highres-building-with-logo.jpg" 
-              alt="מגדל ב.ס.ר ראשונים" 
-              fill
-              className="object-cover rounded-lg shadow-lg"
-              style={{
-                objectPosition: 'center 30%'
-              }}
-              priority
-            />
+            <div className="w-full h-full">
+              <ImageCarousel />
+            </div>
           </div>
           <div className="text-center md:text-right mb-8">
             <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 leading-tight">
@@ -64,10 +52,8 @@ export default function BsrLandingPage() {
           <div className="mb-6 border-t border-gray-700 pt-6">
             <div className="text-right">
               <ul className="space-y-3 text-gray-300 list-outside list-disc pr-5 mb-8 text-right">
-                <li className="leading-relaxed">נגישות מושלמת - על רכבת משה דיין והמחלף ל 431/איילון</li>
-                <li className="leading-relaxed">מאוכלס כעת - כניסה מיידית</li>
                 <li className="leading-relaxed">יותר שטח נטו בפחות כסף</li>
-                <li className="leading-relaxed">בהזדמנות לפני שהשוק מתיישר עם מחירי בניין G הסמוך</li>
+                <li className="leading-relaxed">לפני שהשוק מתיישר עם מחירי בניין <br/> G-City הסמוך</li>
               </ul>
             </div>
           </div>
