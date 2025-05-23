@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 export default function GlowingText() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +12,6 @@ export default function GlowingText() {
   }, []);
 
   const containerClasses = [
-    'md:hidden',
     'inline-block',
     'px-4',
     'py-2',
@@ -26,15 +26,16 @@ export default function GlowingText() {
     'transition-all',
     'duration-700',
     isVisible ? 'opacity-100' : 'opacity-0',
-    isVisible ? 'translate-y-0' : 'translate-y-2'
+    isVisible ? 'translate-y-0' : 'translate-y-2',
+    'inline-flex' // Ensure proper alignment of the dot and text
   ].join(' ');
 
   return (
-    <div className="md:hidden flex justify-center w-full">
+    <div className="flex justify-center w-full">
       <div className={containerClasses}>
         <div className="flex items-center">
           <span className="ml-2 h-2 w-2 bg-red-500 rounded-full animate-pulse"></span>
-          <span className="text-white font-bold text-sm relative z-10">
+          <span className="text-white font-bold text-sm md:text-base relative z-10">
             משרדים אחרונים למכירה!
           </span>
         </div>

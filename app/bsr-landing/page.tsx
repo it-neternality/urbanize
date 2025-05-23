@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { MapPin, Sun, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import ContactForm from './components/ContactForm';
 import GlowingText from './components/GlowingText';
@@ -73,7 +73,7 @@ const MobileView = () => {
           <div className="text-right">
             <ul className="space-y-3 text-gray-300 list-outside list-disc pr-5">
               <li>יותר שטח נטו בפחות כסף</li>
-              <li>לפני שהשוק מתיישר עם מחירי בניין G-City הסמוך</li>
+              <li>לפני שהשוק מתיישר עם מחירי G-City הסמוך</li>
             </ul>
           </div>
         </div>
@@ -106,62 +106,75 @@ const MobileView = () => {
 
 // Desktop View
 const DesktopView = () => (
-  <div className="hidden md:flex w-full min-h-screen">
-    {/* Left side - Carousel */}
-    <div className="w-2/3 relative">
-      <div className="fixed top-0 left-0 w-2/3 h-full">
-        <ImageCarousel />
-        <div className="absolute inset-0 bg-black/50 z-1"></div>
+  <div className="hidden md:flex w-full min-h-screen rtl">
+    {/* Left side - Content */}
+    <div className="w-[30%] bg-gradient-to-br from-slate-900 to-gray-800 text-gray-100 p-6 lg:p-8 shadow-2xl z-10">
+      <div className="flex flex-col h-full justify-center">
+        <div className="text-right mb-8">
+          <h1 className="text-5xl font-extrabold mb-3">
+            ב.ס.ר ראשונים
+          </h1>
+          <p className="text-3xl font-semibold text-blue-400 mb-6">
+            מגדל העסקים החדש והיוקרתי
+          </p>
+          
+          <GlowingText />
+        </div>
+        
+        <div className="border-t border-gray-700 pt-6 mb-8">
+          <div className="text-right">
+            <ul className="space-y-3 text-gray-300 list-outside list-disc pr-5">
+              <li>יותר שטח נטו בפחות כסף</li>
+              <li>לפני שהשוק מתיישר עם מחירי בניין G-City הסמוך</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="w-full">
+          <ContactForm />
+        </div>
+        
+        <p className="text-xs text-gray-500 mt-6 text-center">
+          *ההדמיות להמחשה בלבד. כפוף לתנאי החברה.
+        </p>
       </div>
     </div>
     
-    {/* Right side - Content */}
-    <div className="w-1/3 bg-gradient-to-br from-slate-900 to-gray-800 text-gray-100 p-8 lg:p-12 shadow-2xl z-10 ml-auto">
-      <div className="text-right mb-8">
-        <h1 className="text-5xl font-extrabold mb-3">
-          ב.ס.ר ראשונים
-        </h1>
-        <p className="text-3xl font-semibold text-blue-400 mb-6">
-          מגדל העסקים החדש והיוקרתי
-        </p>
-        
-        <div className="flex items-center justify-end mb-6">
-          <p className="text-white text-sm flex items-center">
-            <MapPin className="h-5 w-5 ml-2 text-blue-500" />
-            מיקום מנצח
-            <Sun className="h-5 w-5 mr-2 ml-4 text-yellow-500" />
-            נוף לים
-          </p>
+    {/* Right side - Carousel */}
+    <div className="w-[70%] relative">
+      <div className="fixed top-0 left-0 w-[70%] h-full overflow-hidden">
+        <div className="w-full h-full">
+          <ImageCarousel />
         </div>
-        
-        <GlowingText />
+        <div className="absolute inset-0 bg-black/30 z-1"></div>
       </div>
-      
-      <div className="border-t border-gray-700 pt-6 mb-8">
-        <div className="text-right">
-          <ul className="space-y-3 text-gray-300 list-outside list-disc pr-5">
-            <li>יותר שטח נטו בפחות כסף</li>
-            <li>לפני שהשוק מתיישר עם מחירי בניין G-City הסמוך</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div className="w-full">
-        <ContactForm />
-      </div>
-      
-      <p className="text-xs text-gray-500 mt-6 text-center">
-        *ההדמיות להמחשה בלבד. כפוף לתנאי החברה.
-      </p>
     </div>
   </div>
 );
 
 export default function BsrLandingPage() {
   const [isMounted, setIsMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
+    // Set mounted state
     setIsMounted(true);
+    
+    // Check if mobile on client side
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint in Tailwind
+    };
+    
+    // Set initial value
+    checkIfMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
   }, []);
   
   // Prevent hydration mismatch
@@ -171,8 +184,7 @@ export default function BsrLandingPage() {
   
   return (
     <div className="min-h-screen bg-[#000e26] text-gray-800 font-sans overflow-x-hidden">
-      <MobileView />
-      <DesktopView />
+      {isMobile ? <MobileView key="mobile" /> : <DesktopView key="desktop" />}
     </div>
   );
 }

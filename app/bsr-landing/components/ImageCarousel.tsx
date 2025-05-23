@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const images = [
   '/bsr-rishonim/lp-1.png',
@@ -21,7 +22,11 @@ export default function ImageCarousel({ onSlideChange }: ImageCarouselProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const animationRef = useRef<number | undefined>(undefined);
 
   const goToSlide = useCallback((newIndex: number) => {
@@ -74,6 +79,47 @@ export default function ImageCarousel({ onSlideChange }: ImageCarouselProps) {
     }
   };
 
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    setIsDragging(true);
+    setDragStartX(e.clientX);
+    setDragOffset(0);
+  };
+
+
+  // Wrap event handlers in useCallback to prevent unnecessary re-renders
+  const handleMouseMoveCallback = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    const offset = e.clientX - dragStartX;
+    setDragOffset(offset);
+  }, [isDragging, dragStartX]);
+
+  const handleMouseUpCallback = useCallback(() => {
+    if (Math.abs(dragOffset) > 50) {
+      if (dragOffset > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    }
+    setIsDragging(false);
+    setDragOffset(0);
+  }, [dragOffset, prevSlide, nextSlide]);
+
+  // Effect for mouse drag events
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMoveCallback);
+      window.addEventListener('mouseup', handleMouseUpCallback, { once: true });
+    }
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMoveCallback);
+      window.removeEventListener('mouseup', handleMouseUpCallback);
+    };
+  }, [isDragging, handleMouseMoveCallback, handleMouseUpCallback]);
+
   // Auto-advance slides every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
@@ -105,7 +151,8 @@ export default function ImageCarousel({ onSlideChange }: ImageCarouselProps) {
 
   return (
     <div 
-      className="relative w-screen h-full"
+      ref={containerRef}
+      className="relative w-screen h-full cursor-grab active:cursor-grabbing"
       style={{
         position: 'relative',
         left: '50%',
@@ -115,8 +162,11 @@ export default function ImageCarousel({ onSlideChange }: ImageCarouselProps) {
         maxWidth: '100vw',
         width: '100vw',
         marginTop: '-1px',
-        top: 0
+        top: 0,
+        transform: `translateX(${dragOffset}px)`,
+        transition: isDragging ? 'none' : 'transform 0.3s ease-out'
       }}
+      onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -125,7 +175,7 @@ export default function ImageCarousel({ onSlideChange }: ImageCarouselProps) {
       <div className="relative w-full h-full">
         {images.map((image, index) => (
           <div
-            key={image}
+            key={`${image}-${index}`}
             className={`absolute inset-0 w-full h-full transition-transform duration-500 ease-in-out ${
               index === currentIndex ? 'z-10' : 'z-0'
             }`}
@@ -134,41 +184,60 @@ export default function ImageCarousel({ onSlideChange }: ImageCarouselProps) {
               opacity: index === currentIndex ? 1 : 0,
               transition: 'transform 500ms ease-in-out, opacity 500ms ease-in-out',
             }}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${index + 1} of ${images.length}`}
           >
             <div className="w-full h-full relative">
-              <Image
-                src={image}
-                alt={`מגדל ב.ס.ר ראשונים - תמונה ${index + 1}`}
-                width={1200}
-                height={800}
-                className="w-full h-full object-cover md:object-contain"
-                priority={index === 0}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }}
-              />
+              <div className="w-full h-full flex items-center justify-center bg-black">
+                <Image
+                  src={image}
+                  alt={`מגדל ב.ס.ר ראשונים - תמונה ${index + 1}`}
+                  width={1200}
+                  height={800}
+                  className="w-auto h-auto max-w-full max-h-full object-scale-down"
+                  priority={index === 0}
+                  style={{
+                    width: 'auto',
+                    height: 'auto',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                  }}
+                />
+              </div>
             </div>
           </div>
         ))}
       </div>
 
       {/* Navigation Buttons - Hidden on mobile, shown on md screens and up */}
-      <button 
-        onClick={prevSlide}
-        className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-20"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      <button 
-        onClick={nextSlide}
-        className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-20"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
+      <AnimatePresence>
+        <motion.button 
+          onClick={prevSlide}
+          className="hidden md:block absolute right-6 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all z-20 backdrop-blur-sm"
+          aria-label="Previous slide"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 20 }}
+          whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.7)' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronLeft className="h-8 w-8" strokeWidth={2.5} />
+        </motion.button>
+        <motion.button 
+          onClick={nextSlide}
+          className="hidden md:block absolute left-6 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-all z-20 backdrop-blur-sm"
+          aria-label="Next slide"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.7)' }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronRight className="h-8 w-8" strokeWidth={2.5} />
+        </motion.button>
+      </AnimatePresence>
 
       {/* Dots Indicator */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
