@@ -66,15 +66,6 @@ const MobileView = () => {
             מגדל העסקים החדש והיוקרתי
           </p>
           
-          <div className="flex justify-center items-center mb-6">
-            <p className="text-white text-sm flex items-center">
-              <MapPin className="h-5 w-5 ml-2 text-blue-500" />
-              מיקום מנצח
-              <Sun className="h-5 w-5 mr-2 ml-4 text-yellow-500" />
-              נוף לים
-            </p>
-          </div>
-          
           <GlowingText />
         </div>
         
