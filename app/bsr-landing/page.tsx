@@ -2,13 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, ExternalLink, Sun } from 'lucide-react'; // Assuming lucide-react for icons
 import ContactForm from './components/ContactForm'; // Import the new ContactForm using absolute path
-
-const stats = [
-  { value: '65,000', label: 'מ"ר שטחי משרדים' },
-  { value: '470+', label: 'מקומות חניה' },
-  { value: '1,000,000+', label: 'אוכלוסייה בטווח 10 ק"מ' },
-  { value: '34', label: 'קומות' },
-];
+import GlowingText from './components/GlowingText'; // Import the GlowingText component
 
 export default function BsrLandingPage() {
   return (
@@ -51,17 +45,19 @@ export default function BsrLandingPage() {
             <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 leading-tight">
               ב.ס.ר ראשונים
             </h1>
-            <p className="text-2xl sm:text-3xl font-semibold text-blue-400 mb-6 leading-tight">
+            <p className="text-xl sm:text-2xl font-semibold text-blue-400 mb-6 leading-tight md:text-3xl">
               מגדל העסקים החדש והיוקרתי
             </p>
             
             <div className="flex justify-center md:justify-start">
-              <p className="text-gray-500 flex items-center">
+              <p className="hidden md:block text-white text-sm flex items-center">
                 <MapPin className="h-5 w-5 mr-3 text-blue-500" />
                 &nbsp;מיקום מנצח
                 <Sun className="h-5 w-5 mr-3 text-yellow-500" />
                 &nbsp;נוף לים
               </p>
+
+              <GlowingText />
             </div>
           </div>
           
@@ -83,18 +79,6 @@ export default function BsrLandingPage() {
           <p className="text-xs text-gray-500 mt-6 text-center">
             *ההדמיות להמחשה בלבד. כפוף לתנאי החברה.
           </p>
-        </div>
-      </section>
-
-      {/* Stats Section - Refined Styling - Hidden on mobile */}
-      <section className="hidden md:block bg-white py-12 sm:py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {stats.map((stat) => (
-            <div key={stat.label} className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-              <p className="text-3xl sm:text-4xl font-bold text-blue-600">{stat.value}</p>
-              <p className="text-sm sm:text-md text-gray-600 mt-1">{stat.label}</p>
-            </div>
-          ))}
         </div>
       </section>
 
