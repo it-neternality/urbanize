@@ -11,7 +11,11 @@ const images = [
   '/bsr-rishonim/lp-4.png',
 ];
 
-export default function ImageCarousel() {
+interface ImageCarouselProps {
+  onSlideChange?: (index: number) => void;
+}
+
+export default function ImageCarousel({ onSlideChange }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
   const [isAnimating, setIsAnimating] = useState(false);
@@ -31,6 +35,11 @@ export default function ImageCarousel() {
     setCurrentIndex(nextIndex);
     setIsAnimating(true);
     
+    // Notify parent component about the slide change
+    if (onSlideChange) {
+      onSlideChange(nextIndex);
+    }
+    
     // Reset animation state after transition
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
@@ -39,7 +48,7 @@ export default function ImageCarousel() {
     animationRef.current = requestAnimationFrame(() => {
       setIsAnimating(false);
     });
-  }, [currentIndex]);
+  }, [currentIndex, onSlideChange]);
 
   const nextSlide = useCallback(() => {
     goToSlide(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
@@ -96,7 +105,18 @@ export default function ImageCarousel() {
 
   return (
     <div 
-      className="relative w-full h-full overflow-hidden"
+      className="relative w-screen h-full"
+      style={{
+        position: 'relative',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw',
+        maxWidth: '100vw',
+        width: '100vw',
+        marginTop: '-1px',
+        top: 0
+      }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -115,28 +135,36 @@ export default function ImageCarousel() {
               transition: 'transform 500ms ease-in-out, opacity 500ms ease-in-out',
             }}
           >
-            <Image
-              src={image}
-              alt={`מגדל ב.ס.ר ראשונים - תמונה ${index + 1}`}
-              fill
-              className="object-contain"
-              priority={index === 0}
-            />
+            <div className="w-full h-full relative">
+              <Image
+                src={image}
+                alt={`מגדל ב.ס.ר ראשונים - תמונה ${index + 1}`}
+                width={1200}
+                height={800}
+                className="w-full h-full object-cover md:object-contain"
+                priority={index === 0}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons - Hidden on mobile, shown on md screens and up */}
       <button 
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-20"
+        className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-20"
         aria-label="Previous slide"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button 
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-20"
+        className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-20"
         aria-label="Next slide"
       >
         <ChevronRight className="h-6 w-6" />
